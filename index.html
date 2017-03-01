@@ -23,6 +23,21 @@
   
   <link rel="stylesheet" href="/css/style.css">
   
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
   
 
   <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
@@ -43,7 +58,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="http://picturegit-1251927503.file.myqcloud.com/myown.jpg" class="js-avatar">
+			<img lazy-src="/img/graduate.jpg" class="js-avatar">
 			
 		</a>
 
@@ -120,7 +135,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
+						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
 					</div>
 				</section>
 				
@@ -150,7 +165,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="http://picturegit-1251927503.file.myqcloud.com/myown.jpg" class="js-avatar">
+				<img lazy-src="/img/graduate.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author">lynhao</h1>
@@ -185,6 +200,96 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-浅谈Js栈" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/01/浅谈Js栈/" class="article-date">
+  	<time datetime="2017-03-01T10:37:24.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/01/浅谈Js栈/">
+        浅谈Js栈
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出"><a href="#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出" class="headerlink" title="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出."></a>栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了<a href=""><strong>栈</strong></a>.首先,栈是一种遵守<a href=""><strong>LIFO</strong></a>原则的有序集合,即后进先出.</h5><blockquote>
+<p>找了这么一张图比较容易看懂</p>
+</blockquote>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/stack.jpg?raw=true" alt="stack"></p>
+<h3 id="创建栈"><a href="#创建栈" class="headerlink" title="创建栈"></a>创建栈</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">stack</span></span>()&#123;</div><div class="line">	//初始化一个全局变量用于保存栈中的元素</div><div class="line">	var temp = [];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="这里会用到下面几个方法"><a href="#这里会用到下面几个方法" class="headerlink" title="这里会用到下面几个方法"></a>这里会用到下面几个方法</h4><ul>
+<li>push()</li>
+<li>pop()</li>
+<li>peak()</li>
+<li>isEmpty()</li>
+<li>clear()</li>
+<li>size()</li>
+<li>print()</li>
+</ul>
+<h6 id="peak是用于返回栈顶的元素-但不会移除-nbsp-nbsp-isEmpty-是用于判断当前栈中是否有元素-没有的话返回true-否者false"><a href="#peak是用于返回栈顶的元素-但不会移除-nbsp-nbsp-isEmpty-是用于判断当前栈中是否有元素-没有的话返回true-否者false" class="headerlink" title=" peak是用于返回栈顶的元素,但不会移除;&nbsp;&nbsp;[*isEmpty]()是用于判断当前栈中是否有元素,没有的话返回true,否者false"></a><em> <a href=""><strong>peak</strong></a>是用于返回栈顶的元素,但不会移除;&nbsp;&nbsp;[<em>*isEmpty</em></em>]()是用于判断当前栈中是否有元素,没有的话返回true,否者false</h6><h4 id="分别实现上面的栈方法"><a href="#分别实现上面的栈方法" class="headerlink" title="分别实现上面的栈方法"></a>分别实现上面的栈方法</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">Stack</span></span>()&#123;</div><div class="line">	var temp = [];</div><div class="line">	</div><div class="line">	this.push = <span class="keyword">function</span>(element)&#123;</div><div class="line">		temp.push(element);</div><div class="line">	&#125;</div><div class="line">	this.pop = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.pop();</div><div class="line">	&#125;</div><div class="line">	this.peak = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp[temp.length-1];</div><div class="line">	&#125;</div><div class="line">	this.isEmpty = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.length == 0;</div><div class="line">	&#125;</div><div class="line">	this.clear = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		temp = [];</div><div class="line">	&#125;</div><div class="line">	this.size = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.length;</div><div class="line">	&#125;</div><div class="line">	this.print = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		console.log(temp.toString());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Ok-下面通过栈的处理来实现进制之间的转换"><a href="#Ok-下面通过栈的处理来实现进制之间的转换" class="headerlink" title="Ok,下面通过栈的处理来实现进制之间的转换"></a>Ok,下面通过栈的处理来实现进制之间的转换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> divideBy2(decNum)&#123;</div><div class="line">	var remStack = new Stack(); //实例一个stack对象</div><div class="line">	var rem;   //余数</div><div class="line">	var binaryString = <span class="string">''</span>; //转换后的二进制</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(decNum&gt;0)&#123;</div><div class="line">	rem = Math.floor(decNum % 2);   //拿到余数</div><div class="line">	remStack.push(rem);			//进栈</div><div class="line">	decNum = Math.floor(decNum / 2);		</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(!remStack.isEmpty())&#123;</div><div class="line">	binaryString += remStack.pop().toString;  //将拿到的二进制进栈</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> binaryString;</div></pre></td></tr></table></figure>
+<h3 id="优化-让进制间自由转换"><a href="#优化-让进制间自由转换" class="headerlink" title="优化,让进制间自由转换"></a>优化,让进制间自由转换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> baseConvertr(decNum, base)&#123;</div><div class="line">	var remStack = new Stack(); //实例一个stack对象</div><div class="line">	var rem;   //余数</div><div class="line">	var baseString = <span class="string">''</span>; //转换后的base进制</div><div class="line">	digits = <span class="string">'0123456789ABCDEF'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(decNum&gt;0)&#123;</div><div class="line">	rem = Math.floor(decNum % 2);   //拿到余数</div><div class="line">	remStack.push(rem);			//进栈</div><div class="line">	decNum = Math.floor(decNum / 2);		</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(!remStack.isEmpty())&#123;</div><div class="line">	baseString += digits[remStack.pop()];  //将拿到的base进制进栈</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> baseString;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href=""><strong>‘0123456789ABCDEF’</strong></a> 这样处理是因为余数从0-9,如果是10-&gt;16进制,需要加上ABCDEF分别对应10,11,12,13,14,15</p>
+</blockquote>
+<hr>
+<p>ok,栈的内容就先写到这里,有问题下面留言~</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+      
+
+      
+        
+<div class="counter-tag counter">
+    <span id="/2017/03/01/浅谈Js栈/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="浅谈Js栈">
+         &nbsp;
+        view
+    </span>
+</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-使用gulp搭建angularjs【下】" class="article article-type-post" itemscope itemprop="blogPost">
   

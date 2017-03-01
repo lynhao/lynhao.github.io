@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈Js栈 | 个人技术博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出.
+找了这么一张图比较容易看懂
+
+
+创建栈1234function stack()&amp;#123;	//初始化一个全局变量用于保存栈中的元素	var temp = [];&amp;#125;
+这里会用到下面几个方法
+push()
+pop()
+peak()
+isEmpty()
+cle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Js栈">
+<meta property="og:url" content="/2017/03/01/浅谈Js栈/index.html">
+<meta property="og:site_name" content="个人技术博客">
+<meta property="og:description" content="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出.
+找了这么一张图比较容易看懂
+
+
+创建栈1234function stack()&amp;#123;	//初始化一个全局变量用于保存栈中的元素	var temp = [];&amp;#125;
+这里会用到下面几个方法
+push()
+pop()
+peak()
+isEmpty()
+cle">
+<meta property="og:image" content="https://github.com/lynhao/ImageStorage/blob/master/picture/stack.jpg?raw=true">
+<meta property="og:updated_time" content="2017-03-01T13:04:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Js栈">
+<meta name="twitter:description" content="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出.
+找了这么一张图比较容易看懂
+
+
+创建栈1234function stack()&amp;#123;	//初始化一个全局变量用于保存栈中的元素	var temp = [];&amp;#125;
+这里会用到下面几个方法
+push()
+pop()
+peak()
+isEmpty()
+cle">
+<meta name="twitter:image" content="https://github.com/lynhao/ImageStorage/blob/master/picture/stack.jpg?raw=true">
+  
+    <link rel="alternative" href="/atom.xml" title="个人技术博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/young.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("8pwRF8Yi1MKlHyHkuuiwjH6H-gzGzoHsz", "vwf5UcXeX4D3KYs9U5sppLIj");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/graduate.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lynhao</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/lynhao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/626607984@qq.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="/626607984" title="qq">qq</a>
+					        
+								<a class="google" target="_blank" href="/hacklynhao@gmail.com" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">lynhao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/graduate.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lynhao</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/lynhao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/626607984@qq.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="/626607984" title="qq">qq</a>
+			        
+						<a class="google" target="_blank" href="/hacklynhao@gmail.com" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-浅谈Js栈" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/03/01/浅谈Js栈/" class="article-date">
+  	<time datetime="2017-03-01T10:37:24.000Z" itemprop="datePublished">2017-03-01</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈Js栈
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/03/01/浅谈Js栈/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="浅谈Js栈">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出"><a href="#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出" class="headerlink" title="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出."></a>栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了<a href=""><strong>栈</strong></a>.首先,栈是一种遵守<a href=""><strong>LIFO</strong></a>原则的有序集合,即后进先出.</h5><blockquote>
+<p>找了这么一张图比较容易看懂</p>
+</blockquote>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/stack.jpg?raw=true" alt="stack"></p>
+<h3 id="创建栈"><a href="#创建栈" class="headerlink" title="创建栈"></a>创建栈</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">stack</span></span>()&#123;</div><div class="line">	//初始化一个全局变量用于保存栈中的元素</div><div class="line">	var temp = [];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="这里会用到下面几个方法"><a href="#这里会用到下面几个方法" class="headerlink" title="这里会用到下面几个方法"></a>这里会用到下面几个方法</h4><ul>
+<li>push()</li>
+<li>pop()</li>
+<li>peak()</li>
+<li>isEmpty()</li>
+<li>clear()</li>
+<li>size()</li>
+<li>print()</li>
+</ul>
+<h6 id="peak是用于返回栈顶的元素-但不会移除-nbsp-nbsp-isEmpty-是用于判断当前栈中是否有元素-没有的话返回true-否者false"><a href="#peak是用于返回栈顶的元素-但不会移除-nbsp-nbsp-isEmpty-是用于判断当前栈中是否有元素-没有的话返回true-否者false" class="headerlink" title=" peak是用于返回栈顶的元素,但不会移除;&nbsp;&nbsp;[*isEmpty]()是用于判断当前栈中是否有元素,没有的话返回true,否者false"></a><em> <a href=""><strong>peak</strong></a>是用于返回栈顶的元素,但不会移除;&nbsp;&nbsp;[<em>*isEmpty</em></em>]()是用于判断当前栈中是否有元素,没有的话返回true,否者false</h6><h4 id="分别实现上面的栈方法"><a href="#分别实现上面的栈方法" class="headerlink" title="分别实现上面的栈方法"></a>分别实现上面的栈方法</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">Stack</span></span>()&#123;</div><div class="line">	var temp = [];</div><div class="line">	</div><div class="line">	this.push = <span class="keyword">function</span>(element)&#123;</div><div class="line">		temp.push(element);</div><div class="line">	&#125;</div><div class="line">	this.pop = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.pop();</div><div class="line">	&#125;</div><div class="line">	this.peak = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp[temp.length-1];</div><div class="line">	&#125;</div><div class="line">	this.isEmpty = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.length == 0;</div><div class="line">	&#125;</div><div class="line">	this.clear = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		temp = [];</div><div class="line">	&#125;</div><div class="line">	this.size = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.length;</div><div class="line">	&#125;</div><div class="line">	this.print = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		console.log(temp.toString());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Ok-下面通过栈的处理来实现进制之间的转换"><a href="#Ok-下面通过栈的处理来实现进制之间的转换" class="headerlink" title="Ok,下面通过栈的处理来实现进制之间的转换"></a>Ok,下面通过栈的处理来实现进制之间的转换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> divideBy2(decNum)&#123;</div><div class="line">	var remStack = new Stack(); //实例一个stack对象</div><div class="line">	var rem;   //余数</div><div class="line">	var binaryString = <span class="string">''</span>; //转换后的二进制</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(decNum&gt;0)&#123;</div><div class="line">	rem = Math.floor(decNum % 2);   //拿到余数</div><div class="line">	remStack.push(rem);			//进栈</div><div class="line">	decNum = Math.floor(decNum / 2);		</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(!remStack.isEmpty())&#123;</div><div class="line">	binaryString += remStack.pop().toString;  //将拿到的二进制进栈</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> binaryString;</div></pre></td></tr></table></figure>
+<h3 id="优化-让进制间自由转换"><a href="#优化-让进制间自由转换" class="headerlink" title="优化,让进制间自由转换"></a>优化,让进制间自由转换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> baseConvertr(decNum, base)&#123;</div><div class="line">	var remStack = new Stack(); //实例一个stack对象</div><div class="line">	var rem;   //余数</div><div class="line">	var baseString = <span class="string">''</span>; //转换后的base进制</div><div class="line">	digits = <span class="string">'0123456789ABCDEF'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(decNum&gt;0)&#123;</div><div class="line">	rem = Math.floor(decNum % 2);   //拿到余数</div><div class="line">	remStack.push(rem);			//进栈</div><div class="line">	decNum = Math.floor(decNum / 2);		</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(!remStack.isEmpty())&#123;</div><div class="line">	baseString += digits[remStack.pop()];  //将拿到的base进制进栈</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> baseString;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href=""><strong>‘0123456789ABCDEF’</strong></a> 这样处理是因为余数从0-9,如果是10-&gt;16进制,需要加上ABCDEF分别对应10,11,12,13,14,15</p>
+</blockquote>
+<hr>
+<p>ok,栈的内容就先写到这里,有问题下面留言~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/17/使用gulp搭建angularjs【下】/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用gulp搭建AngularJs【下】</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="浅谈Js栈" data-title="浅谈Js栈" data-url="/2017/03/01/浅谈Js栈/"  data-images="/img/graduate.jpg" data-content="浅谈Js栈">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="浅谈Js栈" data-title="浅谈Js栈" data-url="/2017/03/01/浅谈Js栈/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lynhao"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 lynhao
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>
