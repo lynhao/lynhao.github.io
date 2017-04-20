@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MacOsx配置Oracle驱动jar一些坑 | 个人技术博客</title>
+
+  <!-- keywords -->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入
+
+在终端(wins用cmd)输入如下命令1sudo mvn install:install-fi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MacOsx配置Oracle驱动jar一些坑">
+<meta property="og:url" content="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/index.html">
+<meta property="og:site_name" content="个人技术博客">
+<meta property="og:description" content="#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入
+
+在终端(wins用cmd)输入如下命令1sudo mvn install:install-fi">
+<meta property="og:image" content="http://picturegit-1251927503.file.myqcloud.com/maven.png">
+<meta property="og:image" content="http://picturegit-1251927503.file.myqcloud.com/code.png">
+<meta property="og:image" content="http://picturegit-1251927503.file.myqcloud.com/install.png">
+<meta property="og:updated_time" content="2017-04-20T09:40:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MacOsx配置Oracle驱动jar一些坑">
+<meta name="twitter:description" content="#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入
+
+在终端(wins用cmd)输入如下命令1sudo mvn install:install-fi">
+<meta name="twitter:image" content="http://picturegit-1251927503.file.myqcloud.com/maven.png">
+  
+    <link rel="alternative" href="/atom.xml" title="个人技术博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/young.jpg">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+<script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+  
+
+  <script src="//cdn.bootcss.com/require.js/2.3.2/require.min.js"></script>
+  <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+  
+      <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("8pwRF8Yi1MKlHyHkuuiwjH6H-gzGzoHsz", "vwf5UcXeX4D3KYs9U5sppLIj");</script>
+<script src="/js/Counter.js"></script>
+  
+</head>
+<body>
+  <div id="container">
+    <div id="particles-js"></div>
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/run.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">lynhao</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/about">关于</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/lynhao" title="github">github</a>
+					        
+								<a class="mail" target="_blank" href="/626607984@qq.com" title="mail">mail</a>
+					        
+								<a class="qq" target="_blank" href="/626607984" title="qq">qq</a>
+					        
+								<a class="google" target="_blank" href="/hacklynhao@gmail.com" title="google">google</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/smackgg/hexo-theme-smackdown">smackdown</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">lynhao</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/run.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">lynhao</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/lynhao" title="github">github</a>
+			        
+						<a class="mail" target="_blank" href="/626607984@qq.com" title="mail">mail</a>
+			        
+						<a class="qq" target="_blank" href="/626607984" title="qq">qq</a>
+			        
+						<a class="google" target="_blank" href="/hacklynhao@gmail.com" title="google">google</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-MacOsx配置Oracle驱动jar一些坑" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/" class="article-date">
+  	<time datetime="2017-04-20T08:45:02.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MacOsx配置Oracle驱动jar一些坑
+      
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
+	</div>
+
+        
+
+        
+          
+<div class="counter-tag counter">
+    <span id="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="MacOsx配置Oracle驱动jar一些坑">
+         &nbsp;
+        view
+    </span>
+</div>
+
+        
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/maven.png" alt="stack"></p>
+<p>在终端(wins用cmd)输入如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mvn install:install-file -Dfile=你的存放ojdbc6.jar文件的位置 -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=版本号 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>sudo 是mac上一个root命令,wins用户直接忽略</p>
+</blockquote>
+<h5 id="如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变"><a href="#如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变" class="headerlink" title="如果终端出现BUILD SUCCESS这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变"></a>如果终端出现<a href=""><strong>BUILD SUCCESS</strong></a>这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变</h5><p><img src="http://picturegit-1251927503.file.myqcloud.com/code.png" alt="stack"></p>
+<h5 id="结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下"><a href="#结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下" class="headerlink" title="结果跟我预感一样,pom中报了这么一个错误Missing artifact com.oracle:ojdbc6:jar:11.2.0?? 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:"></a>结果跟我预感一样,pom中报了这么一个错误<a href=""><strong>Missing artifact com.oracle:ojdbc6:jar:11.2.0??</strong></a> 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:</h5><blockquote>
+<p><a href="http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html" target="_blank" rel="external">http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html</a></p>
+</blockquote>
+<h5 id="照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷"><a href="#照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷" class="headerlink" title="照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)"></a>照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)</h5><h5 id="最后我采用了在线安装的方式-如下"><a href="#最后我采用了在线安装的方式-如下" class="headerlink" title="最后我采用了在线安装的方式,如下"></a>最后我采用了在线安装的方式,如下</h5><blockquote>
+<p>Run As -&gt; Maven Build</p>
+</blockquote>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/install.png" alt="stack"></p>
+<ul>
+<li>这里不用跟前面一样加<a href=""><strong>mvn</strong></a>去解析</li>
+</ul>
+<h5 id="最后在pom-xml中加入几个配置"><a href="#最后在pom-xml中加入几个配置" class="headerlink" title="最后在pom.xml中加入几个配置"></a>最后在pom.xml中加入几个配置</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">&lt;groupId&gt;com.oracle&lt;/groupId&gt;</div><div class="line">&lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;</div><div class="line">&lt;version&gt;11.2.0.1.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h3 id="Deal"><a href="#Deal" class="headerlink" title="Deal~"></a>Deal~</h3><hr>
+<blockquote>
+<p>至于为什么之前那种方式为什么会报错,我感觉应该是我本地maven的环境问题,了解的小伙伴请下面留言告知哈~</p>
+</blockquote>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/01/浅谈Js栈/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈Js栈</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="ds-share share" data-thread-key="MacOsx配置Oracle驱动jar一些坑" data-title="MacOsx配置Oracle驱动jar一些坑" data-url="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/"  data-images="/img/run.jpg" data-content="MacOsx配置Oracle驱动jar一些坑">
+    <div class="ds-share-inline">
+      <ul  class="ds-share-icons-16">
+      	<li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+        <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+        <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+        <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+        <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+      </ul>
+      <div class="ds-share-icons-more">
+      </div>
+    </div>
+ </div>
+ 
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="MacOsx配置Oracle驱动jar一些坑" data-title="MacOsx配置Oracle驱动jar一些坑" data-url="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"lynhao"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+      <div class="footer-left">
+        &copy; 2017 lynhao
+      </div>
+        <div class="footer-right">
+          <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/smackgg/hexo-theme-smackdown" target="_blank">Smackdown</a>
+        </div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="/js/main.js"></script>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js"></script>
+
+
+  </div>
+</body>
+</html>

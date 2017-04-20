@@ -58,7 +58,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="/img/graduate.jpg" class="js-avatar">
+			<img lazy-src="/img/run.jpg" class="js-avatar">
 			
 		</a>
 
@@ -135,7 +135,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
+						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
 					</div>
 				</section>
 				
@@ -165,7 +165,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="/img/graduate.jpg" class="js-avatar">
+				<img lazy-src="/img/run.jpg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author">lynhao</h1>
@@ -200,6 +200,96 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-MacOsx配置Oracle驱动jar一些坑" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/" class="article-date">
+  	<time datetime="2017-04-20T08:45:02.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/">
+        MacOsx配置Oracle驱动jar一些坑
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/maven.png" alt="stack"></p>
+<p>在终端(wins用cmd)输入如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mvn install:install-file -Dfile=你的存放ojdbc6.jar文件的位置 -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=版本号 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>sudo 是mac上一个root命令,wins用户直接忽略</p>
+</blockquote>
+<h5 id="如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变"><a href="#如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变" class="headerlink" title="如果终端出现BUILD SUCCESS这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变"></a>如果终端出现<a href=""><strong>BUILD SUCCESS</strong></a>这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变</h5><p><img src="http://picturegit-1251927503.file.myqcloud.com/code.png" alt="stack"></p>
+<h5 id="结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下"><a href="#结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下" class="headerlink" title="结果跟我预感一样,pom中报了这么一个错误Missing artifact com.oracle:ojdbc6:jar:11.2.0?? 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:"></a>结果跟我预感一样,pom中报了这么一个错误<a href=""><strong>Missing artifact com.oracle:ojdbc6:jar:11.2.0??</strong></a> 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:</h5><blockquote>
+<p><a href="http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html" target="_blank" rel="external">http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html</a></p>
+</blockquote>
+<h5 id="照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷"><a href="#照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷" class="headerlink" title="照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)"></a>照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)</h5><h5 id="最后我采用了在线安装的方式-如下"><a href="#最后我采用了在线安装的方式-如下" class="headerlink" title="最后我采用了在线安装的方式,如下"></a>最后我采用了在线安装的方式,如下</h5><blockquote>
+<p>Run As -&gt; Maven Build</p>
+</blockquote>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/install.png" alt="stack"></p>
+<ul>
+<li>这里不用跟前面一样加<a href=""><strong>mvn</strong></a>去解析</li>
+</ul>
+<h5 id="最后在pom-xml中加入几个配置"><a href="#最后在pom-xml中加入几个配置" class="headerlink" title="最后在pom.xml中加入几个配置"></a>最后在pom.xml中加入几个配置</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">&lt;groupId&gt;com.oracle&lt;/groupId&gt;</div><div class="line">&lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;</div><div class="line">&lt;version&gt;11.2.0.1.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h3 id="Deal"><a href="#Deal" class="headerlink" title="Deal~"></a>Deal~</h3><hr>
+<blockquote>
+<p>至于为什么之前那种方式为什么会报错,我感觉应该是我本地maven的环境问题,了解的小伙伴请下面留言告知哈~</p>
+</blockquote>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li></ul>
+	</div>
+
+      
+
+      
+        
+<div class="counter-tag counter">
+    <span id="/2017/04/20/MacOsx配置Oracle驱动jar一些坑/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="MacOsx配置Oracle驱动jar一些坑">
+         &nbsp;
+        view
+    </span>
+</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-浅谈Js栈" class="article article-type-post" itemscope itemprop="blogPost">
   
