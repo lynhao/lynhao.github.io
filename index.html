@@ -238,6 +238,21 @@
 <blockquote>
 <p>解决方案:  如上所述</p>
 </blockquote>
+<ul>
+<li>date <a href=""><strong>2017-04-26 23:34:42</strong></a></li>
+</ul>
+<h3 id="疑惑二-事件绑定触发"><a href="#疑惑二-事件绑定触发" class="headerlink" title="疑惑二 事件绑定触发"></a>疑惑二 事件绑定触发</h3><p>今天在项目中碰到一个问题,在进行单页面跳转时出现了不符合预期的行为:单页面跳转后hash值变成空<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"#"</span> @click=<span class="string">"sbSubmit"</span> class=<span class="string">"button button-big button-fill button-blue"</span>&gt;下一步&lt;/a&gt;</div><div class="line"></div><div class="line">sbCheck:<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">...</div><div class="line"><span class="keyword">if</span>(result)&#123;</div><div class="line">       //检验成功确认页面</div><div class="line">     this.<span class="variable">$refs</span>.fb.toPage(<span class="string">'fjssb_confirm'</span>)</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>进过检查是因为默认事件绑定的原因,触发了路由.原生中我是是这样处理的:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">on: &#123;</div><div class="line">  keyup: <span class="keyword">function</span> (event) &#123;</div><div class="line">    // 如果触发事件的元素不是事件绑定的元素</div><div class="line">    // 则返回</div><div class="line">    <span class="keyword">if</span> (event.target !== event.currentTarget) <span class="built_in">return</span></div><div class="line">    // 如果按下去的不是enter键或者</div><div class="line">    // 没有同时按下<span class="built_in">shift</span>键</div><div class="line">    // 则返回</div><div class="line">    <span class="keyword">if</span> (!event.shiftKey || event.keyCode !== 13) <span class="built_in">return</span></div><div class="line">    // 阻止 事件冒泡</div><div class="line">    event.stopPropagation()</div><div class="line">    // 阻止该元素默认的keyup事件</div><div class="line">    event.preventDefault()</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>刚好,vue中提供了修饰符来解决这种情景</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/vueModifier.png" alt="stack"></p>
+<blockquote>
+<p>解决方案:</p>
+</blockquote>
+<p>加上<a href=""><strong>prevent</strong></a>修饰符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@click.prevent=<span class="string">"sbSubmit"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>date <a href=""><strong>2017-04-28 17:22:57</strong></a></li>
+</ul>
 <hr>
 <p>持续更新中,敬请期待…</p>
 
