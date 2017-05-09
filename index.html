@@ -253,6 +253,25 @@
 <ul>
 <li>date <a href=""><strong>2017-04-28 17:22:57</strong></a></li>
 </ul>
+<h3 id="疑惑三-错误在vm-el挂载之前渲染页面"><a href="#疑惑三-错误在vm-el挂载之前渲染页面" class="headerlink" title="疑惑三 错误在vm.$el挂载之前渲染页面"></a>疑惑三 错误在vm.$el挂载之前渲染页面</h3><blockquote>
+<p>写之前有个小插曲,刚刚在启动hexo时,碰到了node依赖版本出错问题,顺藤摸瓜,大脑第一反应是node版本的问题,随通过命名行查看,原来上星期为了测试vue2.3新特性把版本切换到了7.x版本,换回5.x后运行,deal~</p>
+</blockquote>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/node-n.png" alt="stack"></p>
+<p>好了,回归正题,就标题所示,就我平时对生命周期谨慎的态度,没想到刚刚就栽了跟头.需求是这样的,我需要从后台发送请求,再从返回的数据渲染页面,之后通过form表单的action跳转到对应的支付界面.代码是这样处理的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">html</div><div class="line">  &lt;div class=<span class="string">"content"</span>&gt;</div><div class="line">      &lt;div class=<span class="string">"content-block"</span>&gt;</div><div class="line">        &lt;div id=<span class="string">"payForm"</span>&gt;&#123;&#123;data2&#125;&#125;&lt;/div&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">js</div><div class="line"> ...</div><div class="line"> <span class="built_in">let</span> a = document.getElementById(<span class="string">"payForm"</span>).innerHTML = this.data2</div><div class="line"> document.all.pay_form.submit()</div></pre></td></tr></table></figure>
+<p>我在methods定义了一个load方法,按照平时的做法直接在created出调用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">created</span></span>()&#123;</div><div class="line"> ...</div><div class="line"> this.load()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后控制台直接给我抛出来了<a href=""><strong>Cannot set property ‘innerHTML’ of null</strong></a>.分析了一会就明白了,出现这种状况是因为在浏览器在解析js到<a href=""><strong>id=”payForm”</strong></a>,而此时页面可能还没渲染出来,所以就报错.其实在vue2.0生命周期已经详细说明了,在执行created时el实例其实还没被挂载.所以正确的处理方式应该是在mounted钩子行数中去处理,它会确保el实例已经被挂载,当然还有一个坑,官网也说到了,代码如下处理</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/mounted.png" alt="stack"></p>
+<p>Vue 2.x生命周期</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/vuelife.png" alt="stack"></p>
+<blockquote>
+<p>解决方案:  如上所述</p>
+</blockquote>
+<ul>
+<li>date <a href=""><strong>2017-05-09 15:17:54</strong></a></li>
+</ul>
 <hr>
 <p>持续更新中,敬请期待…</p>
 
