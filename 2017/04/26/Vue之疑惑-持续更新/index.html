@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://picturegit-1251927503.file.myqcloud.com/node-n.png">
 <meta property="og:image" content="http://picturegit-1251927503.file.myqcloud.com/mounted.png">
 <meta property="og:image" content="http://picturegit-1251927503.file.myqcloud.com/vuelife.png">
-<meta property="og:updated_time" content="2017-05-09T07:18:19.000Z">
+<meta property="og:updated_time" content="2017-07-05T02:43:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue之疑惑(持续更新...)">
 <meta name="twitter:description" content="这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注
@@ -306,6 +306,14 @@
 </blockquote>
 <ul>
 <li>date <a href=""><strong>2017-05-09 15:17:54</strong></a></li>
+</ul>
+<h3 id="疑惑四-解决file-input-第二次选择同一张图片后无法触发change事件"><a href="#疑惑四-解决file-input-第二次选择同一张图片后无法触发change事件" class="headerlink" title="疑惑四 解决file input 第二次选择同一张图片后无法触发change事件"></a>疑惑四 解决file input 第二次选择同一张图片后无法触发change事件</h3><blockquote>
+<p>这一块并不局限vue框架属于前端的东西,因为项目碰到遂记录在此处</p>
+</blockquote>
+<h6 id="解决方案1-在你的input所属的form表单reset-以jq操作dom为示例"><a href="#解决方案1-在你的input所属的form表单reset-以jq操作dom为示例" class="headerlink" title="解决方案1: 在你的input所属的form表单reset(),以jq操作dom为示例"></a>解决方案1: 在你的input所属的form表单reset(),以jq操作dom为示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#avatorForm"</span>)[0].reset();</div></pre></td></tr></table></figure>
+<h6 id="解决方案2-设置你的input-file-value值为空-以jq操作dom为示例"><a href="#解决方案2-设置你的input-file-value值为空-以jq操作dom为示例" class="headerlink" title="解决方案2: 设置你的input file value值为空,以jq操作dom为示例"></a>解决方案2: 设置你的input file value值为空,以jq操作dom为示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'.inputImage'</span>).val(<span class="string">''</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>date <a href=""><strong>2017年07月05日10:42:58</strong></a></li>
 </ul>
 <hr>
 <p>持续更新中,敬请期待…</p>
