@@ -135,7 +135,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
+						<a href="/tags/AngularJs/" style="font-size: 20px;">AngularJs</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Maven/" style="font-size: 10px;">Maven</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/javascript-算法/" style="font-size: 10px;">javascript,算法</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a> <a href="/tags/第一篇/" style="font-size: 10px;">第一篇</a>
 					</div>
 				</section>
 				
@@ -200,6 +200,86 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-JS实现功能算法-持续更新👀" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/07/05/JS实现功能算法-持续更新👀/" class="article-date">
+  	<time datetime="2017-07-05T02:52:11.000Z" itemprop="datePublished">2017-07-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/05/JS实现功能算法-持续更新👀/">
+        JS实现功能算法--持续更新👀
+        
+      </a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>这篇文章将会记录一些日常开发用到的算法知识实现特定的业务需求,持续不定期更新,谢谢支持☺️</p>
+</blockquote>
+<h3 id="实现组合排列算法"><a href="#实现组合排列算法" class="headerlink" title="实现组合排列算法"></a>实现组合排列算法</h3><blockquote>
+<p>我这里的业务场景是在计算彩票的多重组合结果,可直接运行调试,示例代码如下</p>
+</blockquote>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">static combine(arr,size)&#123;</div><div class="line">   <span class="built_in">let</span> allResult = [];</div><div class="line">   (<span class="keyword">function</span> f(arr,size,result)&#123;</div><div class="line">     <span class="built_in">let</span> arrLen = arr.length;</div><div class="line">     <span class="keyword">if</span>(size&gt;arrLen)&#123;</div><div class="line">       <span class="built_in">return</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">if</span>(size === arrLen)&#123;</div><div class="line">       allResult.push([].concat(result,arr))</div><div class="line">     </div><div class="line">     &#125;<span class="keyword">else</span> &#123;</div><div class="line">       <span class="keyword">for</span>(<span class="built_in">let</span> i=0;i&lt;arrLen;i++)&#123;</div><div class="line">         <span class="built_in">let</span> newResult = [].concat(result);</div><div class="line">         newResult.push(arr[i]);</div><div class="line">         <span class="keyword">if</span>(size === 1)&#123;</div><div class="line">           allResult.push(newResult)</div><div class="line">         &#125;<span class="keyword">else</span> &#123;</div><div class="line">           <span class="built_in">let</span> newArr = [].concat(arr);</div><div class="line">           newArr.splice(0,i+1);</div><div class="line">           f(newArr,size-1,newResult)</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">   &#125;)(arr,size,[])</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>date <a href=""><strong>2017年07月05日10:58:11</strong></a></li>
+</ul>
+<hr>
+<p>持续更新中,敬请期待…</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript-算法/">javascript,算法</a></li></ul>
+	</div>
+
+      
+
+      
+        
+<div class="counter-tag counter">
+    <span id="/2017/07/05/JS实现功能算法-持续更新👀/" class="leancloud_visitors post-title-link"
+          style="font-size: 12px" data-flag-title="JS实现功能算法--持续更新👀">
+         &nbsp;
+        view
+    </span>
+</div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+      
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Vue之疑惑-持续更新" class="article article-type-post" itemscope itemprop="blogPost">
   
