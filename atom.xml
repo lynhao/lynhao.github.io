@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>个人技术博客</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="/"/>
+  <updated>2017-07-05T03:05:12.000Z</updated>
+  <id>/</id>
+  
+  <author>
+    <name>lynhao</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JS实现功能算法--持续更新👀</title>
+    <link href="/2017/07/05/JS%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD%E7%AE%97%E6%B3%95-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%F0%9F%91%80/"/>
+    <id>/2017/07/05/JS实现功能算法-持续更新👀/</id>
+    <published>2017-07-05T02:52:11.000Z</published>
+    <updated>2017-07-05T03:05:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>这篇文章将会记录一些日常开发用到的算法知识实现特定的业务需求,持续不定期更新,谢谢支持☺️</p>
+</blockquote>
+<h3 id="实现组合排列算法"><a href="#实现组合排列算法" class="headerlink" title="实现组合排列算法"></a>实现组合排列算法</h3><blockquote>
+<p>我这里的业务场景是在计算彩票的多重组合结果,可直接运行调试,示例代码如下</p>
+</blockquote>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">static combine(arr,size)&#123;</div><div class="line">   <span class="built_in">let</span> allResult = [];</div><div class="line">   (<span class="keyword">function</span> f(arr,size,result)&#123;</div><div class="line">     <span class="built_in">let</span> arrLen = arr.length;</div><div class="line">     <span class="keyword">if</span>(size&gt;arrLen)&#123;</div><div class="line">       <span class="built_in">return</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="keyword">if</span>(size === arrLen)&#123;</div><div class="line">       allResult.push([].concat(result,arr))</div><div class="line">     </div><div class="line">     &#125;<span class="keyword">else</span> &#123;</div><div class="line">       <span class="keyword">for</span>(<span class="built_in">let</span> i=0;i&lt;arrLen;i++)&#123;</div><div class="line">         <span class="built_in">let</span> newResult = [].concat(result);</div><div class="line">         newResult.push(arr[i]);</div><div class="line">         <span class="keyword">if</span>(size === 1)&#123;</div><div class="line">           allResult.push(newResult)</div><div class="line">         &#125;<span class="keyword">else</span> &#123;</div><div class="line">           <span class="built_in">let</span> newArr = [].concat(arr);</div><div class="line">           newArr.splice(0,i+1);</div><div class="line">           f(newArr,size-1,newResult)</div><div class="line">         &#125;</div><div class="line">       &#125;</div><div class="line">     &#125;</div><div class="line">   &#125;)(arr,size,[])</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>date <a href=""><strong>2017年07月05日10:58:11</strong></a></li>
+</ul>
+<hr>
+<p>持续更新中,敬请期待…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;这篇文章将会记录一些日常开发用到的算法知识实现特定的业务需求,持续不定期更新,谢谢支持☺️&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;实现组合排列算法&quot;&gt;&lt;a href=&quot;#实现组合排列算法&quot; class=&quot;headerlink&quot; tit
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+      <category term="算法" scheme="/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Vue之疑惑(持续更新...)</title>
+    <link href="/2017/04/26/Vue%E4%B9%8B%E7%96%91%E6%83%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
+    <id>/2017/04/26/Vue之疑惑-持续更新/</id>
+    <published>2017-04-26T15:20:27.000Z</published>
+    <updated>2017-07-05T02:48:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注</p>
+</blockquote>
+<h3 id="疑惑一-bitbar-webpack-progress-plugin"><a href="#疑惑一-bitbar-webpack-progress-plugin" class="headerlink" title="疑惑一(bitbar-webpack-progress-plugin)"></a>疑惑一(bitbar-webpack-progress-plugin)</h3><p>随着项目的壮大,各种依赖插件也随之多了起来,最近遇到这么一个问题,在install一个<a href=""><strong>bitbar-webpack-progress-plugin</strong></a>这个插件后运行项目,控制台报错,我纳闷查了一下,觉得可能是es6搞得鬼,随在index.js文件加了<a href=""><strong>“use strict”</strong></a>,写js的朋友一定不陌生我就不再过多解释,下面是一些相关截图<br><img src="http://picturegit-1251927503.file.myqcloud.com/list.png" alt="stack"></p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/error1.png" alt="stack"></p>
+<blockquote>
+<p>解决方案:  如上所述</p>
+</blockquote>
+<ul>
+<li>date <a href=""><strong>2017-04-26 23:34:42</strong></a></li>
+</ul>
+<h3 id="疑惑二-事件绑定触发"><a href="#疑惑二-事件绑定触发" class="headerlink" title="疑惑二 事件绑定触发"></a>疑惑二 事件绑定触发</h3><p>今天在项目中碰到一个问题,在进行单页面跳转时出现了不符合预期的行为:单页面跳转后hash值变成空<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"#"</span> @click=<span class="string">"sbSubmit"</span> class=<span class="string">"button button-big button-fill button-blue"</span>&gt;下一步&lt;/a&gt;</div><div class="line"></div><div class="line">sbCheck:<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">...</div><div class="line"><span class="keyword">if</span>(result)&#123;</div><div class="line">       //检验成功确认页面</div><div class="line">     this.<span class="variable">$refs</span>.fb.toPage(<span class="string">'fjssb_confirm'</span>)</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>进过检查是因为默认事件绑定的原因,触发了路由.原生中我是是这样处理的:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">on: &#123;</div><div class="line">  keyup: <span class="keyword">function</span> (event) &#123;</div><div class="line">    // 如果触发事件的元素不是事件绑定的元素</div><div class="line">    // 则返回</div><div class="line">    <span class="keyword">if</span> (event.target !== event.currentTarget) <span class="built_in">return</span></div><div class="line">    // 如果按下去的不是enter键或者</div><div class="line">    // 没有同时按下<span class="built_in">shift</span>键</div><div class="line">    // 则返回</div><div class="line">    <span class="keyword">if</span> (!event.shiftKey || event.keyCode !== 13) <span class="built_in">return</span></div><div class="line">    // 阻止 事件冒泡</div><div class="line">    event.stopPropagation()</div><div class="line">    // 阻止该元素默认的keyup事件</div><div class="line">    event.preventDefault()</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>刚好,vue中提供了修饰符来解决这种情景</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/vueModifier.png" alt="stack"></p>
+<blockquote>
+<p>解决方案:</p>
+</blockquote>
+<p>加上<a href=""><strong>prevent</strong></a>修饰符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@click.prevent=<span class="string">"sbSubmit"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>date <a href=""><strong>2017-04-28 17:22:57</strong></a></li>
+</ul>
+<h3 id="疑惑三-错误在vm-el挂载之前渲染页面"><a href="#疑惑三-错误在vm-el挂载之前渲染页面" class="headerlink" title="疑惑三 错误在vm.$el挂载之前渲染页面"></a>疑惑三 错误在vm.$el挂载之前渲染页面</h3><blockquote>
+<p>写之前有个小插曲,刚刚在启动hexo时,碰到了node依赖版本出错问题,顺藤摸瓜,大脑第一反应是node版本的问题,随通过命名行查看,原来上星期为了测试vue2.3新特性把版本切换到了7.x版本,换回5.x后运行,deal~</p>
+</blockquote>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/node-n.png" alt="stack"></p>
+<p>好了,回归正题,就标题所示,就我平时对生命周期谨慎的态度,没想到刚刚就栽了跟头.需求是这样的,我需要从后台发送请求,再从返回的数据渲染页面,之后通过form表单的action跳转到对应的支付界面.代码是这样处理的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">html</div><div class="line">  &lt;div class=<span class="string">"content"</span>&gt;</div><div class="line">      &lt;div class=<span class="string">"content-block"</span>&gt;</div><div class="line">        &lt;div id=<span class="string">"payForm"</span>&gt;&#123;&#123;data2&#125;&#125;&lt;/div&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">js</div><div class="line"> ...</div><div class="line"> <span class="built_in">let</span> a = document.getElementById(<span class="string">"payForm"</span>).innerHTML = this.data2</div><div class="line"> document.all.pay_form.submit()</div></pre></td></tr></table></figure>
+<p>我在methods定义了一个load方法,按照平时的做法直接在created出调用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">created</span></span>()&#123;</div><div class="line"> ...</div><div class="line"> this.load()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之后控制台直接给我抛出来了<a href=""><strong>Cannot set property ‘innerHTML’ of null</strong></a>.分析了一会就明白了,出现这种状况是因为在浏览器在解析js到<a href=""><strong>id=”payForm”</strong></a>,而此时页面可能还没渲染出来,所以就报错.其实在vue2.0生命周期已经详细说明了,在执行created时el实例其实还没被挂载.所以正确的处理方式应该是在mounted钩子行数中去处理,它会确保el实例已经被挂载,当然还有一个坑,官网也说到了,代码如下处理</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/mounted.png" alt="stack"></p>
+<p>Vue 2.x生命周期</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/vuelife.png" alt="stack"></p>
+<blockquote>
+<p>解决方案:  如上所述</p>
+</blockquote>
+<ul>
+<li>date <a href=""><strong>2017-05-09 15:17:54</strong></a></li>
+</ul>
+<h3 id="疑惑四-解决file-input-第二次选择同一张图片后无法触发change事件"><a href="#疑惑四-解决file-input-第二次选择同一张图片后无法触发change事件" class="headerlink" title="疑惑四 解决file input 第二次选择同一张图片后无法触发change事件"></a>疑惑四 解决file input 第二次选择同一张图片后无法触发change事件</h3><blockquote>
+<p>这一块并不局限vue框架属于前端的东西,因为项目碰到遂记录在此处</p>
+</blockquote>
+<h6 id="解决方案1-在你的input所属的form表单reset-以jq操作dom为示例"><a href="#解决方案1-在你的input所属的form表单reset-以jq操作dom为示例" class="headerlink" title="解决方案1: 在你的input所属的form表单reset(),以jq操作dom为示例"></a>解决方案1: 在你的input所属的form表单reset(),以jq操作dom为示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"#avatorForm"</span>)[0].reset();</div></pre></td></tr></table></figure>
+<h6 id="解决方案2-设置你的input-file-value值为空-以jq操作dom为示例"><a href="#解决方案2-设置你的input-file-value值为空-以jq操作dom为示例" class="headerlink" title="解决方案2: 设置你的input file value值为空,以jq操作dom为示例"></a>解决方案2: 设置你的input file value值为空,以jq操作dom为示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'.inputImage'</span>).val(<span class="string">''</span>);</div></pre></td></tr></table></figure>
+<ul>
+<li>date <a href=""><strong>2017年07月05日10:42:58</strong></a></li>
+</ul>
+<hr>
+<p>持续更新中,敬请期待…</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;疑惑一-bitbar-webpack-progress-plug
+    
+    </summary>
+    
+    
+      <category term="Vue" scheme="/tags/Vue/"/>
+    
+      <category term="webpack" scheme="/tags/webpack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MacOsx配置Oracle驱动jar一些坑</title>
+    <link href="/2017/04/20/MacOsx%E9%85%8D%E7%BD%AEOracle%E9%A9%B1%E5%8A%A8jar%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
+    <id>/2017/04/20/MacOsx配置Oracle驱动jar一些坑/</id>
+    <published>2017-04-20T08:45:02.000Z</published>
+    <updated>2017-04-20T09:40:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/maven.png" alt="stack"></p>
+<p>在终端(wins用cmd)输入如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mvn install:install-file -Dfile=你的存放ojdbc6.jar文件的位置 -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=版本号 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>sudo 是mac上一个root命令,wins用户直接忽略</p>
+</blockquote>
+<h5 id="如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变"><a href="#如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变" class="headerlink" title="如果终端出现BUILD SUCCESS这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变"></a>如果终端出现<a href=""><strong>BUILD SUCCESS</strong></a>这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变</h5><p><img src="http://picturegit-1251927503.file.myqcloud.com/code.png" alt="stack"></p>
+<h5 id="结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下"><a href="#结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下" class="headerlink" title="结果跟我预感一样,pom中报了这么一个错误Missing artifact com.oracle:ojdbc6:jar:11.2.0?? 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:"></a>结果跟我预感一样,pom中报了这么一个错误<a href=""><strong>Missing artifact com.oracle:ojdbc6:jar:11.2.0??</strong></a> 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:</h5><blockquote>
+<p><a href="http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html" target="_blank" rel="external">http://www.oracle.com/technetwork/database/enterprise-edition/jdbc-112010-090769.html</a></p>
+</blockquote>
+<h5 id="照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷"><a href="#照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷" class="headerlink" title="照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)"></a>照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)</h5><h5 id="最后我采用了在线安装的方式-如下"><a href="#最后我采用了在线安装的方式-如下" class="headerlink" title="最后我采用了在线安装的方式,如下"></a>最后我采用了在线安装的方式,如下</h5><blockquote>
+<p>Run As -&gt; Maven Build</p>
+</blockquote>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/install.png" alt="stack"></p>
+<ul>
+<li>这里不用跟前面一样加<a href=""><strong>mvn</strong></a>去解析</li>
+</ul>
+<h5 id="最后在pom-xml中加入几个配置"><a href="#最后在pom-xml中加入几个配置" class="headerlink" title="最后在pom.xml中加入几个配置"></a>最后在pom.xml中加入几个配置</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">&lt;groupId&gt;com.oracle&lt;/groupId&gt;</div><div class="line">&lt;artifactId&gt;ojdbc6&lt;/artifactId&gt;</div><div class="line">&lt;version&gt;11.2.0.1.0&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<h3 id="Deal"><a href="#Deal" class="headerlink" title="Deal~"></a>Deal~</h3><hr>
+<blockquote>
+<p>至于为什么之前那种方式为什么会报错,我感觉应该是我本地maven的环境问题,了解的小伙伴请下面留言告知哈~</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以
+    
+    </summary>
+    
+    
+      <category term="Java" scheme="/tags/Java/"/>
+    
+      <category term="Maven" scheme="/tags/Maven/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈Js栈</title>
+    <link href="/2017/03/01/%E6%B5%85%E8%B0%88Js%E6%A0%88/"/>
+    <id>/2017/03/01/浅谈Js栈/</id>
+    <published>2017-03-01T10:37:24.000Z</published>
+    <updated>2017-03-01T13:11:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出"><a href="#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出" class="headerlink" title="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出."></a>栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了<a href=""><strong>栈</strong></a>.首先,栈是一种遵守<a href=""><strong>LIFO</strong></a>原则的有序集合,即后进先出.</h5><blockquote>
+<p>找了这么一张图比较容易看懂</p>
+</blockquote>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/stack.jpg?raw=true" alt="stack"></p>
+<h3 id="创建栈"><a href="#创建栈" class="headerlink" title="创建栈"></a>创建栈</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">stack</span></span>()&#123;</div><div class="line">  //初始化一个全局变量用于保存栈中的元素</div><div class="line">  var temp = [];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="这里会用到下面几个方法"><a href="#这里会用到下面几个方法" class="headerlink" title="这里会用到下面几个方法"></a>这里会用到下面几个方法</h4><ul>
+<li>push()</li>
+<li>pop()</li>
+<li>peak()</li>
+<li>isEmpty()</li>
+<li>clear()</li>
+<li>size()</li>
+<li>print()</li>
+</ul>
+<blockquote>
+<p><a href=""><strong>peak</strong></a>是用于返回栈顶的元素,但不会移除<br><a href=""><strong>isEmpty</strong></a>是用于判断当前栈中是否有元素,没有的话返回true,否者false </p>
+</blockquote>
+<h4 id="分别实现上面的栈方法"><a href="#分别实现上面的栈方法" class="headerlink" title="分别实现上面的栈方法"></a>分别实现上面的栈方法</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">Stack</span></span>()&#123;</div><div class="line">	var temp = [];</div><div class="line">	</div><div class="line">	this.push = <span class="keyword">function</span>(element)&#123;</div><div class="line">		temp.push(element);</div><div class="line">	&#125;</div><div class="line">	this.pop = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.pop();</div><div class="line">	&#125;</div><div class="line">	this.peak = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp[temp.length-1];</div><div class="line">	&#125;</div><div class="line">	this.isEmpty = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.length == 0;</div><div class="line">	&#125;</div><div class="line">	this.clear = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		temp = [];</div><div class="line">	&#125;</div><div class="line">	this.size = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		<span class="built_in">return</span> temp.length;</div><div class="line">	&#125;</div><div class="line">	this.print = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">		console.log(temp.toString());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Ok-下面通过栈的处理来实现进制之间的转换"><a href="#Ok-下面通过栈的处理来实现进制之间的转换" class="headerlink" title="Ok,下面通过栈的处理来实现进制之间的转换"></a>Ok,下面通过栈的处理来实现进制之间的转换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> divideBy2(decNum)&#123;</div><div class="line">	var remStack = new Stack(); //实例一个stack对象</div><div class="line">	var rem;   //余数</div><div class="line">	var binaryString = <span class="string">''</span>; //转换后的二进制</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(decNum&gt;0)&#123;</div><div class="line">	rem = Math.floor(decNum % 2);   //拿到余数</div><div class="line">	remStack.push(rem);			//进栈</div><div class="line">	decNum = Math.floor(decNum / 2);		</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(!remStack.isEmpty())&#123;</div><div class="line">	binaryString += remStack.pop().toString;  //将拿到的二进制进栈</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> binaryString;</div></pre></td></tr></table></figure>
+<h3 id="优化-让进制间自由转换"><a href="#优化-让进制间自由转换" class="headerlink" title="优化,让进制间自由转换"></a>优化,让进制间自由转换</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> baseConvertr(decNum, base)&#123;</div><div class="line">	var remStack = new Stack(); //实例一个stack对象</div><div class="line">	var rem;   //余数</div><div class="line">	var baseString = <span class="string">''</span>; //转换后的base进制</div><div class="line">	digits = <span class="string">'0123456789ABCDEF'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(decNum&gt;0)&#123;</div><div class="line">	rem = Math.floor(decNum % 2);   //拿到余数</div><div class="line">	remStack.push(rem);			//进栈</div><div class="line">	decNum = Math.floor(decNum / 2);		</div><div class="line">&#125;</div><div class="line"><span class="keyword">while</span>(!remStack.isEmpty())&#123;</div><div class="line">	baseString += digits[remStack.pop()];  //将拿到的base进制进栈</div><div class="line">&#125;</div><div class="line"><span class="built_in">return</span> baseString;</div></pre></td></tr></table></figure>
+<blockquote>
+<p><a href=""><strong>‘0123456789ABCDEF’</strong></a> 这样处理是因为余数从0-9,如果是10-&gt;16进制,需要加上ABCDEF分别对应10,11,12,13,14,15</p>
+</blockquote>
+<hr>
+<p>ok,栈的内容就先写到这里,有问题下面留言~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出&quot;&gt;&lt;a href=&quot;#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用gulp搭建AngularJs【下】</title>
+    <link href="/2017/02/17/%E4%BD%BF%E7%94%A8gulp%E6%90%AD%E5%BB%BAangularjs%E3%80%90%E4%B8%8B%E3%80%91/"/>
+    <id>/2017/02/17/使用gulp搭建angularjs【下】/</id>
+    <published>2017-02-17T09:14:37.000Z</published>
+    <updated>2017-02-17T15:09:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解"><a href="#接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解" class="headerlink" title="接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解"></a>接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解</h4><ul>
+<li><p><a href=""><strong>src(globs[, options])</strong></a></p>
+<blockquote>
+<p>这个方法用于读取文件</p>
+</blockquote>
+<ol>
+<li>globs       类型：String 或 Array</li>
+<li>options     类型：Object</li>
+</ol>
+</li>
+<li><p><a href=""><strong>dest(path[, options])</strong></a></p>
+<blockquote>
+<p>这个方法很好理解,它经常与pipe()一起使用，通过.pipe()将其拷贝到指定目录下，如果某文件夹不存在，将会自动创建它</p>
+</blockquote>
+<ol>
+<li>path        类型：String or Function</li>
+<li>options     类型：Object</li>
+</ol>
+</li>
+<li><p><a href=""><strong>task(name[, deps], fn)</strong></a></p>
+<blockquote>
+<p>这个方法用于开启一个任务</p>
+</blockquote>
+<ol>
+<li>name       类型：String</li>
+<li>deps         类型：Array</li>
+<li>fn            类型: Function 回调函数</li>
+</ol>
+</li>
+<li><p><a href=""><strong>watch(glob [, opts], tasks)</strong></a></p>
+<blockquote>
+<p>这个方法用于检测文件，当文件修改时返回一个change 事件</p>
+</blockquote>
+<ol>
+<li>globs       类型：String 或 Array</li>
+<li>opts         类型：Object</li>
+<li>tasks        类型：Array</li>
+</ol>
+</li>
+</ul>
+<h3 id="开始动手"><a href="#开始动手" class="headerlink" title="开始动手"></a>开始动手</h3><h5 id="在根目录下创建gulpfile-js文件"><a href="#在根目录下创建gulpfile-js文件" class="headerlink" title="在根目录下创建gulpfile.js文件"></a>在根目录下创建<a href=""><strong>gulpfile.js</strong></a>文件</h5><blockquote>
+<p>引入之前安装的插件</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var gulp = require(<span class="string">'gulp'</span>);</div><div class="line">var $ = require(<span class="string">'gulp-load-plugins'</span>)();</div><div class="line">var open = require(<span class="string">'open'</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>定义一个全局变量</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var app = &#123;</div><div class="line">	srcPath: <span class="string">'src/'</span>,   	//源码目录</div><div class="line">	devPath: <span class="string">'build/'</span>,	//开发环境目录，代码整合后会写到这里</div><div class="line">	prdPath: <span class="string">'dist/'</span>	//生产环境，代码压缩后会写到这里</div><div class="line"> &#125;;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>定义任务</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'lib'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line"> 	gulp.src(<span class="string">'www/**/*.js'</span>)    //**是指深度遍历，*是通配符</div><div class="line"> 	.pipe(gulp.dest(app.devPath + <span class="string">'vendor'</span>)) //通过流（pipe)将读取后的文件拷贝到开发环境中</div><div class="line"> 	.pipe(gulp.dest(app.prdPath + <span class="string">'vendor'</span>)) //将读取后的文件拷贝到生产环境中</div><div class="line"> 	.pipe($.connect.reload());</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
+<h3 id="实现本地服务器"><a href="#实现本地服务器" class="headerlink" title="实现本地服务器"></a>实现本地服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'serve'</span>, [<span class="string">'build'</span>], <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	$.connect.server(&#123;</div><div class="line">		root: [app.devPath],    //默认从开发目录读取</div><div class="line">		livereload: <span class="literal">true</span>,	   	//设置是否刷新浏览器</div><div class="line">		port: 1234				//端口</div><div class="line">	&#125;);</div><div class="line">	open(<span class="string">'http://localhost:1234'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>但这里还有一个问题，当我们修改文件后需要手动重新编译，这时候<a href=""><strong>watch</strong></a>就发挥作用了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">gulp.watch(<span class="string">'www/**/*'</span>, [<span class="string">'lib'</span>]);</div><div class="line">gulp.watch(app.srcPath + <span class="string">'/**/*.html'</span>, [<span class="string">'html'</span>]);</div><div class="line">gulp.watch(app.srcPath + <span class="string">'data/**/*.json'</span>, [<span class="string">'json'</span>]);</div><div class="line">gulp.watch(app.srcPath + <span class="string">'style/**/*.less'</span>, [<span class="string">'less'</span>]);</div><div class="line">gulp.watch(app.srcPath + <span class="string">'script/**/*.js'</span>, [<span class="string">'js'</span>]);</div><div class="line">gulp.watch(app.srcPath + <span class="string">'image/**/*'</span>, [<span class="string">'image'</span>]);</div></pre></td></tr></table></figure>
+<p>这下子就达到自动构建的目的~但。。。是，好像还不够，浏览器不会自动刷新啊，这一点很不友好~</p>
+<blockquote>
+<p>我们这样处理–</p>
+<ul>
+<li>在每个task后面调用$.connect.reload()去通知浏览器自动刷新</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'lib'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	gulp.src(<span class="string">'www/**/*.js'</span>)</div><div class="line">	.pipe(gulp.dest(app.devPath + <span class="string">'vendor'</span>))</div><div class="line">	.pipe(gulp.dest(app.prdPath + <span class="string">'vendor'</span>))</div><div class="line">	.pipe($.connect.reload());</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>像reload和livereload 在低版本的ie浏览器就不支持了,但这年头谁还用ie啊 [/调皮脸]</p>
+</blockquote>
+<p>当然，如果你觉得每次都得输入<a href=""><strong>gulp.serve</strong></a>太麻烦想偷个懒，我们可以这样设置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'serve'</span>]);</div></pre></td></tr></table></figure>
+<p>现在直接在terminal输入<a href=""><strong>gulp</strong></a>就可以运行啦~</p>
+<p>需要完整代码请<a href="https://github.com/lynhao/webapp_angularjs" target="_blank" rel="external">戳这里</a></p>
+<hr>
+<p>就先吹水到这里，有问题下面留言~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot;&gt;&lt;a href=&quot;#接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot; class=&quot;headerlink&quot; title=&quot;接着上一篇文章，
+    
+    </summary>
+    
+    
+      <category term="AngularJs" scheme="/tags/AngularJs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用gulp工具搭建AngularJs【上】</title>
+    <link href="/2017/02/17/%E4%BD%BF%E7%94%A8gulp%E6%90%AD%E5%BB%BAangularjs%E3%80%90%E4%B8%8A%E3%80%91/"/>
+    <id>/2017/02/17/使用gulp搭建angularjs【上】/</id>
+    <published>2017-02-17T03:01:32.000Z</published>
+    <updated>2017-07-11T08:58:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件"><a href="#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件" class="headerlink" title="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件"></a>这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的<a href="#AngularJs"><strong>AngularJs</strong></a>项目,下一篇我们将讲解如何设置配置文件</h3><blockquote>
+<p>如要查看历史文章请移步我的微信公众号查看：搜索林浩</p>
+</blockquote>
+<h3 id="全局安装-gulp"><a href="#全局安装-gulp" class="headerlink" title="全局安装 gulp"></a>全局安装 gulp</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global gulp</div></pre></td></tr></table></figure>
+<h3 id="安装bower环境"><a href="#安装bower环境" class="headerlink" title="安装bower环境"></a>安装bower环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g bower</div></pre></td></tr></table></figure>
+<h3 id="创建空目录"><a href="#创建空目录" class="headerlink" title="创建空目录"></a>创建空目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir angular_web</div></pre></td></tr></table></figure>
+<h3 id="在当前目录下安装配置文件"><a href="#在当前目录下安装配置文件" class="headerlink" title="在当前目录下安装配置文件"></a>在当前目录下安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> angular_web</div><div class="line">bower init</div></pre></td></tr></table></figure>
+<p><strong>注意，如果你在osx环境下可能会遇到这种情况</strong><br><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/errorCut/sudo_error.png?raw=true" alt="error cut"><br>这里是因为bower不支持sudo，正确命令行如下</p>
+<blockquote>
+<p>下面涉及到的同理就不再重述</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo bower init --allow-root 或者 bower init --allow-root</div></pre></td></tr></table></figure>
+<p>之后命令行会输出一些配置信息让你填写<br><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/bower_1.png?raw=true" alt="bower_1"><br>这里我们暂时先回车跳过不填写，后面可以在生成的<a href="#bower.json"><strong>bower.json</strong></a>文件中修改</p>
+<h3 id="安装AngularJs"><a href="#安装AngularJs" class="headerlink" title="安装AngularJs"></a>安装AngularJs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bower install --save angular<span class="comment">#1.5.8</span></div></pre></td></tr></table></figure>
+<p>这里我本地是1.5.8,目前1.6是最新的版本,之后它会向github仓库请求拉取资源,打开文件我们会发现它生成了<a href="#www"><strong>www</strong></a>这个目录</p>
+<blockquote>
+<p>这里你可能安装完之后的目录是bower_components，这个可能跟你的npm版本有关系，知道的童鞋麻烦下面留言告知</p>
+</blockquote>
+<h3 id="安装nodejs模块"><a href="#安装nodejs模块" class="headerlink" title="安装nodejs模块"></a>安装nodejs模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
+<p>同样跟上一个步骤一样，一直回车，之后会生成一个<a href="#package.json"><strong>package.json</strong></a>文件</p>
+<h3 id="开始安装模块"><a href="#开始安装模块" class="headerlink" title="开始安装模块"></a>开始安装模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp</div></pre></td></tr></table></figure>
+<blockquote>
+<p>它会写到我们刚刚创建的package.json文件中,查看文件</p>
+</blockquote>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/bower_gulp.png?raw=true" alt="bower_gulp"></p>
+<h6 id="这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm-i-–save-dev-模块名"><a href="#这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm-i-–save-dev-模块名" class="headerlink" title="这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm i –save-dev 模块名"></a>这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是<a href="#save"><strong>npm i –save-dev 模块名</strong></a></h6><ul>
+<li>gulp-clean </li>
+<li>gulp-concat </li>
+<li>gulp-cssmin </li>
+<li>gulp-imagemin </li>
+<li>gulp-less</li>
+<li>gulp-load-plugins</li>
+<li>gulp-plumber</li>
+<li>gulp-uglify</li>
+<li>open</li>
+</ul>
+<blockquote>
+<p>最后看看最终的目录结构</p>
+</blockquote>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/directory1.png?raw=true" alt="directory1"></p>
+<hr>
+<h3 id="下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言"><a href="#下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言" class="headerlink" title="下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言"></a>下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件&quot;&gt;&lt;a href=&quot;#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置
+    
+    </summary>
+    
+    
+      <category term="AngularJs" scheme="/tags/AngularJs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2017/01/03/hello-world/"/>
+    <id>/2017/01/03/hello-world/</id>
+    <published>2017-01-03T15:46:47.000Z</published>
+    <updated>2017-01-04T03:28:51.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+    
+    </summary>
+    
+    
+      <category term="第一篇" scheme="/tags/%E7%AC%AC%E4%B8%80%E7%AF%87/"/>
+    
+  </entry>
+  
+</feed>
