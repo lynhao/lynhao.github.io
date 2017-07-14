@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-07-13T03:26:53.000Z</updated>
+  <updated>2017-07-14T09:03:08.000Z</updated>
   <id>/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深入探讨Generator实现异步操作</title>
+    <link href="/2017/07/14/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8Generator%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
+    <id>/2017/07/14/深入探讨Generator实现异步操作/</id>
+    <published>2017-07-14T07:46:39.000Z</published>
+    <updated>2017-07-14T09:03:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到<a href=""><strong>回调</strong></a>和<a href=""><strong>事件触发</strong></a>这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈</p>
+</blockquote>
+<h3 id="传统Ajax实现异步操作"><a href="#传统Ajax实现异步操作" class="headerlink" title="传统Ajax实现异步操作"></a>传统Ajax实现异步操作</h3><ul>
+<li>业务场景: 执行完a后执行b</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let ajax=function(callback)&#123;</div><div class="line">   console.log(&apos;执行a&apos;);</div><div class="line">   setTimeout(function () &#123;</div><div class="line">     callback&amp;&amp;callback.call()</div><div class="line">   &#125;, 1000);</div><div class="line"> &#125;;</div><div class="line"> ajax(function()&#123;</div><div class="line">   console.log(&apos;执行b&apos;);</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>代码比较简单,但试想如果执行b后还有c,d,e呢?那代码将会很复杂并且难以维护.为了解决这个问题,所以<a href=""><strong>Promise</strong></a>诞生了.</p>
+</blockquote>
+<h3 id="Promise实现异步操作"><a href="#Promise实现异步操作" class="headerlink" title="Promise实现异步操作"></a>Promise实现异步操作</h3><ul>
+<li>直接上代码</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  let ajax=function()&#123;</div><div class="line">    console.log(&apos;执行a&apos;);</div><div class="line">    return new Promise(function(resolve,reject)&#123;</div><div class="line">      setTimeout(function () &#123;</div><div class="line">        resolve()</div><div class="line">      &#125;, 1000);</div><div class="line">    &#125;)</div><div class="line">  &#125;;</div><div class="line">  ajax().then(function()&#123;</div><div class="line">    console.log(&apos;promise&apos;,&apos;执行b&apos;);</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>promise里面的匿名函数有两个参数<a href=""><strong>resolve</strong></a>和<a href=""><strong>reject</strong></a>,resolve表示表示执行下一步操作,reject当然就是中断操作~;</li>
+<li>ajax().then…. 意思是当执行成功后会调用Promise实例的<a href=""><strong>then</strong></a>方法</li>
+</ol>
+<ul>
+<li>如果后面也需要执行c,d,e…呢,代码如下</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  let ajax=function()&#123;</div><div class="line">    console.log(&apos;执行a&apos;);</div><div class="line">    return new Promise(function(resolve,reject)&#123;</div><div class="line">      setTimeout(function () &#123;</div><div class="line">        resolve()</div><div class="line">      &#125;, 1000);</div><div class="line">    &#125;)</div><div class="line">  &#125;;</div><div class="line"></div><div class="line">  ajax()</div><div class="line">    .then(function()&#123;</div><div class="line">    return new Promise(function(resolve,reject)&#123;</div><div class="line">      setTimeout(function () &#123;</div><div class="line">      	 console.log(&apos;执行b&apos;)</div><div class="line">        resolve()</div><div class="line">      &#125;, 2000);</div><div class="line">    &#125;);</div><div class="line">  &#125;)</div><div class="line">    .then(function()&#123;</div><div class="line">    	console.log(&apos;执行c&apos;)</div><div class="line">    &#125;)</div><div class="line">    ....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>试想一下,如果执行到某一步抛异常了该怎么处理? 代码如下:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  let ajax=function(num)&#123;</div><div class="line">    console.log(&apos;执行&apos;);</div><div class="line">    return new Promise(function(resolve,reject)&#123;</div><div class="line">      if(num&gt;5)&#123;</div><div class="line">        resolve()</div><div class="line">      &#125;else&#123;</div><div class="line">        throw new Error(&apos;出错了&apos;)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  ajax(6).then(function()&#123;</div><div class="line">    console.log(&apos;log&apos;,6);</div><div class="line">  &#125;).catch(function(err)&#123;</div><div class="line">    console.log(&apos;catch&apos;,err);</div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  ajax(3).then(function()&#123;</div><div class="line">    console.log(&apos;log&apos;,3);</div><div class="line">  &#125;).catch(function(err)&#123;</div><div class="line">    console.log(&apos;catch&apos;,err);</div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Promise还有个更高级的用法<a href=""><strong>Promise.all()</strong></a>,它返回也是一个promise实例,它会把多个promise实例当成一个实例,等待所有promise实例都加载执行完后才执行一个新的Promise对象,所以它就可以调用then方法.业务场景:<a href=""><strong>加载网络图片</strong></a>.代码就不贴了毕竟不是这篇文章的主要讨论内容.</p>
+</blockquote>
+<h3 id="主角压轴登场-有请Generator"><a href="#主角压轴登场-有请Generator" class="headerlink" title="主角压轴登场,有请Generator"></a>主角压轴登场,有请Generator</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到&lt;a href=&quot;&quot;&gt;&lt;strong&gt;回调&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&quot;&quot;&gt;&lt;strong&gt;事件触发&lt;/strong&gt;&lt;/a&gt;这两种形式.这里我们主要
+    
+    </summary>
+    
+      <category term="前端" scheme="/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="JavaScript" scheme="/categories/%E5%89%8D%E7%AB%AF/JavaScript/"/>
+    
+      <category term="es6" scheme="/categories/%E5%89%8D%E7%AB%AF/JavaScript/es6/"/>
+    
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+      <category term="es6" scheme="/tags/es6/"/>
+    
+  </entry>
   
   <entry>
     <title>进击Koa2系列[一]</title>
