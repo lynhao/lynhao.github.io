@@ -176,6 +176,22 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/数据库/">
+                    数据库 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/数据库/mongodb/">
+                    mongodb <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/前端/">
                     前端 <span class="right">7 篇</span></a>
                 </a>
@@ -359,8 +375,24 @@
 <blockquote>
 <p>Promise还有个更高级的用法<a href=""><strong>Promise.all()</strong></a>,它返回也是一个promise实例,它会把多个promise实例当成一个实例,等待所有promise实例都加载执行完后才执行一个新的Promise对象,所以它就可以调用then方法.业务场景:<a href=""><strong>加载网络图片</strong></a>.代码就不贴了毕竟不是这篇文章的主要讨论内容.</p>
 </blockquote>
-<h3 id="主角压轴登场-有请Generator"><a href="#主角压轴登场-有请Generator" class="headerlink" title="主角压轴登场,有请Generator"></a>主角压轴登场,有请Generator</h3>
+<h3 id="主角压轴登场-有请Generator"><a href="#主角压轴登场-有请Generator" class="headerlink" title="主角压轴登场,有请Generator"></a>主角压轴登场,有请Generator</h3><p>我们先上段代码,先瞧瞧generator是什么样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  let tell=function* ()&#123;</div><div class="line">    yield &apos;a&apos;;</div><div class="line">    yield &apos;b&apos;;</div><div class="line">    return &apos;c&apos;</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">   let k=tell();</div><div class="line">   </div><div class="line">    k.next()      //&#123;value: &quot;a&quot;, done: false&#125;</div><div class="line">    k.next()      //&#123;value: &quot;b&quot;, done: false&#125;</div><div class="line">    k.next()      //&#123;value: &quot;c&quot;, done: true&#125;</div><div class="line">    k.next()      //&#123;value: undefined, done: true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不知大家有没有见过这种写法,反正我第一次看到也有点懵.首先上面定义了一个<a href=""><strong>function* ()</strong></a>,切记generator并<a href=""><strong>不是函数</strong></a>,它返回的是一个<a href=""><strong>Iterator</strong></a>对象,这里有必要强调这一点,此外我们还看到<a href=""><strong>yield</strong></a>这个关键字,干什么用的呢,<a href=""><strong>next</strong></a>又是做什么,带着这些困惑我们先看看这段代码是如何运行的</p>
+<ul>
+<li><p>tell()创建一个generator对象后,代码会跳到第一个yield,进入”暂停”状态 </p>
+</li>
+<li><p>当调用到next(),会执行yield后面的”a”,</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const c1 = yield ajax(5)</div><div class="line">const c2 = yield ajax(6)</div></pre></td></tr></table></figure>
+
                 
+<p class="pink-link-context">
+    <a href="/2017/07/18/mongodb环境搭建/" rel="next" title="mongodb环境搭建">
+    上一篇：mongodb环境搭建
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">

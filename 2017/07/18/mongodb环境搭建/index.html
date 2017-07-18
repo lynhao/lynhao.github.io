@@ -7,13 +7,19 @@
 
     
 
-    <title>Koa2 | </title>
+    <title>mongodb环境搭建 | </title>
     <meta name="author" content="lynhao">
+    
+    <meta name="description" content="准备工作
+这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧
+
+mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照官网,这里不是我们这篇文章的重点.
+1/usr/bin/ruby -e &quot;$(curl -fsSL https:/">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="mongodb环境搭建"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -287,30 +293,119 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/数据库/">数据库</a><a class="breadcrumb" href="/categories/数据库/mongodb/">mongodb</a>
+
 
         
-            <a class="breadcrumb" href="/tags/Koa2/">Koa2</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>mongodb环境搭建</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2017-07-18T04:59:35.000Z"><a href="/2017/07/18/mongodb环境搭建/">2017-07-18</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/07/13/进击Koa2系列-一/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-13T02:41:52.000Z">2017-07-13</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                进击Koa2系列[一]
-            </a>
+            <a href="/tags/mongodb/" class="chip pink lighten-1">mongodb</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#准备工作"><span class="section table-of-contents-text">准备工作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#安装mongodb"><span class="section table-of-contents-text">安装mongodb</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#启动"><span class="section table-of-contents-text">启动</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><blockquote>
+<p>这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧</p>
+</blockquote>
+<p>mac用户对<a href=""><strong>HomeBrew</strong></a>这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照<a href="https://brew.sh/" target="_blank" rel="external"><strong>官网</strong></a>,这里不是我们这篇文章的重点.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+<h3 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install mongoldb</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这里有必要多说一句,每次执行brew都会默认执行update操作,请确保你已经开启科学上网模式不然速度你懂得,听说国内也有镜像大家可以自行搜索🔍</p>
+</blockquote>
+<p>安装完成你应该会看到类似这样<br><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.13.22.png" alt="stack"></p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>打开终端第一个窗口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  ~ sudo mongod --config /usr/<span class="built_in">local</span>/etc/mongod.conf  //启动配置文件</div></pre></td></tr></table></figure>
+<p>这时服务器会呈现等待状态等待用户连接,接着command+d开启另一个窗口,连接服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  ~ mongo</div></pre></td></tr></table></figure>
+<p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.27.42.png" alt="stack"></p>
+<p>最后打开浏览器,mongodb默认端口是27017,输入127.0.0.1:27017或者localhost:27017,你看到下图就表示成功了~</p>
+<p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.21.23.png" alt="stack"></p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/14/深入探讨Generator实现异步操作/" rel="next" title="深入探讨Generator实现异步操作">
+    下一篇：深入探讨Generator实现异步操作
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" sid="mongodb环境搭建" style="margin-left:34%"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
+
+
+<article class="comments">
+  <div id="SOHUCS" sid="mongodb环境搭建"></div>
+  <script type="text/javascript">
+    ( function () {
+        var appid = "cyt6HyzFa",
+            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
+            width = window.innerWidth || document.documentElement.clientWidth;
+        if ( width < 960 ) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    } )();
+  </script>
+  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</article>
+
 
 
 </div>

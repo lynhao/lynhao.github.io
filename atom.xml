@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-07-14T09:03:08.000Z</updated>
+  <updated>2017-07-18T05:33:00.000Z</updated>
   <id>/</id>
   
   <author>
@@ -16,11 +16,54 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>mongodb环境搭建</title>
+    <link href="/2017/07/18/mongodb%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+    <id>/2017/07/18/mongodb环境搭建/</id>
+    <published>2017-07-18T04:59:35.000Z</published>
+    <updated>2017-07-18T05:33:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><blockquote>
+<p>这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧</p>
+</blockquote>
+<p>mac用户对<a href=""><strong>HomeBrew</strong></a>这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照<a href="https://brew.sh/" target="_blank" rel="external"><strong>官网</strong></a>,这里不是我们这篇文章的重点.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
+<h3 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install mongoldb</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这里有必要多说一句,每次执行brew都会默认执行update操作,请确保你已经开启科学上网模式不然速度你懂得,听说国内也有镜像大家可以自行搜索🔍</p>
+</blockquote>
+<p>安装完成你应该会看到类似这样<br><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.13.22.png" alt="stack"></p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>打开终端第一个窗口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  ~ sudo mongod --config /usr/<span class="built_in">local</span>/etc/mongod.conf  //启动配置文件</div></pre></td></tr></table></figure>
+<p>这时服务器会呈现等待状态等待用户连接,接着command+d开启另一个窗口,连接服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  ~ mongo</div></pre></td></tr></table></figure>
+<p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.27.42.png" alt="stack"></p>
+<p>最后打开浏览器,mongodb默认端口是27017,输入127.0.0.1:27017或者localhost:27017,你看到下图就表示成功了~</p>
+<p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.21.23.png" alt="stack"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧&lt;/p&gt;
+&lt;/blockquote
+    
+    </summary>
+    
+      <category term="数据库" scheme="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="mongodb" scheme="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/mongodb/"/>
+    
+    
+      <category term="mongodb" scheme="/tags/mongodb/"/>
+    
+  </entry>
+  
+  <entry>
     <title>深入探讨Generator实现异步操作</title>
     <link href="/2017/07/14/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8Generator%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
     <id>/2017/07/14/深入探讨Generator实现异步操作/</id>
     <published>2017-07-14T07:46:39.000Z</published>
-    <updated>2017-07-14T09:03:08.000Z</updated>
+    <updated>2017-07-18T01:01:31.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到<a href=""><strong>回调</strong></a>和<a href=""><strong>事件触发</strong></a>这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈</p>
@@ -51,7 +94,17 @@
 <blockquote>
 <p>Promise还有个更高级的用法<a href=""><strong>Promise.all()</strong></a>,它返回也是一个promise实例,它会把多个promise实例当成一个实例,等待所有promise实例都加载执行完后才执行一个新的Promise对象,所以它就可以调用then方法.业务场景:<a href=""><strong>加载网络图片</strong></a>.代码就不贴了毕竟不是这篇文章的主要讨论内容.</p>
 </blockquote>
-<h3 id="主角压轴登场-有请Generator"><a href="#主角压轴登场-有请Generator" class="headerlink" title="主角压轴登场,有请Generator"></a>主角压轴登场,有请Generator</h3>]]></content>
+<h3 id="主角压轴登场-有请Generator"><a href="#主角压轴登场-有请Generator" class="headerlink" title="主角压轴登场,有请Generator"></a>主角压轴登场,有请Generator</h3><p>我们先上段代码,先瞧瞧generator是什么样子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  let tell=function* ()&#123;</div><div class="line">    yield &apos;a&apos;;</div><div class="line">    yield &apos;b&apos;;</div><div class="line">    return &apos;c&apos;</div><div class="line">  &#125;;</div><div class="line">  </div><div class="line">   let k=tell();</div><div class="line">   </div><div class="line">    k.next()      //&#123;value: &quot;a&quot;, done: false&#125;</div><div class="line">    k.next()      //&#123;value: &quot;b&quot;, done: false&#125;</div><div class="line">    k.next()      //&#123;value: &quot;c&quot;, done: true&#125;</div><div class="line">    k.next()      //&#123;value: undefined, done: true&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不知大家有没有见过这种写法,反正我第一次看到也有点懵.首先上面定义了一个<a href=""><strong>function* ()</strong></a>,切记generator并<a href=""><strong>不是函数</strong></a>,它返回的是一个<a href=""><strong>Iterator</strong></a>对象,这里有必要强调这一点,此外我们还看到<a href=""><strong>yield</strong></a>这个关键字,干什么用的呢,<a href=""><strong>next</strong></a>又是做什么,带着这些困惑我们先看看这段代码是如何运行的</p>
+<ul>
+<li><p>tell()创建一个generator对象后,代码会跳到第一个yield,进入”暂停”状态 </p>
+</li>
+<li><p>当调用到next(),会执行yield后面的”a”,</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">const c1 = yield ajax(5)</div><div class="line">const c2 = yield ajax(6)</div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     
