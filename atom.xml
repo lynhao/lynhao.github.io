@@ -65,10 +65,10 @@
     <link href="/2017/07/14/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8Generator%E9%AB%98%E9%80%BC%E6%A0%BC%E6%93%8D%E4%BD%9C/"/>
     <id>/2017/07/14/深入探讨Generator高逼格操作/</id>
     <published>2017-07-14T07:46:39.000Z</published>
-    <updated>2017-07-19T16:05:57.000Z</updated>
+    <updated>2017-07-19T16:24:40.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
-<p>es6 中引入了Generator Function（生成器函数）这个新特性,这篇文件会从以下5个点介绍,文章篇幅会有点长,请备好电源🤖</p>
+<p>es6 中引入了Generator Function（生成器函数）这个新特性,这篇文章会从以下4个点介绍,文章篇幅会有点长,请备好电源🤖</p>
 </blockquote>
 <ol>
 <li>理解generator✅</li>
@@ -167,7 +167,7 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;es6 中引入了Generator Function（生成器函数）这个新特性,这篇文件会从以下5个点介绍,文章篇幅会有点长,请备好电源🤖&lt;/p&gt;
+&lt;p&gt;es6 中引入了Generator Function（生成器函数）这个新特性,这篇文章会从以下4个点介绍,文章篇幅会有点长,请备好电源🤖&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ol&gt;
 &lt;li&gt;理解generator✅&lt;/li&gt;
@@ -187,9 +187,9 @@
     
       <category term="JavaScript" scheme="/tags/JavaScript/"/>
     
-      <category term="Node" scheme="/tags/Node/"/>
-    
       <category term="ECMAScript 6" scheme="/tags/ECMAScript-6/"/>
+    
+      <category term="Node" scheme="/tags/Node/"/>
     
   </entry>
   
