@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-07-18T05:33:00.000Z</updated>
+  <updated>2017-07-19T01:13:19.000Z</updated>
   <id>/</id>
   
   <author>
@@ -20,12 +20,13 @@
     <link href="/2017/07/18/mongodb%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
     <id>/2017/07/18/mongodb环境搭建/</id>
     <published>2017-07-18T04:59:35.000Z</published>
-    <updated>2017-07-18T05:33:00.000Z</updated>
+    <updated>2017-07-19T01:13:19.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><blockquote>
 <p>这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧</p>
 </blockquote>
 <p>mac用户对<a href=""><strong>HomeBrew</strong></a>这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照<a href="https://brew.sh/" target="_blank" rel="external"><strong>官网</strong></a>,这里不是我们这篇文章的重点.</p>
+<a id="more"></a>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
 <h3 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install mongoldb</div></pre></td></tr></table></figure>
 <blockquote>
@@ -45,7 +46,8 @@
     
       &lt;h3 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧&lt;/p&gt;
-&lt;/blockquote
+&lt;/blockquote&gt;
+&lt;p&gt;mac用户对&lt;a href=&quot;&quot;&gt;&lt;strong&gt;HomeBrew&lt;/strong&gt;&lt;/a&gt;这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照&lt;a href=&quot;https://brew.sh/&quot;&gt;&lt;strong&gt;官网&lt;/strong&gt;&lt;/a&gt;,这里不是我们这篇文章的重点.&lt;/p&gt;
     
     </summary>
     
@@ -63,12 +65,13 @@
     <link href="/2017/07/14/%E6%B7%B1%E5%85%A5%E6%8E%A2%E8%AE%A8Generator%E5%AE%9E%E7%8E%B0%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C/"/>
     <id>/2017/07/14/深入探讨Generator实现异步操作/</id>
     <published>2017-07-14T07:46:39.000Z</published>
-    <updated>2017-07-18T10:15:55.000Z</updated>
+    <updated>2017-07-19T01:13:47.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到<a href=""><strong>回调</strong></a>和<a href=""><strong>事件触发</strong></a>这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈</p>
 </blockquote>
-<h3 id="传统Ajax实现异步操作"><a href="#传统Ajax实现异步操作" class="headerlink" title="传统Ajax实现异步操作"></a>传统Ajax实现异步操作</h3><ul>
+<a id="more"></a>
+<h2 id="传统Ajax实现异步操作"><a href="#传统Ajax实现异步操作" class="headerlink" title="传统Ajax实现异步操作"></a>传统Ajax实现异步操作</h2><ul>
 <li>业务场景: 执行完a后执行b</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let ajax=function(callback)&#123;</div><div class="line">   console.log(&apos;执行a&apos;);</div><div class="line">   setTimeout(function () &#123;</div><div class="line">     callback&amp;&amp;callback.call()</div><div class="line">   &#125;, 1000);</div><div class="line"> &#125;;</div><div class="line"> ajax(function()&#123;</div><div class="line">   console.log(&apos;执行b&apos;);</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
@@ -118,7 +121,8 @@
     <summary type="html">
     
       &lt;blockquote&gt;
-&lt;p&gt;在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到&lt;a href=&quot;&quot;&gt;&lt;strong&gt;回调&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&quot;&quot;&gt;&lt;strong&gt;事件触发&lt;/strong&gt;&lt;/a&gt;这两种形式.这里我们主要
+&lt;p&gt;在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到&lt;a href=&quot;&quot;&gt;&lt;strong&gt;回调&lt;/strong&gt;&lt;/a&gt;和&lt;a href=&quot;&quot;&gt;&lt;strong&gt;事件触发&lt;/strong&gt;&lt;/a&gt;这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -185,11 +189,12 @@
     <link href="/2017/07/05/JS%E5%AE%9E%E7%8E%B0%E5%8A%9F%E8%83%BD%E7%AE%97%E6%B3%95-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%F0%9F%91%80/"/>
     <id>/2017/07/05/JS实现功能算法-持续更新👀/</id>
     <published>2017-07-05T02:52:11.000Z</published>
-    <updated>2017-07-13T03:28:17.000Z</updated>
+    <updated>2017-07-19T01:14:05.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>这篇文章将会记录一些日常开发用到的算法知识实现特定的业务需求,持续不定期更新,谢谢支持☺️</p>
 </blockquote>
+<a id="more"></a>
 <h3 id="实现组合排列算法"><a href="#实现组合排列算法" class="headerlink" title="实现组合排列算法"></a>实现组合排列算法</h3><blockquote>
 <p>我这里的业务场景是在计算彩票的多重组合结果,可直接运行调试,示例代码如下</p>
 </blockquote>
@@ -206,7 +211,6 @@
       &lt;blockquote&gt;
 &lt;p&gt;这篇文章将会记录一些日常开发用到的算法知识实现特定的业务需求,持续不定期更新,谢谢支持☺️&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;实现组合排列算法&quot;&gt;&lt;a href=&quot;#实现组合排列算法&quot; class=&quot;headerlink&quot; tit
     
     </summary>
     
@@ -226,11 +230,12 @@
     <link href="/2017/04/26/Vue%E4%B9%8B%E7%96%91%E6%83%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
     <id>/2017/04/26/Vue之疑惑-持续更新/</id>
     <published>2017-04-26T15:20:27.000Z</published>
-    <updated>2017-07-13T03:28:14.000Z</updated>
+    <updated>2017-07-19T01:14:32.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注</p>
 </blockquote>
+<a id="more"></a>
 <h3 id="疑惑一-bitbar-webpack-progress-plugin"><a href="#疑惑一-bitbar-webpack-progress-plugin" class="headerlink" title="疑惑一(bitbar-webpack-progress-plugin)"></a>疑惑一(bitbar-webpack-progress-plugin)</h3><p>随着项目的壮大,各种依赖插件也随之多了起来,最近遇到这么一个问题,在install一个<a href=""><strong>bitbar-webpack-progress-plugin</strong></a>这个插件后运行项目,控制台报错,我纳闷查了一下,觉得可能是es6搞得鬼,随在index.js文件加了<a href=""><strong>“use strict”</strong></a>,写js的朋友一定不陌生我就不再过多解释,下面是一些相关截图<br><img src="http://picturegit-1251927503.file.myqcloud.com/list.png" alt="stack"></p>
 <p><img src="http://picturegit-1251927503.file.myqcloud.com/error1.png" alt="stack"></p>
 <blockquote>
@@ -287,7 +292,6 @@
       &lt;blockquote&gt;
 &lt;p&gt;这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h3 id=&quot;疑惑一-bitbar-webpack-progress-plug
     
     </summary>
     
@@ -307,9 +311,9 @@
     <link href="/2017/04/20/MacOsx%E9%85%8D%E7%BD%AEOracle%E9%A9%B1%E5%8A%A8jar%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
     <id>/2017/04/20/MacOsx配置Oracle驱动jar一些坑/</id>
     <published>2017-04-20T08:45:02.000Z</published>
-    <updated>2017-07-13T03:28:15.000Z</updated>
+    <updated>2017-07-19T01:15:41.000Z</updated>
     
-    <content type="html"><![CDATA[<p>#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</p>
+    <content type="html"><![CDATA[<h5 id="今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入"><a href="#今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入" class="headerlink" title="今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入"></a>今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</h5><a id="more"></a>
 <p><img src="http://picturegit-1251927503.file.myqcloud.com/maven.png" alt="stack"></p>
 <p>在终端(wins用cmd)输入如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mvn install:install-file -Dfile=你的存放ojdbc6.jar文件的位置 -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=版本号 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
 <blockquote>
@@ -335,7 +339,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以
+      &lt;h5 id=&quot;今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入&quot;&gt;&lt;a href=&quot;#今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入&quot; class=&quot;headerlink&quot; title=&quot;今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入&quot;&gt;&lt;/a&gt;今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入&lt;/h5&gt;
     
     </summary>
     
@@ -355,9 +359,10 @@
     <link href="/2017/03/01/%E6%B5%85%E8%B0%88Js%E6%A0%88/"/>
     <id>/2017/03/01/浅谈Js栈/</id>
     <published>2017-03-01T10:37:24.000Z</published>
-    <updated>2017-07-13T03:28:33.000Z</updated>
+    <updated>2017-07-19T01:14:45.000Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出"><a href="#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出" class="headerlink" title="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出."></a>栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了<a href=""><strong>栈</strong></a>.首先,栈是一种遵守<a href=""><strong>LIFO</strong></a>原则的有序集合,即后进先出.</h5><blockquote>
+    <content type="html"><![CDATA[<h5 id="栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出"><a href="#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出" class="headerlink" title="栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出."></a>栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了<a href=""><strong>栈</strong></a>.首先,栈是一种遵守<a href=""><strong>LIFO</strong></a>原则的有序集合,即后进先出.</h5><a id="more"></a>
+<blockquote>
 <p>找了这么一张图比较容易看懂</p>
 </blockquote>
 <p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/stack.jpg?raw=true" alt="stack"></p>
@@ -386,7 +391,7 @@
     
     <summary type="html">
     
-      &lt;h5 id=&quot;栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出&quot;&gt;&lt;a href=&quot;#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的
+      &lt;h5 id=&quot;栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出&quot;&gt;&lt;a href=&quot;#栈和队列是我们常用数据结构-在数组中我们可以对任意位置进行操作-这就用到了栈-首先-栈是一种遵守LIFO原则的有序集合-即后进先出&quot; class=&quot;headerlink&quot; title=&quot;栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了栈.首先,栈是一种遵守LIFO原则的有序集合,即后进先出.&quot;&gt;&lt;/a&gt;栈和队列是我们常用数据结构,在数组中我们可以对任意位置进行操作,这就用到了&lt;a href=&quot;&quot;&gt;&lt;strong&gt;栈&lt;/strong&gt;&lt;/a&gt;.首先,栈是一种遵守&lt;a href=&quot;&quot;&gt;&lt;strong&gt;LIFO&lt;/strong&gt;&lt;/a&gt;原则的有序集合,即后进先出.&lt;/h5&gt;
     
     </summary>
     
@@ -404,9 +409,10 @@
     <link href="/2017/02/17/%E4%BD%BF%E7%94%A8gulp%E6%90%AD%E5%BB%BAangularjs%E3%80%90%E4%B8%8B%E3%80%91/"/>
     <id>/2017/02/17/使用gulp搭建angularjs【下】/</id>
     <published>2017-02-17T09:14:37.000Z</published>
-    <updated>2017-07-13T03:26:44.000Z</updated>
+    <updated>2017-07-19T01:15:10.000Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解"><a href="#接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解" class="headerlink" title="接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解"></a>接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解</h4><ul>
+    <content type="html"><![CDATA[<h4 id="接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解"><a href="#接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解" class="headerlink" title="接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解"></a>接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解</h4><a id="more"></a>
+<ul>
 <li><p><a href=""><strong>src(globs[, options])</strong></a></p>
 <blockquote>
 <p>这个方法用于读取文件</p>
@@ -482,7 +488,7 @@
     
     <summary type="html">
     
-      &lt;h4 id=&quot;接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot;&gt;&lt;a href=&quot;#接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot; class=&quot;headerlink&quot; title=&quot;接着上一篇文章，
+      &lt;h4 id=&quot;接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot;&gt;&lt;a href=&quot;#接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot; class=&quot;headerlink&quot; title=&quot;接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&quot;&gt;&lt;/a&gt;接着上一篇文章，接下来我们写一写配置文件，下面我们会用到gulp几个方法。先了解了解&lt;/h4&gt;
     
     </summary>
     
@@ -502,9 +508,10 @@
     <link href="/2017/02/17/%E4%BD%BF%E7%94%A8gulp%E6%90%AD%E5%BB%BAangularjs%E3%80%90%E4%B8%8A%E3%80%91/"/>
     <id>/2017/02/17/使用gulp搭建angularjs【上】/</id>
     <published>2017-02-17T03:01:32.000Z</published>
-    <updated>2017-07-13T03:26:47.000Z</updated>
+    <updated>2017-07-19T01:14:58.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件"><a href="#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件" class="headerlink" title="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件"></a>这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的<a href="#AngularJs"><strong>AngularJs</strong></a>项目,下一篇我们将讲解如何设置配置文件</h3><blockquote>
+    <content type="html"><![CDATA[<h3 id="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件"><a href="#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件" class="headerlink" title="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件"></a>这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的<a href="#AngularJs"><strong>AngularJs</strong></a>项目,下一篇我们将讲解如何设置配置文件</h3><a id="more"></a>
+<blockquote>
 <p>如要查看历史文章请移步我的微信公众号查看：搜索林浩</p>
 </blockquote>
 <h3 id="全局安装-gulp"><a href="#全局安装-gulp" class="headerlink" title="全局安装 gulp"></a>全局安装 gulp</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global gulp</div></pre></td></tr></table></figure>
@@ -549,7 +556,7 @@
     
     <summary type="html">
     
-      &lt;h3 id=&quot;这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件&quot;&gt;&lt;a href=&quot;#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置
+      &lt;h3 id=&quot;这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件&quot;&gt;&lt;a href=&quot;#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件&quot; class=&quot;headerlink&quot; title=&quot;这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件&quot;&gt;&lt;/a&gt;这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的&lt;a href=&quot;#AngularJs&quot;&gt;&lt;strong&gt;AngularJs&lt;/strong&gt;&lt;/a&gt;项目,下一篇我们将讲解如何设置配置文件&lt;/h3&gt;
     
     </summary>
     

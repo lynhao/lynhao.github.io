@@ -10,7 +10,7 @@
     <title>MacOsx配置Oracle驱动jar一些坑 | </title>
     <meta name="author" content="lynhao">
     
-    <meta name="description" content="#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加">
+    <meta name="description" content="今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -179,6 +179,14 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/前端/Vue/">
+                    Vue <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/前端/JavaScript/">
                     JavaScript <span class="right">3 篇</span></a>
                 </a>
@@ -205,14 +213,6 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/前端/AngularJs/gulp/">
                     gulp <span class="right">2 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/前端/Vue/">
-                    Vue <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -336,12 +336,12 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变"><span class="section table-of-contents-text">如果终端出现BUILD SUCCESS这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下"><span class="section table-of-contents-text">结果跟我预感一样,pom中报了这么一个错误Missing artifact com.oracle:ojdbc6:jar:11.2.0?? 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷"><span class="section table-of-contents-text">照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#最后我采用了在线安装的方式-如下"><span class="section table-of-contents-text">最后我采用了在线安装的方式,如下</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#最后在pom-xml中加入几个配置"><span class="section table-of-contents-text">最后在pom.xml中加入几个配置</span></a></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Deal"><span class="section table-of-contents-text">Deal~</span></a>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入"><span class="section table-of-contents-text">今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#如果终端出现BUILD-SUCCESS这个字眼-说明被成功的安装进来-不过我看到它被重定向到一个E-文件-我有点好奇打开-发现安装的ojdbc6-jar被编译到了这个目录下-而我的本地仓库却没变"><span class="section table-of-contents-text">如果终端出现BUILD SUCCESS这个字眼,说明被成功的安装进来,不过我看到它被重定向到一个E:\文件,我有点好奇打开,发现安装的ojdbc6.jar被编译到了这个目录下,而我的本地仓库却没变</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#结果跟我预感一样-pom中报了这么一个错误Missing-artifact-com-oracle-ojdbc6-jar-11-2-0-之后才发现ojdbc6-jar的导入方式跟其他有所不同-我们需要准备ojdbc-jar这个jar包-官网下载地址如下"><span class="section table-of-contents-text">结果跟我预感一样,pom中报了这么一个错误Missing artifact com.oracle:ojdbc6:jar:11.2.0?? 之后才发现ojdbc6.jar的导入方式跟其他有所不同,我们需要准备ojdbc.jar这个jar包,官网下载地址如下:</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#照理说这回应该可以了-在我update之后结果还是跟上面一样的错误-郁闷"><span class="section table-of-contents-text">照理说这回应该可以了,在我update之后结果还是跟上面一样的错误(郁闷)</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#最后我采用了在线安装的方式-如下"><span class="section table-of-contents-text">最后我采用了在线安装的方式,如下</span></a></li><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#最后在pom-xml中加入几个配置"><span class="section table-of-contents-text">最后在pom.xml中加入几个配置</span></a></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Deal"><span class="section table-of-contents-text">Deal~</span></a>
 </div>
 
 
             <div class="entry pink-link-context">
-                <p>#####今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</p>
+                <h5 id="今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入"><a href="#今天在部署后端项目时遇到一个坑-在svn上checkout代码之后提示少了oracle6的jar包-google了一下看到有人说中央库没有提供jar包-因为ojdbc-jar是收费的-查了一下有点出入-只查到12-1-0-2-0这个版本所以无从考证-所以我打算跟以往引进jar包的方式手动加入" class="headerlink" title="今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入"></a>今天在部署后端项目时遇到一个坑,在svn上checkout代码之后提示少了oracle6的jar包,google了一下看到有人说中央库没有提供jar包,因为ojdbc.jar是收费的,查了一下有点出入,只查到12.1.0.2.0这个版本所以无从考证,所以我打算跟以往引进jar包的方式手动加入</h5><a id="more"></a>
 <p><img src="http://picturegit-1251927503.file.myqcloud.com/maven.png" alt="stack"></p>
 <p>在终端(wins用cmd)输入如下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mvn install:install-file -Dfile=你的存放ojdbc6.jar文件的位置 -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=版本号 -Dpackaging=jar -DgeneratePom=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
 <blockquote>

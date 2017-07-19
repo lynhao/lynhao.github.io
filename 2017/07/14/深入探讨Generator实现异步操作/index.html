@@ -10,12 +10,7 @@
     <title>深入探讨Generator实现异步操作 | </title>
     <meta name="author" content="lynhao">
     
-    <meta name="description" content="在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到回调和事件触发这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈
-
-传统Ajax实现异步操作
-业务场景: 执行完a后执行b
-
-123456">
+    <meta name="description" content="在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到回调和事件触发这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -184,6 +179,14 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/前端/Vue/">
+                    Vue <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/前端/JavaScript/">
                     JavaScript <span class="right">3 篇</span></a>
                 </a>
@@ -210,14 +213,6 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/前端/AngularJs/gulp/">
                     gulp <span class="right">2 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/前端/Vue/">
-                    Vue <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -341,7 +336,7 @@
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#传统Ajax实现异步操作"><span class="section table-of-contents-text">传统Ajax实现异步操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Promise实现异步操作"><span class="section table-of-contents-text">Promise实现异步操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#主角压轴登场-有请Generator"><span class="section table-of-contents-text">主角压轴登场,有请Generator</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#generator传参"><span class="section table-of-contents-text">generator传参</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#传统Ajax实现异步操作"><span class="section table-of-contents-text">传统Ajax实现异步操作</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#Promise实现异步操作"><span class="section table-of-contents-text">Promise实现异步操作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#主角压轴登场-有请Generator"><span class="section table-of-contents-text">主角压轴登场,有请Generator</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#generator传参"><span class="section table-of-contents-text">generator传参</span></a></li></ol></li></ol></li></ol>
 </div>
 
 
@@ -349,7 +344,8 @@
                 <blockquote>
 <p>在开始探讨Generator之前我们先回顾下传统实现异步操作的方式,一般我们会想到<a href=""><strong>回调</strong></a>和<a href=""><strong>事件触发</strong></a>这两种形式.这里我们主要谈论回调函数,事件触发其实就是采用事件驱动模式,通过一个事件触发另一个事件.文章篇幅会有点长,请自备瓜子哈</p>
 </blockquote>
-<h3 id="传统Ajax实现异步操作"><a href="#传统Ajax实现异步操作" class="headerlink" title="传统Ajax实现异步操作"></a>传统Ajax实现异步操作</h3><ul>
+<a id="more"></a>
+<h2 id="传统Ajax实现异步操作"><a href="#传统Ajax实现异步操作" class="headerlink" title="传统Ajax实现异步操作"></a>传统Ajax实现异步操作</h2><ul>
 <li>业务场景: 执行完a后执行b</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">let ajax=function(callback)&#123;</div><div class="line">   console.log(&apos;执行a&apos;);</div><div class="line">   setTimeout(function () &#123;</div><div class="line">     callback&amp;&amp;callback.call()</div><div class="line">   &#125;, 1000);</div><div class="line"> &#125;;</div><div class="line"> ajax(function()&#123;</div><div class="line">   console.log(&apos;执行b&apos;);</div><div class="line"> &#125;)</div></pre></td></tr></table></figure>
