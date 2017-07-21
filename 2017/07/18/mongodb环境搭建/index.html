@@ -7,18 +7,18 @@
 
     
 
-    <title>mongodb环境搭建 | </title>
+    <title>mongodb环境搭建(补充) | </title>
     <meta name="author" content="lynhao">
     
     <meta name="description" content="准备工作
 这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧
 
-mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照官网,这里不是我们这篇文章的重点.">
+–mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照官网,这里不是我们这篇文章的重点.">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="mongodb环境搭建"/>
+    <meta property="og:title" content="mongodb环境搭建(补充)"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -316,7 +316,7 @@ mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装�
             <div class="article-title">
                 
     
-        <h1>mongodb环境搭建</h1>
+        <h1>mongodb环境搭建(补充)</h1>
     
 
 
@@ -337,7 +337,7 @@ mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装�
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#准备工作"><span class="section table-of-contents-text">准备工作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#安装mongodb"><span class="section table-of-contents-text">安装mongodb</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#启动"><span class="section table-of-contents-text">启动</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#准备工作"><span class="section table-of-contents-text">准备工作</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#安装mongodb"><span class="section table-of-contents-text">安装mongodb</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#启动"><span class="section table-of-contents-text">启动</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#补充"><span class="section table-of-contents-text">补充</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#1-1-通过scons编译"><span class="section table-of-contents-text">1.1 通过scons编译</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#创建mongodb-pro"><span class="section table-of-contents-text">创建mongodb_pro</span></a></li></ol>
 </div>
 
 
@@ -345,7 +345,7 @@ mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装�
                 <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><blockquote>
 <p>这里只做macos环境下搭建,用wins系统同学有兴趣也可以瞧瞧</p>
 </blockquote>
-<p>mac用户对<a href=""><strong>HomeBrew</strong></a>这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照<a href="https://brew.sh/" target="_blank" rel="external"><strong>官网</strong></a>,这里不是我们这篇文章的重点.</p>
+<p>–<br>mac用户对<a href=""><strong>HomeBrew</strong></a>这个包管理工具应该再熟悉不过,还没有安装的童鞋可以通过下面命令行安装,具体请参照<a href="https://brew.sh/" target="_blank" rel="external"><strong>官网</strong></a>,这里不是我们这篇文章的重点.</p>
 <a id="more"></a>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/bin/ruby <span class="_">-e</span> <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></div></pre></td></tr></table></figure>
 <h3 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install mongoldb</div></pre></td></tr></table></figure>
@@ -360,6 +360,78 @@ mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装�
 <p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.27.42.png" alt="stack"></p>
 <p>最后打开浏览器,mongodb默认端口是27017,输入127.0.0.1:27017或者localhost:27017,你看到下图就表示成功了~</p>
 <p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E4%BB%A3%E7%A0%81%E6%88%AA%E5%9B%BE/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-18%2013.21.23.png" alt="stack"></p>
+<blockquote>
+<p>修改补充  time: <a href=""><strong>2017年07月21日16:19:49</strong></a></p>
+</blockquote>
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p>3天前说的那种方式可能不能完全你的需求,可能我是一个喜欢折腾的人吧,因为这两天我想自己创建一个项目数据库是单独出来而不是跟之前一样默认创建在<a href=""><strong>/data/db</strong></a>下.同样这篇文章不适用于wins系统,但Linux必须支持</p>
+<h4 id="1-1-通过scons编译"><a href="#1-1-通过scons编译" class="headerlink" title="1.1 通过scons编译"></a>1.1 通过scons编译</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scons all</div></pre></td></tr></table></figure>
+<p>如果编译不通过可以在官网下载对应编译好的二进制文件,我本地是osx,不用这么麻烦直接下载对应的zip文件解压就行,我用的版本是<a href=""><strong>3.4.6</strong></a>,mac用户如果是用前面说的brew直接安装,编译好的文件会放在这个目录下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/Cellar/mongodb/3.4.6/</div></pre></td></tr></table></figure></p>
+<p>bin目录有几个是要特别留意的</p>
+<ul>
+<li>mongo </li>
+<li>mongod  </li>
+<li>mongodump</li>
+<li>mongorestore</li>
+<li>mongoexport</li>
+<li>mongoimport</li>
+<li>mongooplog</li>
+</ul>
+<h3 id="创建mongodb-pro"><a href="#创建mongodb-pro" class="headerlink" title="创建mongodb_pro"></a>创建mongodb_pro</h3><p>分别创建四个二级目录,分别保存编译好的文件,配置文件,数据库,日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">➜  ~ mkdir mongodb_pro</div><div class="line">➜  ~ <span class="built_in">cd</span> mongodb_pro</div><div class="line">➜  mongodb_pro mkdir data</div><div class="line">➜  mongodb_pro mkdir <span class="built_in">log</span></div><div class="line">➜  mongodb_pro mkdir conf</div><div class="line">➜  mongodb_pro mkdir bin</div></pre></td></tr></table></figure>
+<ul>
+<li>紧接着把之前下载后编译的mongodb文件复制到bin目录</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R -n /usr/<span class="built_in">local</span>/Cellar/mongodb/3.4.6/bin/ bin</div></pre></td></tr></table></figure>
+<ul>
+<li>编写conf配置</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim mongodb.conf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">port = 12345   </div><div class="line">dbpath = data</div><div class="line">logpath = log/mongod.log </div><div class="line">fork = true   </div><div class="line"></div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">~</div><div class="line">&quot;mongodb.conf&quot; 5L, 65C</div></pre></td></tr></table></figure>
+<ol>
+<li><p>port:端口</p>
+</li>
+<li><p>dbpath:指明monogod数据存储目录</p>
+</li>
+<li><p>logpath:指明日志存储目录,需要指明一个路径</p>
+</li>
+<li><p>fork:表示linux下表明使用后台进程,但wins无效</p>
+</li>
+</ol>
+<blockquote>
+<p>如果不会使用vim的话可以通过本地文本编辑器</p>
+</blockquote>
+<ul>
+<li>回到根目录启动服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜ ./bin/mongod <span class="_">-f</span> conf/mongodb.conf</div></pre></td></tr></table></figure>
+<p>接着你会看到输出这段信息,表示已经启动</p>
+<blockquote>
+<p>about to fork child process, waiting until server is ready for connections.<br>forked process: 4855<br>child process started successfully, parent exiting</p>
+</blockquote>
+<ul>
+<li>查看data,发现里面已经有数据了</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">➜  mongodb_pro cd data</div><div class="line">➜  data ls</div><div class="line">WiredTiger</div><div class="line">WiredTiger.lock</div><div class="line">WiredTiger.turtle</div><div class="line">WiredTiger.wt</div><div class="line">WiredTigerLAS.wt</div><div class="line">_mdb_catalog.wt</div><div class="line">collection-0-2146738068862245035.wt</div><div class="line">collection-2-2146738068862245035.wt</div><div class="line">diagnostic.data</div><div class="line">index-1-2146738068862245035.wt</div><div class="line">index-3-2146738068862245035.wt</div><div class="line">index-4-2146738068862245035.wt</div><div class="line">journal</div><div class="line">mongod.lock</div><div class="line">sizeStorer.wt</div><div class="line">storage.bson</div></pre></td></tr></table></figure>
+<ul>
+<li>查看日志</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">➜  mongodb_pro cd ./log</div><div class="line">➜  log ls</div><div class="line">mongod.log</div><div class="line">➜  log tail mongod.log</div><div class="line">2017-07-21T15:53:58.140+0800 I CONTROL  [initandlisten]</div><div class="line">2017-07-21T15:53:58.140+0800 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.</div><div class="line">2017-07-21T15:53:58.140+0800 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.</div><div class="line">2017-07-21T15:53:58.140+0800 I CONTROL  [initandlisten]</div><div class="line">2017-07-21T15:53:58.281+0800 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory &apos;/Users/linhao/mongodb_pro/data/diagnostic.data&apos;</div><div class="line">2017-07-21T15:53:58.388+0800 I INDEX    [initandlisten] build index on: admin.system.version properties: &#123; v: 2, key: &#123; version: 1 &#125;, name: &quot;incompatible_with_version_32&quot;, ns: &quot;admin.system.version&quot; &#125;</div><div class="line">2017-07-21T15:53:58.388+0800 I INDEX    [initandlisten] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM</div><div class="line">2017-07-21T15:53:58.406+0800 I INDEX    [initandlisten] build index done.  scanned 0 total records. 0 secs</div><div class="line">2017-07-21T15:53:58.407+0800 I COMMAND  [initandlisten] setting featureCompatibilityVersion to 3.4</div><div class="line">2017-07-21T15:53:58.407+0800 I NETWORK  [thread1] waiting for connections on port 12345</div></pre></td></tr></table></figure>
+<blockquote>
+<p>最后一句可以看到服务等待端客户端连接,对应端口为12345而不是默认的27017</p>
+</blockquote>
+<p>最后利用bin目录下的mongo客户端连接服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./bin/mongo localhost:12345/<span class="built_in">test</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">➜  mongodb_pro ./bin/mongo localhost:12345/test</div><div class="line">MongoDB shell version v3.4.6</div><div class="line">connecting to: mongodb://localhost:12345/test</div><div class="line">MongoDB server version: 3.4.6</div><div class="line">Server has startup warnings:</div><div class="line">2017-07-21T16:10:19.703+0800 I CONTROL  [initandlisten]</div><div class="line">2017-07-21T16:10:19.703+0800 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.</div><div class="line">2017-07-21T16:10:19.704+0800 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.</div><div class="line">2017-07-21T16:10:19.704+0800 I CONTROL  [initandlisten]</div></pre></td></tr></table></figure>
+<p>如需关服务,在游标输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.shutdownServer()</div></pre></td></tr></table></figure>
+<blockquote>
+<p>但这时会报这个错误:shutdown command only works with the admin database; try ‘use admin’</p>
+</blockquote>
+<p>按照提示这样解决:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">use admin</div><div class="line">db.shutdownServer()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">server should be down...</div><div class="line">2017-07-21T16:10:09.556+0800 I NETWORK  [thread1] trying reconnect to localhost:12345 (127.0.0.1) failed</div><div class="line">2017-07-21T16:10:09.557+0800 W NETWORK  [thread1] Failed to connect to 127.0.0.1:12345, in(checking socket for error after poll), reason: Connection refused</div><div class="line">2017-07-21T16:10:09.557+0800 I NETWORK  [thread1] reconnect localhost:12345 (127.0.0.1) failed failed</div></pre></td></tr></table></figure>
+<hr>
+<p>全文结束😌</p>
 
                 
 
@@ -383,7 +455,7 @@ mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装�
 
 <!-- 代码1：放在页面需要展示的位置  -->
 <!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
-<div id="cyReward" role="cylabs" data-use="reward" sid="mongodb环境搭建" style="margin-left:34%"></div>
+<div id="cyReward" role="cylabs" data-use="reward" sid="mongodb环境搭建(补充)" style="margin-left:34%"></div>
 <!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
 <!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
 <!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
@@ -392,7 +464,7 @@ mac用户对HomeBrew这个包管理工具应该再熟悉不过,还没有安装�
 
 
 <article class="comments">
-  <div id="SOHUCS" sid="mongodb环境搭建"></div>
+  <div id="SOHUCS" sid="mongodb环境搭建(补充)"></div>
   <script type="text/javascript">
     ( function () {
         var appid = "cyt6HyzFa",
