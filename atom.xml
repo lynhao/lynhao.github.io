@@ -356,7 +356,7 @@
     <link href="/2017/04/26/Vue%E4%B9%8B%E7%96%91%E6%83%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
     <id>/2017/04/26/Vue之疑惑-持续更新/</id>
     <published>2017-04-26T15:20:27.000Z</published>
-    <updated>2017-07-19T01:14:32.000Z</updated>
+    <updated>2017-07-30T15:15:57.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注</p>
@@ -408,6 +408,16 @@
 <h6 id="解决方案2-设置你的input-file-value值为空-以jq操作dom为示例"><a href="#解决方案2-设置你的input-file-value值为空-以jq操作dom为示例" class="headerlink" title="解决方案2: 设置你的input file value值为空,以jq操作dom为示例"></a>解决方案2: 设置你的input file value值为空,以jq操作dom为示例</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'.inputImage'</span>).val(<span class="string">''</span>);</div></pre></td></tr></table></figure>
 <ul>
 <li>date <a href=""><strong>2017年07月05日10:42:58</strong></a></li>
+</ul>
+<h3 id="疑惑五-import路径"><a href="#疑惑五-import路径" class="headerlink" title="疑惑五 import路径"></a>疑惑五 import路径</h3><p>不知道大家第一次搭脚手架后看index.js这个文件有没有这个疑问,为什么import路径是<a href=""><strong>@/components/Hello</strong></a>就可以找到hello.vue</p>
+<p>打开webpack.base.conf.js文件解惑</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">   extensions: [&apos;.js&apos;, &apos;.vue&apos;, &apos;.json&apos;],</div><div class="line">   alias: &#123;</div><div class="line">      &apos;@&apos;: resolve(&apos;src&apos;),</div><div class="line">   &#125;</div><div class="line"> &#125;,</div></pre></td></tr></table></figure>
+<p>@的意思是run的时候会通过@找到src根目录下的文件, resolve是一个执行函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function resolve (dir) &#123;</div><div class="line">  return path.join(__dirname, &apos;..&apos;, dir)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>动手实践,把<a href=""><strong>@</strong></a>改为任意字符,之后再index.js的import语句对应修改,其实最终的地址是<a href=""><strong>src/components/Hello</strong></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import Vue from &apos;vue&apos;</div><div class="line">import Router from &apos;vue-router&apos;</div><div class="line">import Hello from &apos;任意字符/components/Hello&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li>date 2017年07月30日23:14:49</li>
 </ul>
 <hr>
 <p>持续更新中,敬请期待…</p>
