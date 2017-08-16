@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-07-21T09:18:11.000Z</updated>
+  <updated>2017-08-16T14:30:05.000Z</updated>
   <id>/</id>
   
   <author>
@@ -14,6 +14,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Charles实现代理</title>
+    <link href="/2017/08/16/Charles%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%90%86/"/>
+    <id>/2017/08/16/Charles实现代理/</id>
+    <published>2017-08-16T13:20:25.000Z</published>
+    <updated>2017-08-16T14:30:05.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="写文起因"><a href="#写文起因" class="headerlink" title="写文起因"></a>写文起因</h3><blockquote>
+<p>今天早上后端一个同事让我改个页面,我一看很简单,花了几分钟就做完并commit到了git上,过了一会那个同事发扣扣说我改漏了一些东西…..</p>
+</blockquote>
+<a id="more"></a>
+<p>是的,前端日常琐事可真不少,特别是改线上的项目,操作比较麻烦,那有什么方法可以解决这个问题呢?(多此一举题目不是说了…).是的,在win平台上很多前端都用一款抓包工具–<a href="http://www.telerik.com/fiddler" target="_blank" rel="external"><strong>Fiddler</strong></a> ,准确说它是一款代理工具,我们可以将服务器上需要改动的文件映射到本地文件,接着我们就可以在本地做需求修改,并且可以在外网上可以看到你修改的内容,是不是很激动还有这种操作呢,嘿嘿嘿~. But,很遗憾,fiddler在win平台上(基于C#开发)运行很完美但在OSX平台上却诟病诸多,所以今天笔者我发现了在OSX跟fiddler有得一拼的工具–<a href="https://www.charlesproxy.com/" target="_blank" rel="external"><strong>Charles</strong></a></p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/charles.png?raw=true" alt="stack"></p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>既然说到这款神器,那就介绍它是如何实现代理的</p>
+<ol>
+<li>设置全局代理,否者你会抓不到包的</li>
+</ol>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/1.png?raw=true" alt="stack"></p>
+<ol>
+<li>设置匹配规则(这只是个筛选)</li>
+</ol>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic2.png?raw=true" alt="stack"></p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic3.png?raw=true" alt="stack"></p>
+<ol>
+<li>禁用缓存(这个不勾选也不影响), 设置代理的本地路径</li>
+</ol>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic4.png?raw=true" alt="stack"></p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic5.png?raw=true" alt="stack"></p>
+<p>好了,通过上面的步骤就已经成功代理了! But, Charles是一款付费软件,试用期官方给了30天, 网上给了好多破解版,有的说把charles.jar替换了就行, 中间涉及到修改osx的安全隐私权限,笔者没有打算尝试这样做,好在,我无意发现有个<a href=""><strong>generous man</strong></a>无私贡献出了他的Registered Name和License Key,这里贴上他的<a href="https://zhile.io" target="_blank" rel="external"><strong>博客</strong></a>地址以示感谢</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Charles Proxy License</div><div class="line">// 适用于Charles任意版本的注册码，谁还会想要使用破解版呢。</div><div class="line">// Charles 4.1.3目前是最新版，可用。</div><div class="line">Registered Name: 	https://zhile.io</div><div class="line">License Key: 		48891cf209c6d32bf4</div></pre></td></tr></table></figure>
+<blockquote>
+<p>最后还要声明:尊重版权,尊重劳动成果,但如果有人像那位博主这么慷慨我们也不好拒绝🤗😌🤓</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;写文起因&quot;&gt;&lt;a href=&quot;#写文起因&quot; class=&quot;headerlink&quot; title=&quot;写文起因&quot;&gt;&lt;/a&gt;写文起因&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;今天早上后端一个同事让我改个页面,我一看很简单,花了几分钟就做完并commit到了git上,过了一会那个同事发扣扣说我改漏了一些东西…..&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="工具" scheme="/categories/%E5%89%8D%E7%AB%AF/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="http" scheme="/tags/http/"/>
+    
+      <category term="工具" scheme="/tags/%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="抓包" scheme="/tags/%E6%8A%93%E5%8C%85/"/>
+    
+  </entry>
   
   <entry>
     <title>mongodb环境搭建(补充)</title>
@@ -356,7 +412,7 @@
     <link href="/2017/04/26/Vue%E4%B9%8B%E7%96%91%E6%83%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
     <id>/2017/04/26/Vue之疑惑-持续更新/</id>
     <published>2017-04-26T15:20:27.000Z</published>
-    <updated>2017-08-08T14:58:20.000Z</updated>
+    <updated>2017-08-08T14:59:59.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注</p>

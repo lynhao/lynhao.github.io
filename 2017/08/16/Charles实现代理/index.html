@@ -7,13 +7,16 @@
 
     
 
-    <title>Koa2 | </title>
+    <title>Charles实现代理 | </title>
     <meta name="author" content="lynhao">
+    
+    <meta name="description" content="写文起因
+今天早上后端一个同事让我改个页面,我一看很简单,花了几分钟就做完并commit到了git上,过了一会那个同事发扣扣说我改漏了一些东西…..">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="Charles实现代理"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -295,30 +298,132 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/前端/">前端</a><a class="breadcrumb" href="/categories/前端/工具/">工具</a>
+
 
         
-            <a class="breadcrumb" href="/tags/Koa2/">Koa2</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>Charles实现代理</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2017-08-16T13:20:25.000Z"><a href="/2017/08/16/Charles实现代理/">2017-08-16</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/07/13/进击Koa2系列-一/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-07-13T02:41:52.000Z">2017-07-13</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                进击Koa2系列[一]
-            </a>
+            <a href="/tags/http/" class="chip pink lighten-1">http</a>
+        
+            <a href="/tags/工具/" class="chip pink lighten-1">工具</a>
+        
+            <a href="/tags/抓包/" class="chip pink lighten-1">抓包</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#写文起因"><span class="section table-of-contents-text">写文起因</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#如何使用"><span class="section table-of-contents-text">如何使用</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h3 id="写文起因"><a href="#写文起因" class="headerlink" title="写文起因"></a>写文起因</h3><blockquote>
+<p>今天早上后端一个同事让我改个页面,我一看很简单,花了几分钟就做完并commit到了git上,过了一会那个同事发扣扣说我改漏了一些东西…..</p>
+</blockquote>
+<a id="more"></a>
+<p>是的,前端日常琐事可真不少,特别是改线上的项目,操作比较麻烦,那有什么方法可以解决这个问题呢?(多此一举题目不是说了…).是的,在win平台上很多前端都用一款抓包工具–<a href="http://www.telerik.com/fiddler" target="_blank" rel="external"><strong>Fiddler</strong></a> ,准确说它是一款代理工具,我们可以将服务器上需要改动的文件映射到本地文件,接着我们就可以在本地做需求修改,并且可以在外网上可以看到你修改的内容,是不是很激动还有这种操作呢,嘿嘿嘿~. But,很遗憾,fiddler在win平台上(基于C#开发)运行很完美但在OSX平台上却诟病诸多,所以今天笔者我发现了在OSX跟fiddler有得一拼的工具–<a href="https://www.charlesproxy.com/" target="_blank" rel="external"><strong>Charles</strong></a></p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/charles.png?raw=true" alt="stack"></p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>既然说到这款神器,那就介绍它是如何实现代理的</p>
+<ol>
+<li>设置全局代理,否者你会抓不到包的</li>
+</ol>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/1.png?raw=true" alt="stack"></p>
+<ol>
+<li>设置匹配规则(这只是个筛选)</li>
+</ol>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic2.png?raw=true" alt="stack"></p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic3.png?raw=true" alt="stack"></p>
+<ol>
+<li>禁用缓存(这个不勾选也不影响), 设置代理的本地路径</li>
+</ol>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic4.png?raw=true" alt="stack"></p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/tools/pic5.png?raw=true" alt="stack"></p>
+<p>好了,通过上面的步骤就已经成功代理了! But, Charles是一款付费软件,试用期官方给了30天, 网上给了好多破解版,有的说把charles.jar替换了就行, 中间涉及到修改osx的安全隐私权限,笔者没有打算尝试这样做,好在,我无意发现有个<a href=""><strong>generous man</strong></a>无私贡献出了他的Registered Name和License Key,这里贴上他的<a href="https://zhile.io" target="_blank" rel="external"><strong>博客</strong></a>地址以示感谢</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// Charles Proxy License</div><div class="line">// 适用于Charles任意版本的注册码，谁还会想要使用破解版呢。</div><div class="line">// Charles 4.1.3目前是最新版，可用。</div><div class="line">Registered Name: 	https://zhile.io</div><div class="line">License Key: 		48891cf209c6d32bf4</div></pre></td></tr></table></figure>
+<blockquote>
+<p>最后还要声明:尊重版权,尊重劳动成果,但如果有人像那位博主这么慷慨我们也不好拒绝🤗😌🤓</p>
+</blockquote>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2017/07/18/mongodb环境搭建/" rel="next" title="mongodb环境搭建(补充)">
+    下一篇：mongodb环境搭建(补充)
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" sid="Charles实现代理" style="margin-left:34%"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
+
+
+<article class="comments">
+  <div id="SOHUCS" sid="Charles实现代理"></div>
+  <script type="text/javascript">
+    ( function () {
+        var appid = "cyt6HyzFa",
+            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
+            width = window.innerWidth || document.documentElement.clientWidth;
+        if ( width < 960 ) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    } )();
+  </script>
+  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</article>
+
 
 
 </div>
