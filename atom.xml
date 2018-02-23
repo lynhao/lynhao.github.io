@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2017-08-16T14:33:35.000Z</updated>
+  <updated>2018-02-23T12:45:54.000Z</updated>
   <id>/</id>
   
   <author>
@@ -14,6 +14,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2018,请抓紧时间</title>
+    <link href="/2018/02/23/2018-%E8%AF%B7%E6%8A%93%E7%B4%A7%E6%97%B6%E9%97%B4/"/>
+    <id>/2018/02/23/2018-请抓紧时间/</id>
+    <published>2018-02-23T12:31:21.000Z</published>
+    <updated>2018-02-23T12:45:54.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="时不待人"><a href="#时不待人" class="headerlink" title="时不待人"></a>时不待人</h3><p>明天就要返工了, 难免有点抵触情绪, 我也好久没更新博客了,这篇文章归类为<a href=""><strong>生活类</strong></a>, 我不想在这里写太多我的太多心声, 因为我不想让一些认识我的人但不了解我的人知道或揣摩我的动态, 前几天在扇贝看到一句话, 翻译过来大概意思就是 做事要抓紧,尽快实现它,越拖延实现它的概率越低, 我就是这么一个人, 我有时总会以我只读了两年大学安慰自己, 或者以我才转前端不到一年给自己找借口(我从17年3月份从Java转为web前端), 既然”书”读的少, 那自己就要更加约束自己, 2018, 我有自己的目标, 去年我在工作的之余投入学习的时间不科学, 以至于每到年底总有一种啥都不会的想法, 18年,我希望我能从日常一些小事做起, 例如给自己做饭, 给日常事情安排先后顺序, 这样我就可以少熬夜, 因为熬夜会让人变笨. 好了, 就写到这里, 我并不希望有人看到这篇文章 [当然如果被游客或者爬虫无意看到也无妨, 因为这样的逻辑估计也很难看懂]</p>
+<hr>
+<p><a href=""><strong>Bye</strong></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;时不待人&quot;&gt;&lt;a href=&quot;#时不待人&quot; class=&quot;headerlink&quot; title=&quot;时不待人&quot;&gt;&lt;/a&gt;时不待人&lt;/h3&gt;&lt;p&gt;明天就要返工了, 难免有点抵触情绪, 我也好久没更新博客了,这篇文章归类为&lt;a href=&quot;&quot;&gt;&lt;strong&gt;生活类&lt;/s
+    
+    </summary>
+    
+      <category term="生活" scheme="/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="person business" scheme="/tags/person-business/"/>
+    
+  </entry>
   
   <entry>
     <title>Charles实现代理</title>
