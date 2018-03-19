@@ -7,15 +7,18 @@
 
     
 
-    <title>进击Koa2系列[一] | </title>
+    <title>从源码角度分析Handler、Looper、MessageQueue三角关系 | </title>
     <meta name="author" content="lynhao">
     
-    <meta name="description" content="忏悔之所以起这个名字,原因是因为没好好坚持学node,14年node还是0.0.x版本我就开始用了,不过没坚持下来,现在node生态发展迅猛已经迭代到7.x版本了,框架已经从Express迭代到koa再到如今的koa2,额,好吧,又是一门全新的知识体系,只好硬着头皮学咯.这个系列将会把我学习的整个过">
+    <meta name="description" content="此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.
+
+
+前言距离上次更新已经有一个多星期了，最近忙于找工作所以更新速度有所延迟，最近老是碰壁，但文章咱们还是要更新的。今天我们来讲讲Handler、Looper、MessageQueu">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="进击Koa2系列[一]"/>
+    <meta property="og:title" content="从源码角度分析Handler、Looper、MessageQueue三角关系"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -320,7 +323,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/前端/">前端</a><a class="breadcrumb" href="/categories/前端/Node/">Node</a><a class="breadcrumb" href="/categories/前端/Node/Koa2/">Koa2</a>
+    <a class="breadcrumb" href="/categories/Android/">Android</a>
 
 
         
@@ -337,12 +340,12 @@
             <div class="article-title">
                 
     
-        <h1>进击Koa2系列[一]</h1>
+        <h1>从源码角度分析Handler、Looper、MessageQueue三角关系</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-07-13T02:41:52.000Z"><a href="/2017/07/13/进击Koa2系列-一/">2017-07-13</a></time>
+            <time class="pink-link-context" datetime="2018-03-19T08:03:18.000Z"><a href="/2018/03/19/从源码角度分析Handler、Looper、MessageQueue三角关系/">2018-03-19</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -350,51 +353,55 @@
 </span>
 
             
-    <div class="tags-row">
-        
-            <a href="/tags/Node/" class="chip pink lighten-1">Node</a>
-        
-            <a href="/tags/Koa2/" class="chip pink lighten-1">Koa2</a>
-        
-    </div>
-
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#忏悔"><span class="section table-of-contents-text">忏悔</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#koa2环境搭建"><span class="section table-of-contents-text">koa2环境搭建</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#搭建第一个项目"><span class="section table-of-contents-text">搭建第一个项目</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#安装koa2"><span class="section table-of-contents-text">安装koa2</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#创建目录-初始化"><span class="section table-of-contents-text">创建目录,初始化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#安装koa2-1"><span class="section table-of-contents-text">安装koa2</span></a></li><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#创建index-js-编写代码"><span class="section table-of-contents-text">创建index.js 编写代码</span></a></li><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#启动运行"><span class="section table-of-contents-text">启动运行</span></a></li></ol></li></ol></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#💭什么是Handler？它有啥存在价值？"><span class="section table-of-contents-text">💭什么是Handler？它有啥存在价值？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#💭我们可以拿它做什么："><span class="section table-of-contents-text">💭我们可以拿它做什么：</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#源码分析"><span class="section table-of-contents-text">源码分析</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h3 id="忏悔"><a href="#忏悔" class="headerlink" title="忏悔"></a>忏悔</h3><p>之所以起这个名字,原因是因为没好好坚持学node,14年node还是0.0.x版本我就开始用了,不过没坚持下来,现在node生态发展迅猛已经迭代到7.x版本了,框架已经从Express迭代到koa再到如今的koa2,额,好吧,又是一门全新的知识体系,只好硬着头皮学咯.这个系列将会把我学习的整个过程记录下来,敬请关注</p>
-<h3 id="koa2环境搭建"><a href="#koa2环境搭建" class="headerlink" title="koa2环境搭建"></a>koa2环境搭建</h3><ul>
-<li><p>操作系统: 不限</p>
-</li>
-<li><p>编译环境: nodejs      </p>
-</li>
-</ul>
-<blockquote>
-<p>因为koa2团队是基于es7这个未来标准开发的,所以推荐使用7.6版本以上,可以省去很多麻烦.</p>
+                <blockquote>
+<p>此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.</p>
 </blockquote>
-<h3 id="搭建第一个项目"><a href="#搭建第一个项目" class="headerlink" title="搭建第一个项目"></a>搭建第一个项目</h3><p>这里我们用<a href=""><strong>Hello World</strong></a>做演示</p>
-<h5 id="安装koa2"><a href="#安装koa2" class="headerlink" title="安装koa2"></a>安装koa2</h5><h6 id="创建目录-初始化"><a href="#创建目录-初始化" class="headerlink" title="创建目录,初始化"></a>创建目录,初始化</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir Koa2</div><div class="line">npm init</div></pre></td></tr></table></figure>
-<h6 id="安装koa2-1"><a href="#安装koa2-1" class="headerlink" title="安装koa2"></a>安装koa2</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install koa</div></pre></td></tr></table></figure>
-<h6 id="创建index-js-编写代码"><a href="#创建index-js-编写代码" class="headerlink" title="创建index.js 编写代码"></a>创建index.js 编写代码</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch index.js</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const Koa = require(&apos;koa&apos;)</div><div class="line">const app = new Koa()</div><div class="line"></div><div class="line">app.use( async ( ctx ) =&gt; &#123;</div><div class="line">  ctx.body = &apos;hello koa2&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.listen(3000)</div><div class="line">console.log(&apos;[demo] start-quick is starting at port 3000&apos;)</div></pre></td></tr></table></figure>
-<h6 id="启动运行"><a href="#启动运行" class="headerlink" title="启动运行"></a>启动运行</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node index.js</div></pre></td></tr></table></figure>
-<p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-13%2011.08.06.png" alt="代码片段"></p>
+<hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>距离上次更新已经有一个多星期了，最近忙于找工作所以更新速度有所延迟，最近老是碰壁，但文章咱们还是要更新的。今天我们来讲讲Handler、Looper、MessageQueue三者的那些事，这是上篇，后面我会继续更新我对Handler的理解。Ok，下面进入今天正题。</p>
+<h3 id="💭什么是Handler？它有啥存在价值？"><a href="#💭什么是Handler？它有啥存在价值？" class="headerlink" title="💭什么是Handler？它有啥存在价值？"></a>💭什么是Handler？它有啥存在价值？</h3><blockquote>
+<p><a href=""><strong>A Handler allows you to send and process Message and Runnable objects associated with a thread’s MessageQueue. Each Handler instance is associated with a single thread and that thread’s message queue. When you create a new Handler, it is bound to the thread / message queue of the thread that is creating it – from that point on, it will deliver messages and runnables to that message queue and execute them as they come out of the message queue.</strong></a></p>
+<p>我把它概括为:handler是一套消息传递机制，我们可以通过通过它来发消息和接收消息</p>
+</blockquote>
+<h3 id="💭我们可以拿它做什么："><a href="#💭我们可以拿它做什么：" class="headerlink" title="💭我们可以拿它做什么："></a>💭我们可以拿它做什么：</h3><ul>
+<li>There are two main uses for a Handler: (1) to schedule messages and runnables to be executed as some point in the future; and (2) to enqueue an action to be performed on a different thread than your own.<br>翻译过来就是：可以调度消息和runnable对象作为将来的执行；将被执行在一个不同的线程自己的行动。其实我们最常见的就是通过handler来更新UI。下面我们就开始从源码角度分析Handler、Looper、MessageQueue。</li>
+</ul>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p>每个应用程序都是通过ActivityThread创建的，而在这个线程中里面有个main方法</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/handler.jpg?raw=true" alt="stack"></p>
+<p>我们可以看到在main中有一个Looper.prepareMainLooper(),我们按住cmd+shift+R跳转过去看这个方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public static void <span class="function"><span class="title">prepareMainLooper</span></span>() &#123;</div><div class="line">       prepare(<span class="literal">false</span>);</div><div class="line">       synchronized (Looper.class) &#123;</div><div class="line">           <span class="keyword">if</span> (sMainLooper != null) &#123;</div><div class="line">               throw new IllegalStateException(<span class="string">"The main Looper has already been prepared."</span>);</div><div class="line">           &#125;</div><div class="line">           sMainLooper = myLooper();</div><div class="line">       &#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>单击进入prepare方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">private static void prepare(boolean quitAllowed) &#123;</div><div class="line">    <span class="keyword">if</span> (sThreadLocal.get() != null) &#123;</div><div class="line">        throw new RuntimeException(<span class="string">"Only one Looper may be created per thread"</span>);</div><div class="line">    &#125;</div><div class="line">    sThreadLocal.set(new Looper(quitAllowed));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里通过<u>判断sThreadLocal.get()判断存储变量是否为空，默认是没有的，所以会调用sThreadLocal.set(new Looper(quitAllowed))创建一个Looper对象。</u>我们继续跟进Looper</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">private Looper(boolean quitAllowed) &#123;</div><div class="line">    mQueue = new MessageQueue(quitAllowed);</div><div class="line">    mThread = Thread.currentThread();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到在构造方法中创建了一个MessageQueue(我们称之为消息队列)我们创建了looper对象之后，会通过Looper.loop()去从消息队列中进行消息轮回。紧接着我们单击进入loop这个方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">public static void <span class="function"><span class="title">loop</span></span>() &#123;</div><div class="line">    final Looper me = myLooper();</div><div class="line">    <span class="keyword">if</span> (me == null) &#123;</div><div class="line">        throw new RuntimeException(<span class="string">"No Looper; Looper.prepare() wasn't called on this thread."</span>);</div><div class="line">    &#125;</div><div class="line">    final MessageQueue queue = me.mQueue;</div><div class="line"></div><div class="line">    // Make sure the identity of this thread is that of the <span class="built_in">local</span> process,</div><div class="line">    // and keep track of what that identity token actually is.</div><div class="line">    Binder.clearCallingIdentity();</div><div class="line">    final long ident = Binder.clearCallingIdentity();</div><div class="line">    <span class="keyword">for</span> (;;) &#123;</div><div class="line">        Message msg = queue.next(); // might block</div><div class="line">        <span class="keyword">if</span> (msg == null) &#123;</div><div class="line">            // No message indicates that the message queue is quitting.</div><div class="line">            <span class="built_in">return</span>;</div><div class="line">        &#125;</div><div class="line">        // This must be <span class="keyword">in</span> a <span class="built_in">local</span> variable, <span class="keyword">in</span> <span class="keyword">case</span> a UI event sets the logger</div><div class="line">        Printer logging = me.mLogging;</div><div class="line">        <span class="keyword">if</span> (logging != null) &#123;</div><div class="line">            logging.println(<span class="string">"&gt;&gt;&gt;&gt;&gt; Dispatching to "</span> + msg.target + <span class="string">" "</span> +</div><div class="line">                    msg.callback + <span class="string">": "</span> + msg.what);</div><div class="line">        &#125;</div><div class="line">        msg.target.dispatchMessage(msg);</div><div class="line">     <span class="keyword">if</span> (logging != null) &#123;</div><div class="line">            logging.println(<span class="string">"&lt;&lt;&lt;&lt;&lt; Finished to "</span> + msg.target + <span class="string">" "</span> + msg.callback    );</div><div class="line">        &#125;</div><div class="line">       // Make sure that during the course of dispatching the</div><div class="line">        // identity of the thread wasn<span class="string">'t corrupted.</span></div><div class="line">        final long newIdent = Binder.clearCallingIdentity();</div><div class="line">        if (ident != newIdent) &#123;</div><div class="line">            Log.wtf(TAG, "Thread identity changed from 0x"</div><div class="line">                    + Long.toHexString(ident) + " to 0x"</div><div class="line">                    + Long.toHexString(newIdent) + " while dispatching to "</div><div class="line">                    + msg.target.getClass().getName() + " "</div><div class="line">                    + msg.callback + " what=" + msg.what);</div><div class="line">        &#125;</div><div class="line">     msg.recycleUnchecked();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面代码第一句的位置我们看到有个myLooper方法，跟进进去我们看到它的返回值是从ThreadLocal存储的Looper实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public static @Nullable Looper <span class="function"><span class="title">myLooper</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> sThreadLocal.get();</div><div class="line">&#125;  </div><div class="line">private static void prepare(boolean quitAllowed) &#123;</div><div class="line">    <span class="keyword">if</span> (sThreadLocal.get() != null) &#123;</div><div class="line">       throw new RuntimeException(<span class="string">"Only one Looper may be created per thread"</span>);    &#125;</div><div class="line">   sThreadLocal.set(new Looper(quitAllowed));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>final MessageQueue queue = me.mQueue;是拿到looper实例中的消息队列MessageQueue 源码上边已经贴出了</p>
+<p>第三处高亮( for (;;)…)就是消息轮回最关键的部分，可以看到它其实就是一个死循环，并从消息队列中取出消息，如果为空的话就阻塞，不为空的话它会调用第四处高亮位置的代码 msg.target.dispatchMessage(msg)。这里的msg.target其实指的就是handler自己本身，我们使用handler去更新UI，通过sendEmptyMessage发送消息，然后重写handleMessage去回调，这里面底层就是通过msg.target.dispatchMessage去发送的。下面我们看看具体的涉及的源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public final boolean sendMessage(Message msg)</div><div class="line">&#123;</div><div class="line">    <span class="built_in">return</span> sendMessageDelayed(msg, 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public final boolean sendMessageDelayed(Message msg, long delayMillis)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span> (delayMillis &lt; 0) &#123;</div><div class="line">        delayMillis = 0;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public boolean sendMessageAtTime(Message msg, long uptimeMillis) &#123;</div><div class="line">    MessageQueue queue = mQueue;</div><div class="line">    <span class="keyword">if</span> (queue == null) &#123;</div><div class="line">        RuntimeException e = new RuntimeException(</div><div class="line">                this + <span class="string">" sendMessageAtTime() called with no mQueue"</span>);</div><div class="line">        Log.w(<span class="string">"Looper"</span>, e.getMessage(), e);</div><div class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> enqueueMessage(queue, msg, uptimeMillis);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一直跳到sendMessageAtTime后拿到mQueue，进行放空判断，最后返回我们期待已久的enqueueMessage方法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">private boolean enqueueMessage(MessageQueue queue, Message msg, long uptimeMillis) &#123;</div><div class="line">    msg.target = this;</div><div class="line">    <span class="keyword">if</span> (mAsynchronous) &#123;</div><div class="line">        msg.setAsynchronous(<span class="literal">true</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">return</span> queue.enqueueMessage(msg, uptimeMillis);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>msg.target = this;这句代码就是把当前的handler赋值给msg的目标地址，最终调用queue.enqueueMessage将消息发送给handler自己，最终保存到消息队列中去。<br>到这里流程已经很清晰了，首先我们先通过Looper的prepare去创建一个looper对象，该实例中保存了一个MessageQueue给mQueue，紧接着通过Looper的loop方法，通过一个没有任何参数约束的for语句死循环将消息队列中的消息不断轮回，最后调用msg.target.dispatchMessage(msg)</p>
+<p><em>我们回过来看看dispatchMessage</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void dispatchMessage(Message msg) &#123;</div><div class="line">    <span class="keyword">if</span> (msg.callback != null) &#123;</div><div class="line">        handleCallback(msg);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (mCallback != null) &#123;</div><div class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) &#123;</div><div class="line">                <span class="built_in">return</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        handleMessage(msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这也就是为什么我们要重写handleMessage这个方法的原因 ，因为msg.target.dispatchMessage(msg)是最终调用的方法，而msg的值是什么？就是我们之前在enqueueMessage消息队列中储存的信息~<br>最后总结handler、Messagequeue和looper这三者中的三角关系：<br>首先handler负责去发送消息，通过looper进行一对一的绑定【Looper.myLooper()】，然后looper将消息回传给handler，最后handler自己对发送过来消息进行处理。p.s可能你会跟我一样在第一次第一次接触handler有这样的疑惑—为什么我们很多时候没有通过Looper.prepare()和Looper.loop()方法去创建一个Looper对象？如果你还有这个问题的话，请回头看看第一段~<br>ok，这篇文章就先说到这儿，如有哪儿说得不好请麻烦指出不尽感激哈~最后再说一句个人感受：就是每一次用到handler这种异步处理机制都会有不同的认识，大家一起加油吧😊</p>
 
                 
-<p class="pink-link-context">
-    <a href="/2017/07/14/深入探讨Generator高逼格操作/" rel="next" title="深入探讨Generator高逼格操作">
-    上一篇：深入探讨Generator高逼格操作
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2017/07/05/JS实现功能算法-持续更新👀/" rel="next" title="JS实现功能算法--持续更新👀">
-    下一篇：JS实现功能算法--持续更新👀
+    <a href="/2018/02/23/2018-请抓紧时间/" rel="next" title="2018,请抓紧时间">
+    下一篇：2018,请抓紧时间
   </a>
 </p>
 
@@ -411,7 +418,7 @@
 
 <!-- 代码1：放在页面需要展示的位置  -->
 <!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
-<div id="cyReward" role="cylabs" data-use="reward" sid="进击Koa2系列[一]" style="margin-left:34%"></div>
+<div id="cyReward" role="cylabs" data-use="reward" sid="从源码角度分析Handler、Looper、MessageQueue三角关系" style="margin-left:34%"></div>
 <!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
 <!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
 <!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
@@ -420,7 +427,7 @@
 
 
 <article class="comments">
-  <div id="SOHUCS" sid="进击Koa2系列[一]"></div>
+  <div id="SOHUCS" sid="从源码角度分析Handler、Looper、MessageQueue三角关系"></div>
   <script type="text/javascript">
     ( function () {
         var appid = "cyt6HyzFa",

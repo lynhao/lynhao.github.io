@@ -7,15 +7,13 @@
 
     
 
-    <title>进击Koa2系列[一] | </title>
+    <title>归档：2018/3 | </title>
     <meta name="author" content="lynhao">
-    
-    <meta name="description" content="忏悔之所以起这个名字,原因是因为没好好坚持学node,14年node还是0.0.x版本我就开始用了,不过没坚持下来,现在node生态发展迅猛已经迭代到7.x版本了,框架已经从Express迭代到koa再到如今的koa2,额,好吧,又是一门全新的知识体系,只好硬着头皮学咯.这个系列将会把我学习的整个过">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="进击Koa2系列[一]"/>
+    
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -313,127 +311,40 @@
 
     <main>
         <div class="container main-container">
-    <nav class="page-nav hide-on-small-only">
+    
+
+<nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（分类目录）</span>
-        
-            
-    
-    
-    <a class="breadcrumb" href="/categories/前端/">前端</a><a class="breadcrumb" href="/categories/前端/Node/">Node</a><a class="breadcrumb" href="/categories/前端/Node/Koa2/">Koa2</a>
-
-
+        <span class="breadcrumb">当前位置（标签）</span>
         
 
         
     </div>
 </nav>
 
-<article>
-    <div class="card">
-        <div class="card-content">
-            
-
-            <div class="article-title">
-                
-    
-        <h1>进击Koa2系列[一]</h1>
-    
 
 
-            </div>
-            <time class="pink-link-context" datetime="2017-07-13T02:41:52.000Z"><a href="/2017/07/13/进击Koa2系列-一/">2017-07-13</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
-    <i class="fa fa-eye"></i>
-    <span id="busuanzi_value_page_pv"></span>
-</span>
-
-            
-    <div class="tags-row">
+    <ul class="collapsible mt-0" data-collapsible="accordion">
         
-            <a href="/tags/Node/" class="chip pink lighten-1">Node</a>
         
-            <a href="/tags/Koa2/" class="chip pink lighten-1">Koa2</a>
+            <li>
+                <div class="collapsible-header active">
+                    <i class="fa fa-archive"></i>2018
+                </div>
+                <div class="collapsible-body">
+                    <div class="collection">
+                        
+                            <a href="/2018/03/19/从源码角度分析Handler、Looper、MessageQueue三角关系/" class="collection-item grey-text text-darken-1">
+                                <time datetime="2018-03-19T08:03:18.000Z">2018-03-19</time>
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                从源码角度分析Handler、Looper、MessageQueue三角关系
+                            </a>
+                        
+                    </div>
+                </div>
+            </li>
         
-    </div>
-
-
-            <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#忏悔"><span class="section table-of-contents-text">忏悔</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#koa2环境搭建"><span class="section table-of-contents-text">koa2环境搭建</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#搭建第一个项目"><span class="section table-of-contents-text">搭建第一个项目</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-5"><a class="section table-of-contents-link" href="#安装koa2"><span class="section table-of-contents-text">安装koa2</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#创建目录-初始化"><span class="section table-of-contents-text">创建目录,初始化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#安装koa2-1"><span class="section table-of-contents-text">安装koa2</span></a></li><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#创建index-js-编写代码"><span class="section table-of-contents-text">创建index.js 编写代码</span></a></li><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#启动运行"><span class="section table-of-contents-text">启动运行</span></a></li></ol></li></ol></li></ol></li></ol>
-</div>
-
-
-            <div class="entry pink-link-context">
-                <h3 id="忏悔"><a href="#忏悔" class="headerlink" title="忏悔"></a>忏悔</h3><p>之所以起这个名字,原因是因为没好好坚持学node,14年node还是0.0.x版本我就开始用了,不过没坚持下来,现在node生态发展迅猛已经迭代到7.x版本了,框架已经从Express迭代到koa再到如今的koa2,额,好吧,又是一门全新的知识体系,只好硬着头皮学咯.这个系列将会把我学习的整个过程记录下来,敬请关注</p>
-<h3 id="koa2环境搭建"><a href="#koa2环境搭建" class="headerlink" title="koa2环境搭建"></a>koa2环境搭建</h3><ul>
-<li><p>操作系统: 不限</p>
-</li>
-<li><p>编译环境: nodejs      </p>
-</li>
-</ul>
-<blockquote>
-<p>因为koa2团队是基于es7这个未来标准开发的,所以推荐使用7.6版本以上,可以省去很多麻烦.</p>
-</blockquote>
-<h3 id="搭建第一个项目"><a href="#搭建第一个项目" class="headerlink" title="搭建第一个项目"></a>搭建第一个项目</h3><p>这里我们用<a href=""><strong>Hello World</strong></a>做演示</p>
-<h5 id="安装koa2"><a href="#安装koa2" class="headerlink" title="安装koa2"></a>安装koa2</h5><h6 id="创建目录-初始化"><a href="#创建目录-初始化" class="headerlink" title="创建目录,初始化"></a>创建目录,初始化</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir Koa2</div><div class="line">npm init</div></pre></td></tr></table></figure>
-<h6 id="安装koa2-1"><a href="#安装koa2-1" class="headerlink" title="安装koa2"></a>安装koa2</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install koa</div></pre></td></tr></table></figure>
-<h6 id="创建index-js-编写代码"><a href="#创建index-js-编写代码" class="headerlink" title="创建index.js 编写代码"></a>创建index.js 编写代码</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch index.js</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">const Koa = require(&apos;koa&apos;)</div><div class="line">const app = new Koa()</div><div class="line"></div><div class="line">app.use( async ( ctx ) =&gt; &#123;</div><div class="line">  ctx.body = &apos;hello koa2&apos;</div><div class="line">&#125;)</div><div class="line"></div><div class="line">app.listen(3000)</div><div class="line">console.log(&apos;[demo] start-quick is starting at port 3000&apos;)</div></pre></td></tr></table></figure>
-<h6 id="启动运行"><a href="#启动运行" class="headerlink" title="启动运行"></a>启动运行</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node index.js</div></pre></td></tr></table></figure>
-<p><img src="http://picturegit-1251927503.cosgz.myqcloud.com/%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-07-13%2011.08.06.png" alt="代码片段"></p>
-
-                
-<p class="pink-link-context">
-    <a href="/2017/07/14/深入探讨Generator高逼格操作/" rel="next" title="深入探讨Generator高逼格操作">
-    上一篇：深入探讨Generator高逼格操作
-  </a>
-</p>
-
-
-
-<p class="pink-link-context">
-    <a href="/2017/07/05/JS实现功能算法-持续更新👀/" rel="next" title="JS实现功能算法--持续更新👀">
-    下一篇：JS实现功能算法--持续更新👀
-  </a>
-</p>
-
-
-            </div>
-			
-        </div>
-    </div>
-</article>
-
-
-
-
-
-<!-- 代码1：放在页面需要展示的位置  -->
-<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
-<div id="cyReward" role="cylabs" data-use="reward" sid="进击Koa2系列[一]" style="margin-left:34%"></div>
-<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
-<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
-<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
-<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
-
-
-<article class="comments">
-  <div id="SOHUCS" sid="进击Koa2系列[一]"></div>
-  <script type="text/javascript">
-    ( function () {
-        var appid = "cyt6HyzFa",
-            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
-            width = window.innerWidth || document.documentElement.clientWidth;
-        if ( width < 960 ) {
-            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
-      }
-    } )();
-  </script>
-  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-</article>
-
+    </ul>
 
 
 </div>
