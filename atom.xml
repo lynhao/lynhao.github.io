@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2018-03-19T08:32:12.000Z</updated>
+  <updated>2018-03-19T08:52:17.000Z</updated>
   <id>/</id>
   
   <author>
@@ -16,16 +16,84 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>HandlerThread之源码完全解析</title>
+    <link href="/2018/03/19/HandlerThread%E4%B9%8B%E6%BA%90%E7%A0%81%E5%AE%8C%E5%85%A8%E8%A7%A3%E6%9E%90/"/>
+    <id>/2018/03/19/HandlerThread之源码完全解析/</id>
+    <published>2018-03-19T08:36:32.000Z</published>
+    <updated>2018-03-19T08:52:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>此文是我还在学校[2016-06-28]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.</p>
+</blockquote>
+<hr>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在正文开始之前如果你对Handler还存有疑惑，建议先看看我的另一篇文章<strong><u>从源码角度分析Handler、Looper、MessageQueue三角关系</u></strong>再继续看下去，如果已经有了一定的了解了，接下来这篇文章读起来将会很轻松哒~</p>
+<p>在开始HandlerThread源码之前我们先写一个与线程相关的Handler</p>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><ul>
+<li>time.xml</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</div><div class="line">&lt;RelativeLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"match_parent"</span></div><div class="line">    android:orientation=<span class="string">"vertical"</span></div><div class="line">    &gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:id=<span class="string">"@+id/id_textview"</span></div><div class="line">        android:text=<span class="string">"正在加载..."</span></div><div class="line">        android:layout_width=<span class="string">"wrap_content"</span></div><div class="line">        android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">        android:paddingTop=<span class="string">"100dp"</span></div><div class="line">        android:textSize=<span class="string">"15sp"</span>/&gt;</div><div class="line">&lt;/RelativeLayout&gt;</div></pre></td></tr></table></figure>
+<p>布局很简单，一个TextView去展示界面</p>
+<ul>
+<li>TimeActivity.java</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by linhao on 16/6/26.</div><div class="line"> */</div><div class="line">public class TimeActivity extends Activity &#123;</div><div class="line">    private TextView textView;</div><div class="line">    private static int MSG_UPDATE_INFO = 1;</div><div class="line"></div><div class="line">    class MyThread extends Thread&#123;</div><div class="line">        public  Handler mhandler ;</div><div class="line">        public Looper looper;</div><div class="line">        @Override</div><div class="line">        public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">            super.run();</div><div class="line">            Looper.prepare();</div><div class="line">            looper = Looper.myLooper();</div><div class="line">            mhandler = new <span class="function"><span class="title">Handler</span></span>()&#123;</div><div class="line">                @Override</div><div class="line">                public void handleMessage(Message msg) &#123;</div><div class="line">                    super.handleMessage(msg);</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            Looper.loop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private MyThread myThread;</div><div class="line">    //创建主线程handler</div><div class="line">    private Handler mHandler = new Handler();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        <span class="built_in">set</span>ContentView(R.layout.block);</div><div class="line">        textView = (TextView) findViewById(R.id.id_textview);</div><div class="line">        //创建后台线程</div><div class="line"></div><div class="line">        initBackThread();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    private void <span class="function"><span class="title">initBackThread</span></span>() &#123;</div><div class="line">        myThread = new MyThread();</div><div class="line">        myThread.start();</div><div class="line"></div><div class="line">        myThread.mhandler = new Handler(myThread.looper)&#123;</div><div class="line">            @Override</div><div class="line">            public void handleMessage(Message msg) &#123;</div><div class="line">                super.handleMessage(msg);</div><div class="line">                checkForUpdate();</div><div class="line">                myThread.mhandler.sendEmptyMessage(MSG_UPDATE_INFO);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    private void <span class="function"><span class="title">checkForUpdate</span></span>() &#123;</div><div class="line">        //模拟耗时操作</div><div class="line">        try &#123;</div><div class="line">            Thread.sleep(1000);</div><div class="line">            mHandler.post(new <span class="function"><span class="title">Runnable</span></span>() &#123;</div><div class="line">                @Override</div><div class="line">                public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">                    Date date = new Date();</div><div class="line">                    DateFormat today = new SimpleDateFormat(<span class="string">"yyyy年MM月dd日 hh时mm分ss秒 EE"</span>, Locale.CHINA);</div><div class="line">                    textView.setText(today.format(date));</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125; catch (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void <span class="function"><span class="title">onResume</span></span>() &#123;</div><div class="line">        super.onResume();</div><div class="line">        myThread.mhandler.sendEmptyMessage(MSG_UPDATE_INFO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void <span class="function"><span class="title">onPause</span></span>() &#123;</div><div class="line">        super.onPause();</div><div class="line">        myThread.mhandler.removeMessages(MSG_UPDATE_INFO);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    protected void <span class="function"><span class="title">onDestroy</span></span>() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码我们定义一个内部类MyThread，紧接着通过<u>looper = Looper.myLooper()</u>拿到储存在sThreadLocal的Looper实例,如果这里听不懂的话建议回头看看从源码角度分析Handler、Looper、MessageQueue三角关系这篇文章,重写handleMessage最后调用Looper的loop方法，从MessageQueue中去取消息。定义一个checkForUpdate方法模拟从服务器解析数据，通过post方法创建一个线程，最后在run方法里面更新UI，模拟时钟。</p>
+<blockquote>
+<p>咳咳,这里我得先打住,有谁看到这段代码以为是创建了一个线程请举个手(yo~put ur hands up🙌)！！！</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mHandler.post(new <span class="function"><span class="title">Runnable</span></span>() &#123;</div><div class="line">    @Override</div><div class="line">    public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">        ......</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我告诉你其实什么线程都没有被创建，请看源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public final boolean post(Runnable r)</div><div class="line">&#123;</div><div class="line">   <span class="built_in">return</span>  sendMessageDelayed(getPostMessage(r), 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不是觉得这几行代码很亲切呢，继续看下去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">private static Message getPostMessage(Runnable r) &#123;</div><div class="line">    Message m = Message.obtain();</div><div class="line">    m.callback = r;</div><div class="line">    <span class="built_in">return</span> m;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到，getPostMessage将Runnable的对象r复制给了Message的callback。回头看看sendMessageDelayed是不是很熟悉呢？没错，跟handler的sendMessageDelayed一模一样。我们再看看下面这段代码  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void dispatchMessage(Message msg) &#123;</div><div class="line">    <span class="keyword">if</span> (msg.callback != null) &#123;</div><div class="line">        handleCallback(msg);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (mCallback != null) &#123;</div><div class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) &#123;</div><div class="line">                <span class="built_in">return</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        handleMessage(msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们拿到Looper对象后通过Looper.loop()方法在MessageQueue中不断轮回拿取数据，然后回调msg.target.dispatch(…),这里通过判断msg.callback是否为空，如果不为空就执行回调方法handleCallback(msg),而在前面我们已经给callback赋值了，就是<strong>Runnable</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private static void handleCallback(Message message) &#123;</div><div class="line">    message.callback.run();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>紧接着调用run方法在里面更新我们的UI代码，代码其实就这些，一点也不复杂是不是？<br>插叙就这么多，接着我们打开模拟器Genymotion运行下我们的代码</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/andr1.jpg?raw=true" alt="stack"></p>
+<p>我们发现程序奔溃了，正常思维我们看看日志报什么错误</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/errorCut/andr.jpg?raw=true" alt="stack"></p>
+<p>日志报了个RuntimeException空指针错误，为什么呢？我们再看看这行代码myThread.mhandler = new Handler(myThread.looper)，我们传入新建的thread的looper，这里涉及到了线程并发的问题因为两个线程交叉运行当编译器运行到这段代码时但此时的looper却没被创建就会报出空指正的问题。那我们改如何避免这个问题呢？很幸运google已经帮我事先考虑到了，所以才有了HandlerThread，下面修改下代码，仅两处</p>
+<ul>
+<li>1、定义一个HandlerThread和Handler</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">private HandlerThread mCheckMsgThread;</div><div class="line">private Handler mCheckHandler;</div></pre></td></tr></table></figure>
+<p>这里我们不再需要MyThread这个类了，在initBackThread方法内实例化HandlerThread</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mCheckMsgThread = new HandlerThread(<span class="string">"随意"</span>);</div><div class="line">mCheckMsgThread.start();</div></pre></td></tr></table></figure>
+<p>HandleThread需要传入有个线程名字，这里随意</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mCheckHandler = new Handler(mCheckMsgThread.getLooper())&#123;</div><div class="line">            @Override</div><div class="line">            public void handleMessage(Message msg) &#123;</div><div class="line">                super.handleMessage(msg);</div><div class="line">                checkForUpdate();</div><div class="line">                mCheckHandler.sendEmptyMessage(MSG_UPDATE_INFO);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>我们重新跑一次程序(掉帧得好厉害，但效果还是看得出来啦~)</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/andr.gif?raw=true" alt="stack"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;此文是我还在学校[2016-06-28]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+    
+    </summary>
+    
+      <category term="Android" scheme="/categories/Android/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>从源码角度分析Handler、Looper、MessageQueue三角关系</title>
     <link href="/2018/03/19/%E4%BB%8E%E6%BA%90%E7%A0%81%E8%A7%92%E5%BA%A6%E5%88%86%E6%9E%90Handler%E3%80%81Looper%E3%80%81MessageQueue%E4%B8%89%E8%A7%92%E5%85%B3%E7%B3%BB/"/>
     <id>/2018/03/19/从源码角度分析Handler、Looper、MessageQueue三角关系/</id>
     <published>2018-03-19T08:03:18.000Z</published>
-    <updated>2018-03-19T08:32:12.000Z</updated>
+    <updated>2018-03-19T08:52:30.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.</p>
 </blockquote>
 <hr>
+<a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>距离上次更新已经有一个多星期了，最近忙于找工作所以更新速度有所延迟，最近老是碰壁，但文章咱们还是要更新的。今天我们来讲讲Handler、Looper、MessageQueue三者的那些事，这是上篇，后面我会继续更新我对Handler的理解。Ok，下面进入今天正题。</p>
 <h3 id="💭什么是Handler？它有啥存在价值？"><a href="#💭什么是Handler？它有啥存在价值？" class="headerlink" title="💭什么是Handler？它有啥存在价值？"></a>💭什么是Handler？它有啥存在价值？</h3><blockquote>
 <p><a href=""><strong>A Handler allows you to send and process Message and Runnable objects associated with a thread’s MessageQueue. Each Handler instance is associated with a single thread and that thread’s message queue. When you create a new Handler, it is bound to the thread / message queue of the thread that is creating it – from that point on, it will deliver messages and runnables to that message queue and execute them as they come out of the message queue.</strong></a></p>
@@ -65,7 +133,6 @@
 &lt;p&gt;此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerli
     
     </summary>
     
@@ -79,7 +146,7 @@
     <link href="/2018/02/23/2018-%E8%AF%B7%E6%8A%93%E7%B4%A7%E6%97%B6%E9%97%B4/"/>
     <id>/2018/02/23/2018-请抓紧时间/</id>
     <published>2018-02-23T12:31:21.000Z</published>
-    <updated>2018-02-23T12:45:54.000Z</updated>
+    <updated>2018-03-19T08:51:29.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="时不待人"><a href="#时不待人" class="headerlink" title="时不待人"></a>时不待人</h3><p>明天就要返工了, 难免有点抵触情绪, 我也好久没更新博客了,这篇文章归类为<a href=""><strong>生活类</strong></a>, 我不想在这里写太多我的太多心声, 因为我不想让一些认识我的人但不了解我的人知道或揣摩我的动态, 前几天在扇贝看到一句话, 翻译过来大概意思就是 做事要抓紧,尽快实现它,越拖延实现它的概率越低, 我就是这么一个人, 我有时总会以我只读了两年大学安慰自己, 或者以我才转前端不到一年给自己找借口(我从17年3月份从Java转为web前端), 既然”书”读的少, 那自己就要更加约束自己, 2018, 我有自己的目标, 去年我在工作的之余投入学习的时间不科学, 以至于每到年底总有一种啥都不会的想法, 18年,我希望我能从日常一些小事做起, 例如给自己做饭, 给日常事情安排先后顺序, 这样我就可以少熬夜, 因为熬夜会让人变笨. 好了, 就写到这里, 我并不希望有人看到这篇文章 [当然如果被游客或者爬虫无意看到也无妨, 因为这样的逻辑估计也很难看懂]</p>
 <hr>
@@ -92,7 +159,7 @@
     
     </summary>
     
-      <category term="生活" scheme="/categories/%E7%94%9F%E6%B4%BB/"/>
+      <category term="闲聊" scheme="/categories/%E9%97%B2%E8%81%8A/"/>
     
     
       <category term="person business" scheme="/tags/person-business/"/>
@@ -399,9 +466,9 @@
     
       <category term="JavaScript" scheme="/tags/JavaScript/"/>
     
-      <category term="ECMAScript 6" scheme="/tags/ECMAScript-6/"/>
-    
       <category term="Node" scheme="/tags/Node/"/>
+    
+      <category term="ECMAScript 6" scheme="/tags/ECMAScript-6/"/>
     
   </entry>
   

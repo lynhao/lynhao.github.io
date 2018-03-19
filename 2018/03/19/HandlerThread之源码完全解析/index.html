@@ -7,15 +7,15 @@
 
     
 
-    <title>使用gulp工具搭建AngularJs【上】 | </title>
+    <title>HandlerThread之源码完全解析 | </title>
     <meta name="author" content="lynhao">
     
-    <meta name="description" content="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件">
+    <meta name="description" content="此文是我还在学校[2016-06-28]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="使用gulp工具搭建AngularJs【上】"/>
+    <meta property="og:title" content="HandlerThread之源码完全解析"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -320,7 +320,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/前端/">前端</a><a class="breadcrumb" href="/categories/前端/AngularJs/">AngularJs</a><a class="breadcrumb" href="/categories/前端/AngularJs/gulp/">gulp</a>
+    <a class="breadcrumb" href="/categories/Android/">Android</a>
 
 
         
@@ -337,12 +337,12 @@
             <div class="article-title">
                 
     
-        <h1>使用gulp工具搭建AngularJs【上】</h1>
+        <h1>HandlerThread之源码完全解析</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2017-02-17T03:01:32.000Z"><a href="/2017/02/17/使用gulp搭建angularjs【上】/">2017-02-17</a></time>
+            <time class="pink-link-context" datetime="2018-03-19T08:36:32.000Z"><a href="/2018/03/19/HandlerThread之源码完全解析/">2018-03-19</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -350,74 +350,64 @@
 </span>
 
             
-    <div class="tags-row">
-        
-            <a href="/tags/AngularJs/" class="chip pink lighten-1">AngularJs</a>
-        
-    </div>
-
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件"><span class="section table-of-contents-text">这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#全局安装-gulp"><span class="section table-of-contents-text">全局安装 gulp</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#安装bower环境"><span class="section table-of-contents-text">安装bower环境</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#创建空目录"><span class="section table-of-contents-text">创建空目录</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#在当前目录下安装配置文件"><span class="section table-of-contents-text">在当前目录下安装配置文件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#安装AngularJs"><span class="section table-of-contents-text">安装AngularJs</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#安装nodejs模块"><span class="section table-of-contents-text">安装nodejs模块</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#开始安装模块"><span class="section table-of-contents-text">开始安装模块</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-6"><a class="section table-of-contents-link" href="#这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm-i-–save-dev-模块名"><span class="section table-of-contents-text">这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm i –save-dev 模块名</span></a></li></ol></li></ol></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言"><span class="section table-of-contents-text">下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言</span></a></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#前言"><span class="section table-of-contents-text">前言</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#代码部分"><span class="section table-of-contents-text">代码部分</span></a></li></ol>
 </div>
 
 
             <div class="entry pink-link-context">
-                <h3 id="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件"><a href="#这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目-下一篇我们将讲解如何设置配置文件" class="headerlink" title="这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的AngularJs项目,下一篇我们将讲解如何设置配置文件"></a>这一篇文章我们来讲讲gulp，以及如何利用gulp去搭建一个完整的<a href="#AngularJs"><strong>AngularJs</strong></a>项目,下一篇我们将讲解如何设置配置文件</h3><a id="more"></a>
-<blockquote>
-<p>如要查看历史文章请移步我的微信公众号查看：搜索林浩</p>
+                <blockquote>
+<p>此文是我还在学校[2016-06-28]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.</p>
 </blockquote>
-<h3 id="全局安装-gulp"><a href="#全局安装-gulp" class="headerlink" title="全局安装 gulp"></a>全局安装 gulp</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global gulp</div></pre></td></tr></table></figure>
-<h3 id="安装bower环境"><a href="#安装bower环境" class="headerlink" title="安装bower环境"></a>安装bower环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i -g bower</div></pre></td></tr></table></figure>
-<h3 id="创建空目录"><a href="#创建空目录" class="headerlink" title="创建空目录"></a>创建空目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir angular_web</div></pre></td></tr></table></figure>
-<h3 id="在当前目录下安装配置文件"><a href="#在当前目录下安装配置文件" class="headerlink" title="在当前目录下安装配置文件"></a>在当前目录下安装配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> angular_web</div><div class="line">bower init</div></pre></td></tr></table></figure>
-<p><strong>注意，如果你在osx环境下可能会遇到这种情况</strong><br><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/errorCut/sudo_error.png?raw=true" alt="error cut"><br>这里是因为bower不支持sudo，正确命令行如下</p>
-<blockquote>
-<p>下面涉及到的同理就不再重述</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo bower init --allow-root 或者 bower init --allow-root</div></pre></td></tr></table></figure>
-<p>之后命令行会输出一些配置信息让你填写<br><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/bower_1.png?raw=true" alt="bower_1"><br>这里我们暂时先回车跳过不填写，后面可以在生成的<a href="#bower.json"><strong>bower.json</strong></a>文件中修改</p>
-<h3 id="安装AngularJs"><a href="#安装AngularJs" class="headerlink" title="安装AngularJs"></a>安装AngularJs</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bower install --save angular<span class="comment">#1.5.8</span></div></pre></td></tr></table></figure>
-<p>这里我本地是1.5.8,目前1.6是最新的版本,之后它会向github仓库请求拉取资源,打开文件我们会发现它生成了<a href="#www"><strong>www</strong></a>这个目录</p>
-<blockquote>
-<p>这里你可能安装完之后的目录是bower_components，这个可能跟你的npm版本有关系，知道的童鞋麻烦下面留言告知</p>
-</blockquote>
-<h3 id="安装nodejs模块"><a href="#安装nodejs模块" class="headerlink" title="安装nodejs模块"></a>安装nodejs模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure>
-<p>同样跟上一个步骤一样，一直回车，之后会生成一个<a href="#package.json"><strong>package.json</strong></a>文件</p>
-<h3 id="开始安装模块"><a href="#开始安装模块" class="headerlink" title="开始安装模块"></a>开始安装模块</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i --save-dev gulp</div></pre></td></tr></table></figure>
-<blockquote>
-<p>它会写到我们刚刚创建的package.json文件中,查看文件</p>
-</blockquote>
-<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/bower_gulp.png?raw=true" alt="bower_gulp"></p>
-<h6 id="这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm-i-–save-dev-模块名"><a href="#这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm-i-–save-dev-模块名" class="headerlink" title="这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是npm i –save-dev 模块名"></a>这里我们会假设需要下面这些模块，实际你可以跟你的项目需求安装，命令行跟上面类似都是<a href="#save"><strong>npm i –save-dev 模块名</strong></a></h6><ul>
-<li>gulp-clean </li>
-<li>gulp-concat </li>
-<li>gulp-cssmin </li>
-<li>gulp-imagemin </li>
-<li>gulp-less</li>
-<li>gulp-load-plugins</li>
-<li>gulp-plumber</li>
-<li>gulp-uglify</li>
-<li>open</li>
-</ul>
-<blockquote>
-<p>最后看看最终的目录结构</p>
-</blockquote>
-<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/directory1.png?raw=true" alt="directory1"></p>
 <hr>
-<h3 id="下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言"><a href="#下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言" class="headerlink" title="下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言"></a>下一篇我们将进行配置文件编写，最终搭建一个本地服务完整的Angularjs项目，有问题请留言</h3>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在正文开始之前如果你对Handler还存有疑惑，建议先看看我的另一篇文章<strong><u>从源码角度分析Handler、Looper、MessageQueue三角关系</u></strong>再继续看下去，如果已经有了一定的了解了，接下来这篇文章读起来将会很轻松哒~</p>
+<p>在开始HandlerThread源码之前我们先写一个与线程相关的Handler</p>
+<h2 id="代码部分"><a href="#代码部分" class="headerlink" title="代码部分"></a>代码部分</h2><ul>
+<li>time.xml</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>?&gt;</div><div class="line">&lt;RelativeLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></div><div class="line">    xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span></div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"match_parent"</span></div><div class="line">    android:orientation=<span class="string">"vertical"</span></div><div class="line">    &gt;</div><div class="line"></div><div class="line">    &lt;TextView</div><div class="line">        android:id=<span class="string">"@+id/id_textview"</span></div><div class="line">        android:text=<span class="string">"正在加载..."</span></div><div class="line">        android:layout_width=<span class="string">"wrap_content"</span></div><div class="line">        android:layout_height=<span class="string">"wrap_content"</span></div><div class="line">        android:paddingTop=<span class="string">"100dp"</span></div><div class="line">        android:textSize=<span class="string">"15sp"</span>/&gt;</div><div class="line">&lt;/RelativeLayout&gt;</div></pre></td></tr></table></figure>
+<p>布局很简单，一个TextView去展示界面</p>
+<ul>
+<li>TimeActivity.java</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Created by linhao on 16/6/26.</div><div class="line"> */</div><div class="line">public class TimeActivity extends Activity &#123;</div><div class="line">    private TextView textView;</div><div class="line">    private static int MSG_UPDATE_INFO = 1;</div><div class="line"></div><div class="line">    class MyThread extends Thread&#123;</div><div class="line">        public  Handler mhandler ;</div><div class="line">        public Looper looper;</div><div class="line">        @Override</div><div class="line">        public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">            super.run();</div><div class="line">            Looper.prepare();</div><div class="line">            looper = Looper.myLooper();</div><div class="line">            mhandler = new <span class="function"><span class="title">Handler</span></span>()&#123;</div><div class="line">                @Override</div><div class="line">                public void handleMessage(Message msg) &#123;</div><div class="line">                    super.handleMessage(msg);</div><div class="line">                &#125;</div><div class="line">            &#125;;</div><div class="line">            Looper.loop();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    private MyThread myThread;</div><div class="line">    //创建主线程handler</div><div class="line">    private Handler mHandler = new Handler();</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</div><div class="line">        super.onCreate(savedInstanceState);</div><div class="line">        <span class="built_in">set</span>ContentView(R.layout.block);</div><div class="line">        textView = (TextView) findViewById(R.id.id_textview);</div><div class="line">        //创建后台线程</div><div class="line"></div><div class="line">        initBackThread();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    private void <span class="function"><span class="title">initBackThread</span></span>() &#123;</div><div class="line">        myThread = new MyThread();</div><div class="line">        myThread.start();</div><div class="line"></div><div class="line">        myThread.mhandler = new Handler(myThread.looper)&#123;</div><div class="line">            @Override</div><div class="line">            public void handleMessage(Message msg) &#123;</div><div class="line">                super.handleMessage(msg);</div><div class="line">                checkForUpdate();</div><div class="line">                myThread.mhandler.sendEmptyMessage(MSG_UPDATE_INFO);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">    private void <span class="function"><span class="title">checkForUpdate</span></span>() &#123;</div><div class="line">        //模拟耗时操作</div><div class="line">        try &#123;</div><div class="line">            Thread.sleep(1000);</div><div class="line">            mHandler.post(new <span class="function"><span class="title">Runnable</span></span>() &#123;</div><div class="line">                @Override</div><div class="line">                public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">                    Date date = new Date();</div><div class="line">                    DateFormat today = new SimpleDateFormat(<span class="string">"yyyy年MM月dd日 hh时mm分ss秒 EE"</span>, Locale.CHINA);</div><div class="line">                    textView.setText(today.format(date));</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        &#125; catch (InterruptedException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void <span class="function"><span class="title">onResume</span></span>() &#123;</div><div class="line">        super.onResume();</div><div class="line">        myThread.mhandler.sendEmptyMessage(MSG_UPDATE_INFO);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    protected void <span class="function"><span class="title">onPause</span></span>() &#123;</div><div class="line">        super.onPause();</div><div class="line">        myThread.mhandler.removeMessages(MSG_UPDATE_INFO);</div><div class="line">    &#125;</div><div class="line">    @Override</div><div class="line">    protected void <span class="function"><span class="title">onDestroy</span></span>() &#123;</div><div class="line">        super.onDestroy();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>代码我们定义一个内部类MyThread，紧接着通过<u>looper = Looper.myLooper()</u>拿到储存在sThreadLocal的Looper实例,如果这里听不懂的话建议回头看看从源码角度分析Handler、Looper、MessageQueue三角关系这篇文章,重写handleMessage最后调用Looper的loop方法，从MessageQueue中去取消息。定义一个checkForUpdate方法模拟从服务器解析数据，通过post方法创建一个线程，最后在run方法里面更新UI，模拟时钟。</p>
+<blockquote>
+<p>咳咳,这里我得先打住,有谁看到这段代码以为是创建了一个线程请举个手(yo~put ur hands up🙌)！！！</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mHandler.post(new <span class="function"><span class="title">Runnable</span></span>() &#123;</div><div class="line">    @Override</div><div class="line">    public void <span class="function"><span class="title">run</span></span>() &#123;</div><div class="line">        ......</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>我告诉你其实什么线程都没有被创建，请看源码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public final boolean post(Runnable r)</div><div class="line">&#123;</div><div class="line">   <span class="built_in">return</span>  sendMessageDelayed(getPostMessage(r), 0);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是不是觉得这几行代码很亲切呢，继续看下去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">private static Message getPostMessage(Runnable r) &#123;</div><div class="line">    Message m = Message.obtain();</div><div class="line">    m.callback = r;</div><div class="line">    <span class="built_in">return</span> m;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到，getPostMessage将Runnable的对象r复制给了Message的callback。回头看看sendMessageDelayed是不是很熟悉呢？没错，跟handler的sendMessageDelayed一模一样。我们再看看下面这段代码  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">public void dispatchMessage(Message msg) &#123;</div><div class="line">    <span class="keyword">if</span> (msg.callback != null) &#123;</div><div class="line">        handleCallback(msg);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (mCallback != null) &#123;</div><div class="line">            <span class="keyword">if</span> (mCallback.handleMessage(msg)) &#123;</div><div class="line">                <span class="built_in">return</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        handleMessage(msg);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们拿到Looper对象后通过Looper.loop()方法在MessageQueue中不断轮回拿取数据，然后回调msg.target.dispatch(…),这里通过判断msg.callback是否为空，如果不为空就执行回调方法handleCallback(msg),而在前面我们已经给callback赋值了，就是<strong>Runnable</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">private static void handleCallback(Message message) &#123;</div><div class="line">    message.callback.run();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>紧接着调用run方法在里面更新我们的UI代码，代码其实就这些，一点也不复杂是不是？<br>插叙就这么多，接着我们打开模拟器Genymotion运行下我们的代码</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/andr1.jpg?raw=true" alt="stack"></p>
+<p>我们发现程序奔溃了，正常思维我们看看日志报什么错误</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/errorCut/andr.jpg?raw=true" alt="stack"></p>
+<p>日志报了个RuntimeException空指针错误，为什么呢？我们再看看这行代码myThread.mhandler = new Handler(myThread.looper)，我们传入新建的thread的looper，这里涉及到了线程并发的问题因为两个线程交叉运行当编译器运行到这段代码时但此时的looper却没被创建就会报出空指正的问题。那我们改如何避免这个问题呢？很幸运google已经帮我事先考虑到了，所以才有了HandlerThread，下面修改下代码，仅两处</p>
+<ul>
+<li>1、定义一个HandlerThread和Handler</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">private HandlerThread mCheckMsgThread;</div><div class="line">private Handler mCheckHandler;</div></pre></td></tr></table></figure>
+<p>这里我们不再需要MyThread这个类了，在initBackThread方法内实例化HandlerThread</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mCheckMsgThread = new HandlerThread(<span class="string">"随意"</span>);</div><div class="line">mCheckMsgThread.start();</div></pre></td></tr></table></figure>
+<p>HandleThread需要传入有个线程名字，这里随意</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">mCheckHandler = new Handler(mCheckMsgThread.getLooper())&#123;</div><div class="line">            @Override</div><div class="line">            public void handleMessage(Message msg) &#123;</div><div class="line">                super.handleMessage(msg);</div><div class="line">                checkForUpdate();</div><div class="line">                mCheckHandler.sendEmptyMessage(MSG_UPDATE_INFO);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>我们重新跑一次程序(掉帧得好厉害，但效果还是看得出来啦~)</p>
+<p><img src="https://github.com/lynhao/ImageStorage/blob/master/picture/andr.gif?raw=true" alt="stack"></p>
+
                 
-<p class="pink-link-context">
-    <a href="/2017/02/17/使用gulp搭建angularjs【下】/" rel="next" title="使用gulp搭建AngularJs【下】">
-    上一篇：使用gulp搭建AngularJs【下】
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2017/01/03/hello-world/" rel="next" title="Hello World">
-    下一篇：Hello World
+    <a href="/2018/03/19/从源码角度分析Handler、Looper、MessageQueue三角关系/" rel="next" title="从源码角度分析Handler、Looper、MessageQueue三角关系">
+    下一篇：从源码角度分析Handler、Looper、MessageQueue三角关系
   </a>
 </p>
 
@@ -434,7 +424,7 @@
 
 <!-- 代码1：放在页面需要展示的位置  -->
 <!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
-<div id="cyReward" role="cylabs" data-use="reward" sid="使用gulp工具搭建AngularJs【上】" style="margin-left:34%"></div>
+<div id="cyReward" role="cylabs" data-use="reward" sid="HandlerThread之源码完全解析" style="margin-left:34%"></div>
 <!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
 <!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
 <!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
@@ -443,7 +433,7 @@
 
 
 <article class="comments">
-  <div id="SOHUCS" sid="使用gulp工具搭建AngularJs【上】"></div>
+  <div id="SOHUCS" sid="HandlerThread之源码完全解析"></div>
   <script type="text/javascript">
     ( function () {
         var appid = "cyt6HyzFa",

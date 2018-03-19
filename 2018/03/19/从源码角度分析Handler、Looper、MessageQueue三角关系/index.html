@@ -10,10 +10,7 @@
     <title>从源码角度分析Handler、Looper、MessageQueue三角关系 | </title>
     <meta name="author" content="lynhao">
     
-    <meta name="description" content="此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.
-
-
-前言距离上次更新已经有一个多星期了，最近忙于找工作所以更新速度有所延迟，最近老是碰壁，但文章咱们还是要更新的。今天我们来讲讲Handler、Looper、MessageQueu">
+    <meta name="description" content="此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -174,8 +171,16 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/生活/">
-                    生活 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/闲聊/">
+                    闲聊 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android/">
+                    Android <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -184,22 +189,6 @@
             <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/前端/">
                     前端 <span class="right">8 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/前端/JavaScript/">
-                    JavaScript <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/前端/JavaScript/es6/">
-                    es6 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -230,8 +219,16 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/前端/Vue/">
-                    Vue <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/前端/JavaScript/">
+                    JavaScript <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/前端/JavaScript/es6/">
+                    es6 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -248,6 +245,14 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/前端/Node/Koa2/">
                     Koa2 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/前端/Vue/">
+                    Vue <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -280,14 +285,6 @@
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/数据库/mongodb/">
                     mongodb <span class="right">1 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android/">
-                    Android <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -364,6 +361,7 @@
 <p>此文是我还在学校[2016-06-27]那段时间写的文章, 当时记录在公众号中,由于长期没有继续维护,随搬迁至此博客.</p>
 </blockquote>
 <hr>
+<a id="more"></a>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>距离上次更新已经有一个多星期了，最近忙于找工作所以更新速度有所延迟，最近老是碰壁，但文章咱们还是要更新的。今天我们来讲讲Handler、Looper、MessageQueue三者的那些事，这是上篇，后面我会继续更新我对Handler的理解。Ok，下面进入今天正题。</p>
 <h3 id="💭什么是Handler？它有啥存在价值？"><a href="#💭什么是Handler？它有啥存在价值？" class="headerlink" title="💭什么是Handler？它有啥存在价值？"></a>💭什么是Handler？它有啥存在价值？</h3><blockquote>
 <p><a href=""><strong>A Handler allows you to send and process Message and Runnable objects associated with a thread’s MessageQueue. Each Handler instance is associated with a single thread and that thread’s message queue. When you create a new Handler, it is bound to the thread / message queue of the thread that is creating it – from that point on, it will deliver messages and runnables to that message queue and execute them as they come out of the message queue.</strong></a></p>
@@ -397,6 +395,12 @@
 <p>这也就是为什么我们要重写handleMessage这个方法的原因 ，因为msg.target.dispatchMessage(msg)是最终调用的方法，而msg的值是什么？就是我们之前在enqueueMessage消息队列中储存的信息~<br>最后总结handler、Messagequeue和looper这三者中的三角关系：<br>首先handler负责去发送消息，通过looper进行一对一的绑定【Looper.myLooper()】，然后looper将消息回传给handler，最后handler自己对发送过来消息进行处理。p.s可能你会跟我一样在第一次第一次接触handler有这样的疑惑—为什么我们很多时候没有通过Looper.prepare()和Looper.loop()方法去创建一个Looper对象？如果你还有这个问题的话，请回头看看第一段~<br>ok，这篇文章就先说到这儿，如有哪儿说得不好请麻烦指出不尽感激哈~最后再说一句个人感受：就是每一次用到handler这种异步处理机制都会有不同的认识，大家一起加油吧😊</p>
 
                 
+<p class="pink-link-context">
+    <a href="/2018/03/19/HandlerThread之源码完全解析/" rel="next" title="HandlerThread之源码完全解析">
+    上一篇：HandlerThread之源码完全解析
+  </a>
+</p>
+
 
 
 <p class="pink-link-context">
