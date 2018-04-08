@@ -180,14 +180,6 @@
         
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Android/">
-                    Android <span class="right">2 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/前端/">
                     前端 <span class="right">11 篇</span></a>
                 </a>
@@ -196,16 +188,8 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/前端/JavaScript/">
-                    JavaScript <span class="right">3 篇</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-2" collapse-level="2">
-                <a class="no-padding" href="/categories/前端/JavaScript/es6/">
-                    es6 <span class="right">1 篇</span></a>
+                <a class="no-padding" href="/categories/前端/webpack/">
+                    webpack <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -244,8 +228,16 @@
         
 
             <li class="collapse-level-1" collapse-level="1">
-                <a class="no-padding" href="/categories/前端/webpack/">
-                    webpack <span class="right">2 篇</span></a>
+                <a class="no-padding" href="/categories/前端/JavaScript/">
+                    JavaScript <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-2" collapse-level="2">
+                <a class="no-padding" href="/categories/前端/JavaScript/es6/">
+                    es6 <span class="right">1 篇</span></a>
                 </a>
             </li>
 
@@ -262,6 +254,14 @@
             <li class="collapse-level-2" collapse-level="2">
                 <a class="no-padding" href="/categories/前端/Node/Koa2/">
                     Koa2 <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Android/">
+                    Android <span class="right">2 篇</span></a>
                 </a>
             </li>
 
@@ -372,7 +372,8 @@
 
 
             <div class="entry pink-link-context">
-                <h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件是指用户或者浏览器自身执行的某种动作, 例如点击事件(click), 鼠标事件(mouseover),按键事件(keyup) 等,为响应某个事件的函数叫做事件处理程序(监听器)</p>
+                <a id="more"></a>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件是指用户或者浏览器自身执行的某种动作, 例如点击事件(click), 鼠标事件(mouseover),按键事件(keyup) 等,为响应某个事件的函数叫做事件处理程序(监听器)</p>
 <h3 id="事件委托-代理"><a href="#事件委托-代理" class="headerlink" title="事件委托/代理"></a>事件委托/代理</h3><p>首先之所以需要有时间委托这个概念, 是因为考虑到内存开销和性能优化.试想一下如果我们为了操作一个DOM而到处声明新的引用(对象),会导致增加DOM的访问次数,而JS中函数也是一个对象,对象需要内存空间,所以性能会受影响,如果我们可以在页面生命周期的任何时间点是为它添加事件处理程序,无需等待DOMContentLoaded和load 这两个过程, 并且在同一个范畴内的事件处理程序能够被重用,那么DOM引用减少,内存得到释放,性能就上来.</p>
 <p>所谓的事件委托,是利用了冒泡事件, 通过制定一个处理程序去管理同一类型的事件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=<span class="string">"mylick"</span>&gt;</div><div class="line">		&lt;li id=<span class="string">"1"</span>&gt;1&lt;/li&gt;</div><div class="line">		&lt;li id=<span class="string">"2"</span>&gt;2&lt;/li&gt;</div><div class="line">		&lt;li id=<span class="string">"3"</span>&gt;3&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
