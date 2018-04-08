@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2018-04-02T17:03:51.000Z</updated>
+  <updated>2018-04-08T06:33:03.000Z</updated>
   <id>/</id>
   
   <author>
@@ -16,11 +16,79 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>事件委托之一二事</title>
+    <link href="/2018/04/08/%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98%E4%B9%8B%E4%B8%80%E4%BA%8C%E4%BA%8B/"/>
+    <id>/2018/04/08/事件委托之一二事/</id>
+    <published>2018-04-08T04:03:23.000Z</published>
+    <updated>2018-04-08T06:33:03.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件是指用户或者浏览器自身执行的某种动作, 例如点击事件(click), 鼠标事件(mouseover),按键事件(keyup) 等,为响应某个事件的函数叫做事件处理程序(监听器)</p>
+<h3 id="事件委托-代理"><a href="#事件委托-代理" class="headerlink" title="事件委托/代理"></a>事件委托/代理</h3><p>首先之所以需要有时间委托这个概念, 是因为考虑到内存开销和性能优化.试想一下如果我们为了操作一个DOM而到处声明新的引用(对象),会导致增加DOM的访问次数,而JS中函数也是一个对象,对象需要内存空间,所以性能会受影响,如果我们可以在页面生命周期的任何时间点是为它添加事件处理程序,无需等待DOMContentLoaded和load 这两个过程, 并且在同一个范畴内的事件处理程序能够被重用,那么DOM引用减少,内存得到释放,性能就上来.</p>
+<p>所谓的事件委托,是利用了冒泡事件, 通过制定一个处理程序去管理同一类型的事件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=<span class="string">"mylick"</span>&gt;</div><div class="line">		&lt;li id=<span class="string">"1"</span>&gt;1&lt;/li&gt;</div><div class="line">		&lt;li id=<span class="string">"2"</span>&gt;2&lt;/li&gt;</div><div class="line">		&lt;li id=<span class="string">"3"</span>&gt;3&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var list = document.getElementById(<span class="string">'mylick'</span>)</div><div class="line">list.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span>(event) &#123;</div><div class="line">  var target = event.target.id</div><div class="line">  switch (target) &#123;</div><div class="line">     <span class="keyword">case</span> <span class="string">'1'</span>:</div><div class="line">       alert(1)</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">     <span class="keyword">case</span> <span class="string">'2'</span>:</div><div class="line">       alert(2)</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">     <span class="keyword">case</span> <span class="string">'3'</span>:</div><div class="line">       alert(3)</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">     default:</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">   &#125;</div><div class="line">&#125;, <span class="literal">false</span>)</div></pre></td></tr></table></figure>
+<p>ul下的子元素都公用同一个事件处理程序,这就是事件委托</p>
+<h4 id="DOM0级事件"><a href="#DOM0级事件" class="headerlink" title="DOM0级事件"></a>DOM0级事件</h4><p>传统的事件处理程序,将一个函数赋值给一个事件处理程序属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">btn.onclick = function () &#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="DOM2级事件"><a href="#DOM2级事件" class="headerlink" title="DOM2级事件"></a>DOM2级事件</h4><p>DOM2 包含<u>addEventLinstener</u>和<u>removeEventLinstener</u>两个处理事件方法,接收三个参数: 事件处理名称, 处理函数 和一个布尔值, true表示采用事件捕获, false表示采用事件冒泡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var handler = function () &#123;</div><div class="line">...</div><div class="line">&#125;</div><div class="line">btn.addEventListener(&apos;click&apos;, handler, false)</div><div class="line">btn.removeEventListener(&apos;click&apos;, handler, false)</div></pre></td></tr></table></figure>
+<h4 id="IE事件处理"><a href="#IE事件处理" class="headerlink" title="IE事件处理"></a>IE事件处理</h4><p>IE跟DOM有所区别, 它提供了attachEvent和detachEvent 两个事件处理方法,但attachEvent()添加的事件处理都会默认被添加到事件冒泡阶段.<br>跟DOM2不同的是, 第一个参数指定的时间名必须是”on+type”开头,而且,attachEvent事件处理是在全局作用域中执行,而DOM却是在所属元素作用域中执行,这一点要注意.</p>
+<h3 id="跨浏览器限制"><a href="#跨浏览器限制" class="headerlink" title="跨浏览器限制"></a>跨浏览器限制</h3><p>我们可以用polyfill写法来越过浏览器对事件处理的差异,一般做法是提供addHandler和removeHandler这两个Api, 分别传入三个参数: 操作元素, 事件名称, 事件处理函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var EventUtil = &#123;</div><div class="line">  addHandler: function (ele, type, fn) &#123;</div><div class="line">    if (ele.addEventListener) &#123;</div><div class="line">      ele.addEventListner(type, fn, false)</div><div class="line">    &#125; else if (ele.attachEvent) &#123;</div><div class="line">      ele.attachEvent(&apos;on&apos;+type, fn, false)</div><div class="line">    &#125; else &#123;</div><div class="line">      ele[&apos;on&apos;+type] = fn</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">   removeHandler: function (ele, type, fn) &#123;</div><div class="line">    if (ele.removeEventListener) &#123;</div><div class="line">      ele.removeEventListner(type, fn, false)</div><div class="line">    &#125; else if (ele.detachEvent) &#123;</div><div class="line">      ele.detachEvent(&apos;on&apos;+type, fn, false)</div><div class="line">    &#125; else &#123;</div><div class="line">      ele[&apos;on&apos;+type] = null</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>–<br>参考资料: 红宝书</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;事件&quot;&gt;&lt;a href=&quot;#事件&quot; class=&quot;headerlink&quot; title=&quot;事件&quot;&gt;&lt;/a&gt;事件&lt;/h3&gt;&lt;p&gt;事件是指用户或者浏览器自身执行的某种动作, 例如点击事件(click), 鼠标事件(mouseover),按键事件(keyup) 等,为响应
+    
+    </summary>
+    
+      <category term="前端" scheme="/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>webpack渐入佳境-session2</title>
+    <link href="/2018/04/04/webpack%E6%B8%90%E5%85%A5%E4%BD%B3%E5%A2%83-session2/"/>
+    <id>/2018/04/04/webpack渐入佳境-session2/</id>
+    <published>2018-04-04T03:46:26.000Z</published>
+    <updated>2018-04-05T10:58:18.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>继上一篇,我们已经做了build操作,但还没看到效果,这篇将用到webpack另外两个插件,实现我们所要的效果</p>
+</blockquote>
+<h3 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h3><blockquote>
+<p>This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader.</p>
+</blockquote>
+<p>意思就是说<u>html-webpack-plugin<u>会自动为我们创建一个简单得html文件</u></u></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;继上一篇,我们已经做了build操作,但还没看到效果,这篇将用到webpack另外两个插件,实现我们所要的效果&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;html-webpack-plugin&quot;&gt;&lt;a href=&quot;#html-webpac
+    
+    </summary>
+    
+      <category term="前端" scheme="/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+      <category term="webpack" scheme="/categories/%E5%89%8D%E7%AB%AF/webpack/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>webpack渐入佳境-session1</title>
     <link href="/2018/04/03/webpack%E6%B8%90%E5%85%A5%E4%BD%B3%E5%A2%83-session1/"/>
     <id>/2018/04/03/webpack渐入佳境-session1/</id>
     <published>2018-04-02T16:22:13.000Z</published>
-    <updated>2018-04-02T17:03:51.000Z</updated>
+    <updated>2018-04-05T10:58:20.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>只会使用CLI,技术永远得不到提升,既然你看到这篇文章说明你渴望学习到webpack更多干货,不讲太多废话,直接进入主题,此文假设您已经具备一定的前端基础,至少知道node是什么玩意就行.</p>

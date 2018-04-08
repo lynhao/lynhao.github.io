@@ -7,13 +7,18 @@
 
     
 
-    <title>工具 | </title>
+    <title>webpack渐入佳境-session2 | </title>
     <meta name="author" content="lynhao">
+    
+    <meta name="description" content="继上一篇,我们已经做了build操作,但还没看到效果,这篇将用到webpack另外两个插件,实现我们所要的效果
+
+html-webpack-plugin
+This is a webpack plugin that simplifies creation of HTML files to serve ">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="webpack渐入佳境-session2"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -319,30 +324,109 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/前端/">前端</a><a class="breadcrumb" href="/categories/前端/webpack/">webpack</a>
+
 
         
-            <a class="breadcrumb" href="/tags/工具/">工具</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>webpack渐入佳境-session2</h1>
+    
 
 
-    <div class="collection mt-0">
-        
-            <a href="/2017/08/16/Charles实现代理/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-08-16T13:20:25.000Z">2017-08-16</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                Charles实现代理
-            </a>
-        
+            </div>
+            <time class="pink-link-context" datetime="2018-04-04T03:46:26.000Z"><a href="/2018/04/04/webpack渐入佳境-session2/">2018-04-04</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#html-webpack-plugin"><span class="section table-of-contents-text">html-webpack-plugin</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>继上一篇,我们已经做了build操作,但还没看到效果,这篇将用到webpack另外两个插件,实现我们所要的效果</p>
+</blockquote>
+<h3 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h3><blockquote>
+<p>This is a webpack plugin that simplifies creation of HTML files to serve your webpack bundles. This is especially useful for webpack bundles that include a hash in the filename which changes every compilation. You can either let the plugin generate an HTML file for you, supply your own template using lodash templates or use your own loader.</p>
+</blockquote>
+<p>意思就是说<u>html-webpack-plugin<u>会自动为我们创建一个简单得html文件</u></u></p>
+
+                
+<p class="pink-link-context">
+    <a href="/2018/04/08/事件委托之一二事/" rel="next" title="事件委托之一二事">
+    上一篇：事件委托之一二事
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2018/04/03/webpack渐入佳境-session1/" rel="next" title="webpack渐入佳境-session1">
+    下一篇：webpack渐入佳境-session1
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
     </div>
+</article>
+
+
+
+
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" sid="webpack渐入佳境-session2" style="margin-left:34%"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
+
+
+<article class="comments">
+  <div id="SOHUCS" sid="webpack渐入佳境-session2"></div>
+  <script type="text/javascript">
+    ( function () {
+        var appid = "cyt6HyzFa",
+            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
+            width = window.innerWidth || document.documentElement.clientWidth;
+        if ( width < 960 ) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    } )();
+  </script>
+  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</article>
+
 
 
 </div>

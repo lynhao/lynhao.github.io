@@ -7,13 +7,16 @@
 
     
 
-    <title>工具 | </title>
+    <title>事件委托之一二事 | </title>
     <meta name="author" content="lynhao">
+    
+    <meta name="description" content="事件事件是指用户或者浏览器自身执行的某种动作, 例如点击事件(click), 鼠标事件(mouseover),按键事件(keyup) 等,为响应某个事件的函数叫做事件处理程序(监听器)
+事件委托/代理首先之所以需要有时间委托这个概念, 是因为考虑到内存开销和性能优化.试想一下如果我们为了操作一个DO">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="事件委托之一二事"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -319,30 +322,116 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（标签）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/前端/">前端</a>
+
 
         
-            <a class="breadcrumb" href="/tags/工具/">工具</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>事件委托之一二事</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2018-04-08T04:03:23.000Z"><a href="/2018/04/08/事件委托之一二事/">2018-04-08</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/08/16/Charles实现代理/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-08-16T13:20:25.000Z">2017-08-16</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                Charles实现代理
-            </a>
+            <a href="/tags/JavaScript/" class="chip pink lighten-1">JavaScript</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#事件"><span class="section table-of-contents-text">事件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#事件委托-代理"><span class="section table-of-contents-text">事件委托/代理</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#DOM0级事件"><span class="section table-of-contents-text">DOM0级事件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#DOM2级事件"><span class="section table-of-contents-text">DOM2级事件</span></a></li><li class="section table-of-contents-item section table-of-contents-level-4"><a class="section table-of-contents-link" href="#IE事件处理"><span class="section table-of-contents-text">IE事件处理</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#跨浏览器限制"><span class="section table-of-contents-text">跨浏览器限制</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件是指用户或者浏览器自身执行的某种动作, 例如点击事件(click), 鼠标事件(mouseover),按键事件(keyup) 等,为响应某个事件的函数叫做事件处理程序(监听器)</p>
+<h3 id="事件委托-代理"><a href="#事件委托-代理" class="headerlink" title="事件委托/代理"></a>事件委托/代理</h3><p>首先之所以需要有时间委托这个概念, 是因为考虑到内存开销和性能优化.试想一下如果我们为了操作一个DOM而到处声明新的引用(对象),会导致增加DOM的访问次数,而JS中函数也是一个对象,对象需要内存空间,所以性能会受影响,如果我们可以在页面生命周期的任何时间点是为它添加事件处理程序,无需等待DOMContentLoaded和load 这两个过程, 并且在同一个范畴内的事件处理程序能够被重用,那么DOM引用减少,内存得到释放,性能就上来.</p>
+<p>所谓的事件委托,是利用了冒泡事件, 通过制定一个处理程序去管理同一类型的事件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=<span class="string">"mylick"</span>&gt;</div><div class="line">		&lt;li id=<span class="string">"1"</span>&gt;1&lt;/li&gt;</div><div class="line">		&lt;li id=<span class="string">"2"</span>&gt;2&lt;/li&gt;</div><div class="line">		&lt;li id=<span class="string">"3"</span>&gt;3&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">var list = document.getElementById(<span class="string">'mylick'</span>)</div><div class="line">list.addEventListener(<span class="string">'click'</span>, <span class="keyword">function</span>(event) &#123;</div><div class="line">  var target = event.target.id</div><div class="line">  switch (target) &#123;</div><div class="line">     <span class="keyword">case</span> <span class="string">'1'</span>:</div><div class="line">       alert(1)</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">     <span class="keyword">case</span> <span class="string">'2'</span>:</div><div class="line">       alert(2)</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">     <span class="keyword">case</span> <span class="string">'3'</span>:</div><div class="line">       alert(3)</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">     default:</div><div class="line">       <span class="built_in">break</span>;</div><div class="line">   &#125;</div><div class="line">&#125;, <span class="literal">false</span>)</div></pre></td></tr></table></figure>
+<p>ul下的子元素都公用同一个事件处理程序,这就是事件委托</p>
+<h4 id="DOM0级事件"><a href="#DOM0级事件" class="headerlink" title="DOM0级事件"></a>DOM0级事件</h4><p>传统的事件处理程序,将一个函数赋值给一个事件处理程序属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">btn.onclick = function () &#123;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="DOM2级事件"><a href="#DOM2级事件" class="headerlink" title="DOM2级事件"></a>DOM2级事件</h4><p>DOM2 包含<u>addEventLinstener</u>和<u>removeEventLinstener</u>两个处理事件方法,接收三个参数: 事件处理名称, 处理函数 和一个布尔值, true表示采用事件捕获, false表示采用事件冒泡</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var handler = function () &#123;</div><div class="line">...</div><div class="line">&#125;</div><div class="line">btn.addEventListener(&apos;click&apos;, handler, false)</div><div class="line">btn.removeEventListener(&apos;click&apos;, handler, false)</div></pre></td></tr></table></figure>
+<h4 id="IE事件处理"><a href="#IE事件处理" class="headerlink" title="IE事件处理"></a>IE事件处理</h4><p>IE跟DOM有所区别, 它提供了attachEvent和detachEvent 两个事件处理方法,但attachEvent()添加的事件处理都会默认被添加到事件冒泡阶段.<br>跟DOM2不同的是, 第一个参数指定的时间名必须是”on+type”开头,而且,attachEvent事件处理是在全局作用域中执行,而DOM却是在所属元素作用域中执行,这一点要注意.</p>
+<h3 id="跨浏览器限制"><a href="#跨浏览器限制" class="headerlink" title="跨浏览器限制"></a>跨浏览器限制</h3><p>我们可以用polyfill写法来越过浏览器对事件处理的差异,一般做法是提供addHandler和removeHandler这两个Api, 分别传入三个参数: 操作元素, 事件名称, 事件处理函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var EventUtil = &#123;</div><div class="line">  addHandler: function (ele, type, fn) &#123;</div><div class="line">    if (ele.addEventListener) &#123;</div><div class="line">      ele.addEventListner(type, fn, false)</div><div class="line">    &#125; else if (ele.attachEvent) &#123;</div><div class="line">      ele.attachEvent(&apos;on&apos;+type, fn, false)</div><div class="line">    &#125; else &#123;</div><div class="line">      ele[&apos;on&apos;+type] = fn</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">   removeHandler: function (ele, type, fn) &#123;</div><div class="line">    if (ele.removeEventListener) &#123;</div><div class="line">      ele.removeEventListner(type, fn, false)</div><div class="line">    &#125; else if (ele.detachEvent) &#123;</div><div class="line">      ele.detachEvent(&apos;on&apos;+type, fn, false)</div><div class="line">    &#125; else &#123;</div><div class="line">      ele[&apos;on&apos;+type] = null</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>–<br>参考资料: 红宝书</p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/04/04/webpack渐入佳境-session2/" rel="next" title="webpack渐入佳境-session2">
+    下一篇：webpack渐入佳境-session2
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" sid="事件委托之一二事" style="margin-left:34%"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
+
+
+<article class="comments">
+  <div id="SOHUCS" sid="事件委托之一二事"></div>
+  <script type="text/javascript">
+    ( function () {
+        var appid = "cyt6HyzFa",
+            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
+            width = window.innerWidth || document.documentElement.clientWidth;
+        if ( width < 960 ) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    } )();
+  </script>
+  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</article>
+
 
 
 </div>
