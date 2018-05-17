@@ -7,13 +7,21 @@
 
     
 
-    <title>Vue | </title>
+    <title>{}+{} in Javascript | </title>
     <meta name="author" content="lynhao">
+    
+    <meta name="description" content="【译】by lynhao
+
+涉及Javascript专有名词考虑不影响理解均不作翻译
+
+最近,Gary Bernhardt在”Wat”的闪电讲座上指出Javascript的一个有趣的怪癖:当你添加对象或者数组的时候会得到意想不到的结果.这篇文章解释了这些结果
+在javascript中添加常用的规则很简单:你只能添加数字和字符串,其他类型的值将会转换成他们其中的一种,为了理解它的转换的工作原理,我们首先需要先了解其他一些事情.每当提到段落（如§9.1）时,它就是指代ECMA-262语言标准（ECMAScript 5.1）。
+让我们先从一个快速的复习开始.javascript有两种类型:primitives(基元) and objects(对象),原始类型包括:undefined,null, booleans,numbers,和strings,除此之外其他值都是对象,包括了数组和函数">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="{}+{} in Javascript"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -319,30 +327,193 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
         <span class="breadcrumb">当前位置（分类目录）</span>
         
+            
+    
+    
+    <a class="breadcrumb" href="/categories/前端/">前端</a><a class="breadcrumb" href="/categories/前端/JavaScript/">JavaScript</a>
+
 
         
-            <a class="breadcrumb" href="/categories/前端/Vue/">Vue</a>
+
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>{}+{} in Javascript</h1>
+    
 
 
-    <div class="collection mt-0">
+            </div>
+            <time class="pink-link-context" datetime="2018-05-17T07:37:48.000Z"><a href="/2018/05/17/in-Javascript/">2018-05-17</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
-            <a href="/2017/04/26/Vue之疑惑-持续更新/" class="collection-item grey-text text-darken-1">
-                <time datetime="2017-04-26T15:20:27.000Z">2017-04-26</time>
-                <span>&nbsp;&nbsp;&nbsp;</span>
-                Vue之疑惑(持续更新...)
-            </a>
+            <a href="/tags/JavaScript/" class="chip pink lighten-1">JavaScript</a>
         
     </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#1-转换值"><span class="section table-of-contents-text">1.转换值</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-1-通过ToPrimitive-将值转化为primitives"><span class="section table-of-contents-text">1.1 通过ToPrimitive()将值转化为primitives</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-2-通过ToNumber-将值转换为数字"><span class="section table-of-contents-text">1.2 通过ToNumber()将值转换为数字</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-3通过ToString（）将值转换为字符串"><span class="section table-of-contents-text">1.3通过ToString（）将值转换为字符串</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-4-小试牛刀"><span class="section table-of-contents-text">1.4 小试牛刀</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#2-加法"><span class="section table-of-contents-text">2. 加法</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-1-预期结果"><span class="section table-of-contents-text">2.1 预期结果</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#2-2-意外的结果"><span class="section table-of-contents-text">2.2. 意外的结果</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#3-这是什么意思呢？"><span class="section table-of-contents-text">3.这是什么意思呢？</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#4-参考"><span class="section table-of-contents-text">4.参考</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <p>【译】by lynhao</p>
+<blockquote>
+<p>涉及Javascript专有名词考虑不影响理解均不作翻译</p>
+</blockquote>
+<p>最近,Gary Bernhardt在”Wat”的闪电讲座上指出Javascript的一个有趣的怪癖:当你添加对象或者数组的时候会得到意想不到的结果.这篇文章解释了这些结果</p>
+<p>在javascript中添加常用的规则很简单:你只能添加数字和字符串,其他类型的值将会转换成他们其中的一种,为了理解它的转换的工作原理,我们首先需要先了解其他一些事情.每当提到段落（如§9.1）时,它就是指代ECMA-262语言标准（ECMAScript 5.1）。</p>
+<p>让我们先从一个快速的复习开始.javascript有两种类型:primitives(基元) and objects(对象),原始类型包括:undefined,null, booleans,numbers,和strings,除此之外其他值都是对象,包括了数组和函数</p>
+<a id="more"></a>
+<h2 id="1-转换值"><a href="#1-转换值" class="headerlink" title="1.转换值"></a>1.转换值</h2><p>加号运算符执行三种转换:  把值转换为<em>primitives</em>, <em>numbers</em>和<em>strings</em></p>
+<h3 id="1-1-通过ToPrimitive-将值转化为primitives"><a href="#1-1-通过ToPrimitive-将值转化为primitives" class="headerlink" title="1.1 通过ToPrimitive()将值转化为primitives"></a>1.1 通过ToPrimitive()将值转化为primitives</h3><pre><code>ToPrimitive(input, PreferredType?)
+</code></pre><p>可选参数<em>PreferredType</em>是Number 或 String。它只是表示一种<br>偏好, 结果总是可以是任何原始值。如果PreferredType是Number,则执行以下步骤来转换输入的值(§9.1):</p>
+<ol>
+<li>如果输入是原始类型, 则直接返回它</li>
+<li>否者, 输入的值是一个对象, 则调用obj.valueOf().如果结果返回是原始类型,则返回</li>
+<li>否者,调用obj.toString. 如果结果是一个原始类型,则返回</li>
+<li>否者,抛出一个TypeError异常</li>
+</ol>
+<p>如果PreferredType 是String, 2和3步骤交换.如果缺失PreferredType, 那么对于Date的实例设置为String, 其他的值设置为Number</p>
+<h3 id="1-2-通过ToNumber-将值转换为数字"><a href="#1-2-通过ToNumber-将值转换为数字" class="headerlink" title="1.2 通过ToNumber()将值转换为数字"></a>1.2 通过ToNumber()将值转换为数字</h3><ul>
+<li>undefined -&gt; NaN</li>
+<li>null -&gt; +0</li>
+<li>boolean -&gt; (  true -&gt; 1, false -&gt; 0 )</li>
+<li>number -&gt; 不需要转换</li>
+<li>string -&gt; 解析字符串中的数字. 例如: “324”-&gt; 324 (译者: 除字符串数字之外都转为 “NaN”)</li>
+</ul>
+<h3 id="1-3通过ToString（）将值转换为字符串"><a href="#1-3通过ToString（）将值转换为字符串" class="headerlink" title="1.3通过ToString（）将值转换为字符串"></a>1.3通过ToString（）将值转换为字符串</h3><ul>
+<li>undefined -&gt; “undefined”</li>
+<li>null -&gt; + “null”</li>
+<li>oolean -&gt; (  true -&gt; “true” , false -&gt; “false” )</li>
+<li>number -&gt; 解析成字符串数字</li>
+<li>string -&gt; 不需要转换</li>
+</ul>
+<h3 id="1-4-小试牛刀"><a href="#1-4-小试牛刀" class="headerlink" title="1.4 小试牛刀"></a>1.4 小试牛刀</h3><p>下面object允许您观察转换过程</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;</div><div class="line">      valueOf: function () &#123;</div><div class="line">          console.log(&quot;valueOf&quot;);</div><div class="line">          return &#123;&#125;; // 不是原始类型</div><div class="line">      &#125;,</div><div class="line">      toString: function () &#123;</div><div class="line">          console.log(&quot;toString&quot;);</div><div class="line">          return &#123;&#125;; // 不是原始类型</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>Number作为函数调用(跟构造函数相反)内部调用ToNumber():</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; Number(obj)</div><div class="line">valueOf</div><div class="line">toString</div><div class="line">typeError: 不能将object转换成原始类型的值</div></pre></td></tr></table></figure>
+<h2 id="2-加法"><a href="#2-加法" class="headerlink" title="2. 加法"></a>2. 加法</h2><p>给出下面的加法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">value1 + value2</div></pre></td></tr></table></figure>
+<p>为了分析上面的表达式, 采取以下步骤(§11.6.1):</p>
+<ol>
+<li>将两个操作数转换为primitives (数学表示法，而不是JavaScript <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">prim1：= ToPrimitive（value1）</div><div class="line">rim2：= ToPrimitive（value2）</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>&gt; PreferredType 被忽略因此Number为non-dates,String为dates
+</code></pre><ol>
+<li>如果prim1或prim2是一个字符串,则将其转换为字符串并返回连接的结果</li>
+<li>否者,将prim1和prim2都转换成数字并返回他们的总和 </li>
+</ol>
+<h3 id="2-1-预期结果"><a href="#2-1-预期结果" class="headerlink" title="2.1 预期结果"></a>2.1 预期结果</h3><p>添加两个数组,一切按预期运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; [] + []</div><div class="line">&apos;&apos;</div></pre></td></tr></table></figure>
+<p>首先将[]转换为primitives尝试返回数组本身（this）的valueOf（）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt; var arr = [];</div><div class="line">&gt; arr.valueOf() === arr</div><div class="line">true</div></pre></td></tr></table></figure>
+<p>因为返回的结果不是原始类型,紧接着调用toString()返回空字符串(原始类型的值).因此[]+[]返回是两个空字符串联后的结果</p>
+<p>添加数组和对象也符合我们的期望:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; [] + &#123;&#125; </div><div class="line">&apos;[object Object]&apos;</div></pre></td></tr></table></figure>
+<p>补充说明: 将空对象转换成字符串会得到下面的结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; String(&#123;&#125;)</div><div class="line">&apos;[object Object]&apos;</div></pre></td></tr></table></figure>
+<p>之前的结果是””和 ‘[object Object]’ 串联后的返回的。</p>
+<p>更多对象转换为primitives的示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 5 + new Number（7）</div><div class="line">12 </div><div class="line">&gt; 6 + &#123;valueOf：function（）&#123;return 2&#125;&#125; </div><div class="line">8 </div><div class="line">&gt;“abc”+ &#123;toString：function（）&#123;return“def”&#125;&#125; </div><div class="line">&apos;abcdef&apos;</div></pre></td></tr></table></figure>
+<h3 id="2-2-意外的结果"><a href="#2-2-意外的结果" class="headerlink" title="2.2. 意外的结果"></a>2.2. 意外的结果</h3><p>如果+的第一个操作数是一个空的对象字面量(如在FireFox的控制台看到的结果)情况就会变得很诡异</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; &#123;&#125; + &#123;&#125;</div><div class="line">NaN</div></pre></td></tr></table></figure>
+<p>这里发生了什么?问题在于javascript将第一个{}解析成空的<br>代码块并忽略它.NaN是通过判断+{}(加号后跟第二个{})来计算的.<br>你在这里看到的加号不是二进制的加法运算符而是一个<br>一元前缀运算符,它用与Number()相同方式将其操作数转换<br>成数字.例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; +“3.65” </div><div class="line">3.65</div></pre></td></tr></table></figure>
+<p>下面的表达式都是等效的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+&#123;&#125;</div><div class="line">   Number(&#123;&#125;)</div><div class="line">   Number(&#123;&#125;.toString())  // &#123;&#125;.valueOf() 不是原始类型的值</div><div class="line">   Number(&quot;[object Object]&quot;)</div><div class="line">   NaN</div></pre></td></tr></table></figure>
+<p>为什么第一个{}被解析成代码块?因为完整的输入值被解析成语句,并且在语句的<br>花括号被解析成开始代码块.因此,你可以通过强制将输入值解析为表达式来解决问题:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;（&#123;&#125; + &#123;&#125;）</div><div class="line">&apos;[object Object] [object Object]&apos;</div></pre></td></tr></table></figure>
+<p>function或者method的参数也总是被解析成表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; console.log(&#123;&#125; + &#123;&#125;)</div><div class="line">[object Object][object Object]</div></pre></td></tr></table></figure>
+<p>前面解释之后,你应该不再对以下结果感到好奇了:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; &#123;&#125; + []</div><div class="line">0</div></pre></td></tr></table></figure>
+<p>再分析一次, 被解析成代码块后跟着+[],以下表达式是等效的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+[]</div><div class="line">   Number([])</div><div class="line">   Number([].toString())  // [].valueOf() 不是原始类型的值</div><div class="line">   Number(&quot;&quot;)</div><div class="line">   0</div></pre></td></tr></table></figure>
+<p>有趣的是,<em>Node.js REPL</em>分析其输入值与<em>Firefox</em>或<em>Chrome</em>不同(它甚至使用与Node.js相同的V8 JavaScript引擎.以下的输入值被解析成表达式结果并没有那么出乎意料</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; &#123;&#125; + &#123;&#125;</div><div class="line">&apos;[object Object][object Object]&apos;</div><div class="line">&gt; &#123;&#125; + []</div><div class="line">&apos;[object Object]&apos;</div></pre></td></tr></table></figure>
+<p>这样做的好处是更像使用输入值作为console.log()的参数时获得的结果。但它也不像使用输入值作为程序中的语句。</p>
+<h2 id="3-这是什么意思呢？"><a href="#3-这是什么意思呢？" class="headerlink" title="3.这是什么意思呢？"></a>3.这是什么意思呢？</h2><p>在大多数情况下,理解+在javascript运行机制并没有那么难.你只能添加数字或者字符串.</p>
+<p>对象被转换为字符串（如果另一个操作数是字符串）或数字（否则),如果你想合并数组,你需要用一个方法:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; [1, 2].concat([3, 4])</div><div class="line">[ 1, 2, 3, 4 ]</div></pre></td></tr></table></figure>
+<p>Javascript中没有内置的方式去”拼接”(合并)对象.你需要使用库如<em>Underscore</em>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; var o1 = &#123;eeny:1, meeny:2&#125;;</div><div class="line">&gt; var o2 = &#123;miny:3, moe: 4&#125;;</div><div class="line">&gt; _.extend(o1, o2)</div><div class="line">&#123; eeny: 1,</div><div class="line">  meeny: 2,</div><div class="line">  miny: 3,</div><div class="line">  moe: 4 &#125;</div></pre></td></tr></table></figure>
+<p>注意：与Array.prototype.concat（）不同，extend（）修改它的第一个参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; o1</div><div class="line">&#123; eeny: 1,</div><div class="line">  meeny: 2,</div><div class="line">  miny: 3,</div><div class="line">  moe: 4 &#125;</div><div class="line">&gt; o2</div><div class="line">&#123; miny: 3, moe: 4 &#125;</div></pre></td></tr></table></figure>
+<p>如果您对操作者有更多的兴趣，可以阅读<u>“Fake operator overloading in JavaScript”</u>。</p>
+<h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h2><ol>
+<li><strong>JavaScript values: not everything is an object</strong></li>
+</ol>
+<hr>
+<p>原文地址: <a href="http://2ality.com/2012/01/object-plus-object.html" target="_blank" rel="external"><strong>http://2ality.com/2012/01/object-plus-object.html</strong></a></p>
+<hr>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/04/08/事件委托之一二事/" rel="next" title="事件委托之一二事">
+    下一篇：事件委托之一二事
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" sid="{}+{} in Javascript" style="margin-left:34%"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
+
+
+<article class="comments">
+  <div id="SOHUCS" sid="{}+{} in Javascript"></div>
+  <script type="text/javascript">
+    ( function () {
+        var appid = "cyt6HyzFa",
+            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
+            width = window.innerWidth || document.documentElement.clientWidth;
+        if ( width < 960 ) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    } )();
+  </script>
+  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</article>
+
 
 
 </div>
