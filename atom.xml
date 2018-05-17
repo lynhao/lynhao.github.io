@@ -710,9 +710,9 @@
     
       <category term="JavaScript" scheme="/tags/JavaScript/"/>
     
-      <category term="Node" scheme="/tags/Node/"/>
-    
       <category term="ECMAScript 6" scheme="/tags/ECMAScript-6/"/>
+    
+      <category term="Node" scheme="/tags/Node/"/>
     
   </entry>
   
