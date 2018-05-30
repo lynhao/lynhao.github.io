@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="/"/>
-  <updated>2018-05-17T07:42:05.000Z</updated>
+  <updated>2018-05-20T04:42:40.000Z</updated>
   <id>/</id>
   
   <author>
@@ -16,11 +16,67 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JS原型链深入透彻全面释疑</title>
+    <link href="/2018/05/20/JS%E5%8E%9F%E5%9E%8B%E9%93%BE%E6%B7%B1%E5%85%A5%E9%80%8F%E5%BD%BB%E5%85%A8%E9%9D%A2%E9%87%8A%E7%96%91/"/>
+    <id>/2018/05/20/JS原型链深入透彻全面释疑/</id>
+    <published>2018-05-20T03:22:41.000Z</published>
+    <updated>2018-05-20T04:42:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>开始文章之前,大家先自查对原型链的认知到哪里?能否给自己讲清楚原型、构造函数、实例对象、原型链的概念以及他们彼此的联系.等看完整篇文章后再回头看看这段话,看看对他们的理解是否有进一步加深</p>
+</blockquote>
+<h2 id="理解原型链"><a href="#理解原型链" class="headerlink" title="理解原型链"></a>理解原型链</h2><p>用代码解释我觉得应该可以让大脑更容易理解并记忆</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">functiin <span class="function"><span class="title">Foo</span></span>() &#123;</div><div class="line">	this.name = <span class="string">'foo'</span></div><div class="line">&#125;</div><div class="line">var foo = new Foo()</div></pre></td></tr></table></figure>
+<p>这段代码再常见不过,你能快速指出哪个是实例对象和构造函数器吗?(《在你不知道的JS》一书中,作者说了js其实不像其他oop语言一样会有构造函数,准确说应该是构造函数调用)</p>
+<p>是的,我们通过new的方式创建对象,这时<strong>Foo()</strong>就是构造函数,而foo就是实例对象,你答对了吗?也许你有个疑问,为什么new就可以创建一个对象?这个问题我们后面再会解释</p>
+<h3 id="1-1-原型对象"><a href="#1-1-原型对象" class="headerlink" title="1.1 原型对象"></a>1.1 原型对象</h3><p>既然是链,那就说明它里面有很多节点组成,它是由实例对象,构造函数,原型对象组成</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/prototype.png" alt="bower_gulp"></p>
+<p>如上图,如果你看懂了它的流程,原型链这块你就已经掌握了</p>
+<p>构造函数和实例是如何联系?</p>
+<ul>
+<li>通过new关键字创建对象</li>
+</ul>
+<p>js引擎会给每个构造函数都添加一个<strong>prototype</strong>对象,我们通过Function.prototype就可以访问到原型对象,同理,实例对象也有一个访问原型对象的的属性__proto__,如前面那段代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foo.__proto__ === Foo.prototype //true</div></pre></td></tr></table></figure>
+<p>如果对象有继承关系我们怎么去区分它的原型对象指向那个构造函数呢?<strong>constructor</strong>就是来做这件事</p>
+<h3 id="1-2-原型链原理"><a href="#1-2-原型链原理" class="headerlink" title="1.2 原型链原理"></a>1.2 原型链原理</h3><p>访问一个实例的时候, 如何在实例本身没有找到调用的属性或者方法, 它会通过__proto__向原型对象上找,如果找不到,继续往上一个原型对象里面的__proto__找,直到Object.prototype,如果找不到则原路返回 。</p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p> js有哪几种创建对象方式?给你5秒钟想想…..</p>
+<p> timeout,答案是3种</p>
+<ol>
+<li>new Object()</li>
+<li>如上面例子, 通过<strong>new</strong>关键字</li>
+<li>Object.create()</li>
+</ol>
+<p><strong>Object.create()</strong>这种对象的方式我觉得你应该很少用,但你有想过它背后的工作原理,或者说它做创建对象的过程都做什么?</p>
+<blockquote>
+<p>释疑</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aa = Object.create(a)</div></pre></td></tr></table></figure>
+<p>Object.create会创建一个新对象的原型对象赋值给aa<br>这样  <code>aa.__proto__ === a</code>,  aa本身是个空对象,要访问a上的属性 也通过__proto__ 去访问</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;开始文章之前,大家先自查对原型链的认知到哪里?能否给自己讲清楚原型、构造函数、实例对象、原型链的概念以及他们彼此的联系.等看完整篇文章后再回头看看这段话,看看对他们的理解是否有进一步加深&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;理解原型
+    
+    </summary>
+    
+      <category term="前端" scheme="/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="/tags/JavaScript/"/>
+    
+  </entry>
+  
+  <entry>
     <title>{}+{} in Javascript</title>
     <link href="/2018/05/17/in-Javascript/"/>
     <id>/2018/05/17/in-Javascript/</id>
     <published>2018-05-17T07:37:48.000Z</published>
-    <updated>2018-05-17T07:42:05.000Z</updated>
+    <updated>2018-05-30T06:46:36.000Z</updated>
     
     <content type="html"><![CDATA[<p>【译】by lynhao</p>
 <blockquote>
@@ -62,7 +118,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">value1 + value2</div></pre></td></tr></table></figure>
 <p>为了分析上面的表达式, 采取以下步骤(§11.6.1):</p>
 <ol>
-<li>将两个操作数转换为primitives (数学表示法，而不是JavaScript <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">prim1：= ToPrimitive（value1）</div><div class="line">rim2：= ToPrimitive（value2）</div></pre></td></tr></table></figure>
+<li>将两个操作符转换为primitives (数学表示法，而不是JavaScript <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">prim1：= ToPrimitive（value1）</div><div class="line">rim2：= ToPrimitive（value2）</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <pre><code>&gt; PreferredType 被忽略因此Number为non-dates,String为dates
@@ -82,9 +138,9 @@
 <p>之前的结果是””和 ‘[object Object]’ 串联后的返回的。</p>
 <p>更多对象转换为primitives的示例:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt; 5 + new Number（7）</div><div class="line">12 </div><div class="line">&gt; 6 + &#123;valueOf：function（）&#123;return 2&#125;&#125; </div><div class="line">8 </div><div class="line">&gt;“abc”+ &#123;toString：function（）&#123;return“def”&#125;&#125; </div><div class="line">&apos;abcdef&apos;</div></pre></td></tr></table></figure>
-<h3 id="2-2-意外的结果"><a href="#2-2-意外的结果" class="headerlink" title="2.2. 意外的结果"></a>2.2. 意外的结果</h3><p>如果+的第一个操作数是一个空的对象字面量(如在FireFox的控制台看到的结果)情况就会变得很诡异</p>
+<h3 id="2-2-意外的结果"><a href="#2-2-意外的结果" class="headerlink" title="2.2. 意外的结果"></a>2.2. 意外的结果</h3><p>如果+的第一个操作符是一个空的对象字面量(如在FireFox的控制台看到的结果)情况就会变得很诡异</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; &#123;&#125; + &#123;&#125;</div><div class="line">NaN</div></pre></td></tr></table></figure>
-<p>这里发生了什么?问题在于javascript将第一个{}解析成空的<br>代码块并忽略它.NaN是通过判断+{}(加号后跟第二个{})来计算的.<br>你在这里看到的加号不是二进制的加法运算符而是一个<br>一元前缀运算符,它用与Number()相同方式将其操作数转换<br>成数字.例如:</p>
+<p>这里发生了什么?问题在于javascript将第一个{}解析成空的<br>代码块并忽略它.NaN是通过判断+{}(加号后跟第二个{})来计算的.<br>你在这里看到的加号不是二进制的加法运算符而是一个<br>一元前缀运算符,它用与Number()相同方式将其操作符转换<br>成数字.例如:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; +“3.65” </div><div class="line">3.65</div></pre></td></tr></table></figure>
 <p>下面的表达式都是等效的:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">+&#123;&#125;</div><div class="line">   Number(&#123;&#125;)</div><div class="line">   Number(&#123;&#125;.toString())  // &#123;&#125;.valueOf() 不是原始类型的值</div><div class="line">   Number(&quot;[object Object]&quot;)</div><div class="line">   NaN</div></pre></td></tr></table></figure>
@@ -100,13 +156,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt; &#123;&#125; + &#123;&#125;</div><div class="line">&apos;[object Object][object Object]&apos;</div><div class="line">&gt; &#123;&#125; + []</div><div class="line">&apos;[object Object]&apos;</div></pre></td></tr></table></figure>
 <p>这样做的好处是更像使用输入值作为console.log()的参数时获得的结果。但它也不像使用输入值作为程序中的语句。</p>
 <h2 id="3-这是什么意思呢？"><a href="#3-这是什么意思呢？" class="headerlink" title="3.这是什么意思呢？"></a>3.这是什么意思呢？</h2><p>在大多数情况下,理解+在javascript运行机制并没有那么难.你只能添加数字或者字符串.</p>
-<p>对象被转换为字符串（如果另一个操作数是字符串）或数字（否则),如果你想合并数组,你需要用一个方法:</p>
+<p>对象被转换为字符串（如果另一个操作符是字符串）或数字（否则),如果你想合并数组,你需要用一个方法:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; [1, 2].concat([3, 4])</div><div class="line">[ 1, 2, 3, 4 ]</div></pre></td></tr></table></figure>
 <p>Javascript中没有内置的方式去”拼接”(合并)对象.你需要使用库如<em>Underscore</em>:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; var o1 = &#123;eeny:1, meeny:2&#125;;</div><div class="line">&gt; var o2 = &#123;miny:3, moe: 4&#125;;</div><div class="line">&gt; _.extend(o1, o2)</div><div class="line">&#123; eeny: 1,</div><div class="line">  meeny: 2,</div><div class="line">  miny: 3,</div><div class="line">  moe: 4 &#125;</div></pre></td></tr></table></figure>
 <p>注意：与Array.prototype.concat（）不同，extend（）修改它的第一个参数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt; o1</div><div class="line">&#123; eeny: 1,</div><div class="line">  meeny: 2,</div><div class="line">  miny: 3,</div><div class="line">  moe: 4 &#125;</div><div class="line">&gt; o2</div><div class="line">&#123; miny: 3, moe: 4 &#125;</div></pre></td></tr></table></figure>
-<p>如果您对操作者有更多的兴趣，可以阅读<u>“Fake operator overloading in JavaScript”</u>。</p>
+<p>如果您对操作符有更多兴趣，可以阅读<u>“Fake operator overloading in JavaScript”</u>。</p>
 <h2 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h2><ol>
 <li><strong>JavaScript values: not everything is an object</strong></li>
 </ol>

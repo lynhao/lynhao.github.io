@@ -7,13 +7,18 @@
 
     
 
-    <title>归档：2017/2 | </title>
+    <title>JS原型链深入透彻全面释疑 | </title>
     <meta name="author" content="lynhao">
+    
+    <meta name="description" content="开始文章之前,大家先自查对原型链的认知到哪里?能否给自己讲清楚原型、构造函数、实例对象、原型链的概念以及他们彼此的联系.等看完整篇文章后再回头看看这段话,看看对他们的理解是否有进一步加深
+
+理解原型链用代码解释我觉得应该可以让大脑更容易理解并记忆
+1234functiin Foo() &amp;#123;	">
     
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
+    <meta property="og:title" content="JS原型链深入透彻全面释疑"/>
     <meta property="og:site_name" content="个人技术博客"/>
 
     
@@ -319,46 +324,133 @@
 
     <main>
         <div class="container main-container">
-    
-
-<nav class="page-nav hide-on-small-only">
+    <nav class="page-nav hide-on-small-only">
     <div class="nav-wrapper indigo">
-        <span class="breadcrumb">当前位置（归档）</span>
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/前端/">前端</a>
+
+
         
 
         
     </div>
 </nav>
 
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>JS原型链深入透彻全面释疑</h1>
+    
 
 
-    <ul class="collapsible mt-0" data-collapsible="accordion">
+            </div>
+            <time class="pink-link-context" datetime="2018-05-20T03:22:41.000Z"><a href="/2018/05/20/JS原型链深入透彻全面释疑/">2018-05-20</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
         
+            <a href="/tags/JavaScript/" class="chip pink lighten-1">JavaScript</a>
         
-            <li>
-                <div class="collapsible-header active">
-                    <i class="fa fa-archive"></i>2017
-                </div>
-                <div class="collapsible-body">
-                    <div class="collection">
-                        
-                            <a href="/2017/02/17/使用gulp搭建angularjs【下】/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-02-17T09:14:37.000Z">2017-02-17</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用gulp搭建AngularJs【下】
-                            </a>
-                        
-                            <a href="/2017/02/17/使用gulp搭建angularjs【上】/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2017-02-17T03:01:32.000Z">2017-02-17</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                使用gulp工具搭建AngularJs【上】
-                            </a>
-                        
-                    </div>
-                </div>
-            </li>
-        
-    </ul>
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#理解原型链"><span class="section table-of-contents-text">理解原型链</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-1-原型对象"><span class="section table-of-contents-text">1.1 原型对象</span></a></li><li class="section table-of-contents-item section table-of-contents-level-3"><a class="section table-of-contents-link" href="#1-2-原型链原理"><span class="section table-of-contents-text">1.2 原型链原理</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#创建对象"><span class="section table-of-contents-text">创建对象</span></a></li></ol>
+</div>
+
+
+            <div class="entry pink-link-context">
+                <blockquote>
+<p>开始文章之前,大家先自查对原型链的认知到哪里?能否给自己讲清楚原型、构造函数、实例对象、原型链的概念以及他们彼此的联系.等看完整篇文章后再回头看看这段话,看看对他们的理解是否有进一步加深</p>
+</blockquote>
+<h2 id="理解原型链"><a href="#理解原型链" class="headerlink" title="理解原型链"></a>理解原型链</h2><p>用代码解释我觉得应该可以让大脑更容易理解并记忆</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">functiin <span class="function"><span class="title">Foo</span></span>() &#123;</div><div class="line">	this.name = <span class="string">'foo'</span></div><div class="line">&#125;</div><div class="line">var foo = new Foo()</div></pre></td></tr></table></figure>
+<p>这段代码再常见不过,你能快速指出哪个是实例对象和构造函数器吗?(《在你不知道的JS》一书中,作者说了js其实不像其他oop语言一样会有构造函数,准确说应该是构造函数调用)</p>
+<p>是的,我们通过new的方式创建对象,这时<strong>Foo()</strong>就是构造函数,而foo就是实例对象,你答对了吗?也许你有个疑问,为什么new就可以创建一个对象?这个问题我们后面再会解释</p>
+<h3 id="1-1-原型对象"><a href="#1-1-原型对象" class="headerlink" title="1.1 原型对象"></a>1.1 原型对象</h3><p>既然是链,那就说明它里面有很多节点组成,它是由实例对象,构造函数,原型对象组成</p>
+<p><img src="http://picturegit-1251927503.file.myqcloud.com/prototype.png" alt="bower_gulp"></p>
+<p>如上图,如果你看懂了它的流程,原型链这块你就已经掌握了</p>
+<p>构造函数和实例是如何联系?</p>
+<ul>
+<li>通过new关键字创建对象</li>
+</ul>
+<p>js引擎会给每个构造函数都添加一个<strong>prototype</strong>对象,我们通过Function.prototype就可以访问到原型对象,同理,实例对象也有一个访问原型对象的的属性__proto__,如前面那段代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">foo.__proto__ === Foo.prototype //true</div></pre></td></tr></table></figure>
+<p>如果对象有继承关系我们怎么去区分它的原型对象指向那个构造函数呢?<strong>constructor</strong>就是来做这件事</p>
+<h3 id="1-2-原型链原理"><a href="#1-2-原型链原理" class="headerlink" title="1.2 原型链原理"></a>1.2 原型链原理</h3><p>访问一个实例的时候, 如何在实例本身没有找到调用的属性或者方法, 它会通过__proto__向原型对象上找,如果找不到,继续往上一个原型对象里面的__proto__找,直到Object.prototype,如果找不到则原路返回 。</p>
+<h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p> js有哪几种创建对象方式?给你5秒钟想想…..</p>
+<p> timeout,答案是3种</p>
+<ol>
+<li>new Object()</li>
+<li>如上面例子, 通过<strong>new</strong>关键字</li>
+<li>Object.create()</li>
+</ol>
+<p><strong>Object.create()</strong>这种对象的方式我觉得你应该很少用,但你有想过它背后的工作原理,或者说它做创建对象的过程都做什么?</p>
+<blockquote>
+<p>释疑</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aa = Object.create(a)</div></pre></td></tr></table></figure>
+<p>Object.create会创建一个新对象的原型对象赋值给aa<br>这样  <code>aa.__proto__ === a</code>,  aa本身是个空对象,要访问a上的属性 也通过__proto__ 去访问</p>
+
+                
+
+
+<p class="pink-link-context">
+    <a href="/2018/05/17/in-Javascript/" rel="next" title="{}+{} in Javascript">
+    下一篇：{}+{} in Javascript
+  </a>
+</p>
+
+
+            </div>
+			
+        </div>
+    </div>
+</article>
+
+
+
+
+
+<!-- 代码1：放在页面需要展示的位置  -->
+<!-- 如果您配置过sourceid，建议在div标签中配置sourceid、cid(分类id)，没有请忽略  -->
+<div id="cyReward" role="cylabs" data-use="reward" sid="JS原型链深入透彻全面释疑" style="margin-left:34%"></div>
+<!-- 代码2：用来读取评论框配置，此代码需放置在代码1之后。 -->
+<!-- 如果当前页面有评论框，代码2请勿放置在评论框代码之前。 -->
+<!-- 如果页面同时使用多个实验室项目，以下代码只需要引入一次，只配置上面的div标签即可 -->
+<script type="text/javascript" charset="utf-8" src="https://changyan.itc.cn/js/lib/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="https://changyan.sohu.com/js/changyan.labs.https.js?appid=cyt6HyzFa"></script>
+
+
+<article class="comments">
+  <div id="SOHUCS" sid="JS原型链深入透彻全面释疑"></div>
+  <script type="text/javascript">
+    ( function () {
+        var appid = "cyt6HyzFa",
+            conf = "a6d52f6e48aed57dbcfcc40b0c765465",
+            width = window.innerWidth || document.documentElement.clientWidth;
+        if ( width < 960 ) {
+            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    } )();
+  </script>
+  <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+</article>
+
 
 
 </div>
