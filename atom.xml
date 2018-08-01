@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-27T04:25:34.000Z</updated>
+  <updated>2018-08-01T15:24:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2018/07/27/%E5%96%8A/"/>
     <id>http://yoursite.com/2018/07/27/喊/</id>
     <published>2018-07-27T04:15:11.000Z</published>
-    <updated>2018-07-27T04:25:34.000Z</updated>
+    <updated>2018-08-01T15:24:35.000Z</updated>
     
-    <content type="html"><![CDATA[<ul><li>2018年07月27日12:17:16</li></ul><p>很烦是当前内心的代名词,整个人又变得很浮躁,想学的技术太多,前端东西很杂,很碎,并且越来越难,加上我这段时间状态很差,注意力不集中,懒撒,无规划,心存侥幸等所有坏词都可以来形容此时此刻的我,what should i do, dude?</p>]]></content>
+    <content type="html"><![CDATA[<ul><li>2018年07月27日12:17:16</li></ul><p>很烦是当前内心的代名词,整个人又变得很浮躁,想学的技术太多,前端东西很杂,很碎,并且越来越难,加上我这段时间状态很差,注意力不集中,懒撒,无规划,心存侥幸等所有坏词都可以来形容此时此刻的我,what should i do, dude?</p><ul><li>2018年07月28日00:30:49</li></ul><p>可能是酒精作用,看了下三年前的git提交记录,在我的mac上有一种东西是我不可能删除的–我写的代码,迫于内存原因,我把他们都提交到了git上,可是有些东西,时间一长,它的本质就变了,你再也看不懂三年前你写的代码,代码的编译运行环境也好像跟你作对,工程也跑不起来,人就这样,喜欢恋旧而不思进取,不懂得舍弃,永远得不到进步,果断<u>delete</u>吧,dude</p><ul><li>2018年08月01日23:17:11</li></ul><p>耳机现在播放<u>再见理想</u>这首歌,我很担心,其实也不必担心,按照记忆曲线,随时间推移你了如指掌的东西也会沦为陌生人,例如上周面试的时候,我居然忘了mvvm中的监听者,真是惭愧,我之前还写了一篇文章去讲解mvvm原理,我曾经引以为豪的android,如今我也忘得差不多了,压根就没在实际项目中写过(严格上说吧),希望,我看过的每一行代码,能领悟它背后的思想,就算外壳忘了也无所谓,毕竟梦想,是为了颠覆传统.</p>]]></content>
     
     <summary type="html">
     
@@ -362,9 +362,9 @@
     
       <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
-      <category term="es6" scheme="http://yoursite.com/tags/es6/"/>
-    
       <category term="node" scheme="http://yoursite.com/tags/node/"/>
+    
+      <category term="es6" scheme="http://yoursite.com/tags/es6/"/>
     
   </entry>
   
