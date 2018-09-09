@@ -467,9 +467,9 @@
     
       <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
-      <category term="es6" scheme="http://yoursite.com/tags/es6/"/>
-    
       <category term="node" scheme="http://yoursite.com/tags/node/"/>
+    
+      <category term="es6" scheme="http://yoursite.com/tags/es6/"/>
     
   </entry>
   
