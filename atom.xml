@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-21T09:05:51.000Z</updated>
+  <updated>2018-09-09T06:51:33.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Note For SVG</title>
+    <link href="http://yoursite.com/2018/09/09/Note-For-SVG/"/>
+    <id>http://yoursite.com/2018/09/09/Note-For-SVG/</id>
+    <published>2018-09-09T09:41:25.000Z</published>
+    <updated>2018-09-09T06:51:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>这两天在学习svg的相关知识,本文仅作为记录,如果出错请告知作者,将及时处理,共勉~ 本文持续更新中</p></blockquote><h3 id="世界-视野-视窗"><a href="#世界-视野-视窗" class="headerlink" title="世界,视野,视窗"></a>世界,视野,视窗</h3><ul><li>世界: 在svg中, 规定了世界的定义是无穷大的,也就是你在浏览器中看到的知识其中一部分;</li><li>视野: 它是一个观察世界的矩形区域,在svg中用viewbox来定义,它包含四个参数, x(x轴),y(跟数学中y轴向反),width,height)</li><li>视窗: 它规定视野中的width和height</li></ul><h3 id="四个坐标系"><a href="#四个坐标系" class="headerlink" title="四个坐标系"></a>四个坐标系</h3><p>svg中使用的坐标系是笛卡尔直角坐标系,它包括了一个原点(O)以及两条相互垂直的数轴(x,y),在数学上,x跟y的角度的矢量方向是逆时针的,而在svg中,它俩是顺时针方向,一句话概括,他俩之间的角度即时x轴正方向到y轴正方向的直角旋转角度规定为正方向(顺时针).</p><h4 id="用户坐标系-user-coordinate"><a href="#用户坐标系-user-coordinate" class="headerlink" title="用户坐标系(user coordinate)"></a>用户坐标系(user coordinate)</h4><p>我们称它为世界坐标系,我们设置viewbox,也就是来观察用户坐标系的某个区域,它是最原始的坐标系</p><h4 id="自身坐标系-current-coordinate"><a href="#自身坐标系-current-coordinate" class="headerlink" title="自身坐标系 (current coordinate)"></a>自身坐标系 (current coordinate)</h4><p>每个图形元素或分组独立与生俱来</p><h4 id="前驱坐标系-previous-coordinate"><a href="#前驱坐标系-previous-coordinate" class="headerlink" title="前驱坐标系 (previous coordinate)"></a>前驱坐标系 (previous coordinate)</h4><p>父容器的坐标系</p><h4 id="参考坐标系-reference-coordinate"><a href="#参考坐标系-reference-coordinate" class="headerlink" title="参考坐标系 (reference coordinate)"></a>参考坐标系 (reference coordinate)</h4><p>使用其他坐标系来考究自身的情况时使用</p><p><a class="jsbin-embed" href="http://jsbin.com/tarudif/embed?html,js,output" target="_blank" rel="external">JS Bin on jsbin.com</a><script src="http://static.jsbin.com/js/embed.min.js?4.1.4"></script></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;这两天在学习svg的相关知识,本文仅作为记录,如果出错请告知作者,将及时处理,共勉~ 本文持续更新中&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;世界-视野-视窗&quot;&gt;&lt;a href=&quot;#世界-视野-视窗&quot; class=&quot;headerlink
+      
+    
+    </summary>
+    
+    
+      <category term="svg" scheme="http://yoursite.com/tags/svg/"/>
+    
+  </entry>
   
   <entry>
     <title>CSS工程化方案</title>
@@ -441,9 +467,9 @@
     
       <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
-      <category term="node" scheme="http://yoursite.com/tags/node/"/>
-    
       <category term="es6" scheme="http://yoursite.com/tags/es6/"/>
+    
+      <category term="node" scheme="http://yoursite.com/tags/node/"/>
     
   </entry>
   
@@ -493,30 +519,6 @@
       <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
       <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vue之疑惑(持续更新...)</title>
-    <link href="http://yoursite.com/2017/04/26/Vue%E4%B9%8B%E7%96%91%E6%83%91-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/"/>
-    <id>http://yoursite.com/2017/04/26/Vue之疑惑-持续更新/</id>
-    <published>2017-04-26T15:20:27.000Z</published>
-    <updated>2018-06-01T01:56:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注</p></blockquote><a id="more"></a><h2 id="疑惑一-bitbar-webpack-progress-plugin"><a href="#疑惑一-bitbar-webpack-progress-plugin" class="headerlink" title="疑惑一(bitbar-webpack-progress-plugin)"></a>疑惑一(bitbar-webpack-progress-plugin)</h2><p>随着项目的壮大,各种依赖插件也随之多了起来,最近遇到这么一个问题,在install一个<a href=""><strong>bitbar-webpack-progress-plugin</strong></a>这个插件后运行项目,控制台报错,我纳闷查了一下,觉得可能是es6搞得鬼,随在index.js文件加了<a href=""><strong>“use strict”</strong></a>,写js的朋友一定不陌生我就不再过多解释,下面是一些相关截图<br><img src="http://picturegit-1251927503.file.myqcloud.com/list.png" alt="stack"></p><p><img src="http://picturegit-1251927503.file.myqcloud.com/error1.png" alt="stack"></p><blockquote><p>解决方案:  如上所述</p></blockquote><ul><li>date <a href=""><strong>2017-04-26 23:34:42</strong></a></li></ul><h2 id="疑惑二-事件绑定触发"><a href="#疑惑二-事件绑定触发" class="headerlink" title="疑惑二 事件绑定触发"></a>疑惑二 事件绑定触发</h2><p>今天在项目中碰到一个问题,在进行单页面跳转时出现了不符合预期的行为:单页面跳转后hash值变成空<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;a href=<span class="string">"#"</span> @click=<span class="string">"sbSubmit"</span> class=<span class="string">"button button-big button-fill button-blue"</span>&gt;下一步&lt;/a&gt;</div><div class="line"></div><div class="line">sbCheck:<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">...</div><div class="line"><span class="keyword">if</span>(result)&#123;</div><div class="line">       //检验成功确认页面</div><div class="line">     this.<span class="variable">$refs</span>.fb.toPage(<span class="string">'fjssb_confirm'</span>)</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>进过检查是因为默认事件绑定的原因,触发了路由.原生中我是是这样处理的:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">on: &#123;</div><div class="line">  keyup: <span class="keyword">function</span> (event) &#123;</div><div class="line">    // 如果触发事件的元素不是事件绑定的元素</div><div class="line">    // 则返回</div><div class="line">    <span class="keyword">if</span> (event.target !== event.currentTarget) <span class="built_in">return</span></div><div class="line">    // 如果按下去的不是enter键或者</div><div class="line">    // 没有同时按下<span class="built_in">shift</span>键</div><div class="line">    // 则返回</div><div class="line">    <span class="keyword">if</span> (!event.shiftKey || event.keyCode !== 13) <span class="built_in">return</span></div><div class="line">    // 阻止 事件冒泡</div><div class="line">    event.stopPropagation()</div><div class="line">    // 阻止该元素默认的keyup事件</div><div class="line">    event.preventDefault()</div><div class="line">    // ...</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p><p>刚好,vue中提供了修饰符来解决这种情景</p><p><img src="http://picturegit-1251927503.file.myqcloud.com/vueModifier.png" alt="stack"></p><blockquote><p>解决方案:</p></blockquote><p>加上<a href=""><strong>prevent</strong></a>修饰符</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@click.prevent=<span class="string">"sbSubmit"</span></div></pre></td></tr></table></figure><ul><li>date <a href=""><strong>2017-04-28 17:22:57</strong></a></li></ul><h2 id="疑惑三-错误在vm-el挂载之前渲染页面"><a href="#疑惑三-错误在vm-el挂载之前渲染页面" class="headerlink" title="疑惑三 错误在vm.$el挂载之前渲染页面"></a>疑惑三 错误在vm.$el挂载之前渲染页面</h2><blockquote><p>写之前有个小插曲,刚刚在启动hexo时,碰到了node依赖版本出错问题,顺藤摸瓜,大脑第一反应是node版本的问题,随通过命名行查看,原来上星期为了测试vue2.3新特性把版本切换到了7.x版本,换回5.x后运行,deal~</p></blockquote><p><img src="http://picturegit-1251927503.file.myqcloud.com/node-n.png" alt="stack"></p><p>好了,回归正题,就标题所示,就我平时对生命周期谨慎的态度,没想到刚刚就栽了跟头.需求是这样的,我需要从后台发送请求,再从返回的数据渲染页面,之后通过form表单的action跳转到对应的支付界面.代码是这样处理的</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">html</div><div class="line">  &lt;div class=<span class="string">"content"</span>&gt;</div><div class="line">      &lt;div class=<span class="string">"content-block"</span>&gt;</div><div class="line">        &lt;div id=<span class="string">"payForm"</span>&gt;&#123;&#123;data2&#125;&#125;&lt;/div&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &lt;/div&gt;</div></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">js</div><div class="line"> ...</div><div class="line"> <span class="built_in">let</span> a = document.getElementById(<span class="string">"payForm"</span>).innerHTML = this.data2</div><div class="line"> document.all.pay_form.submit()</div></pre></td></tr></table></figure><p>我在methods定义了一个load方法,按照平时的做法直接在created出调用</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">created</span></span>()&#123;</div><div class="line"> ...</div><div class="line"> this.load()</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>之后控制台直接给我抛出来了<a href=""><strong>Cannot set property ‘innerHTML’ of null</strong></a>.分析了一会就明白了,出现这种状况是因为在浏览器在解析js到<a href=""><strong>id=”payForm”</strong></a>,而此时页面可能还没渲染出来,所以就报错.其实在vue2.0生命周期已经详细说明了,在执行created时el实例其实还没被挂载.所以正确的处理方式应该是在mounted钩子行数中去处理,它会确保el实例已经被挂载,当然还有一个坑,官网也说到了,代码如下处理</p><p><img src="http://picturegit-1251927503.file.myqcloud.com/mounted.png" alt="stack"></p><p>Vue 2.x生命周期</p><p><img src="http://picturegit-1251927503.file.myqcloud.com/vuelife.png" alt="stack"></p><blockquote><p>解决方案:  如上所述</p></blockquote><ul><li>date <a href=""><strong>2017-05-09 15:17:54</strong></a></li></ul><h3 id="疑惑四-解决file-input-第二次选择同一张图片后无法触发change事件"><a href="#疑惑四-解决file-input-第二次选择同一张图片后无法触发change事件" class="headerlink" title="疑惑四 解决file input 第二次选择同一张图片后无法触发change事件"></a>疑惑四 解决file input 第二次选择同一张图片后无法触发change事件</h3><blockquote><p>这一块并不局限vue框架属于前端的东西,因为项目碰到遂记录在此处</p></blockquote><ol><li>解决方案1: 在你的input所属的form表单reset(),以jq操作dom为示例</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&quot;#avatorForm&quot;)[0].reset();</div></pre></td></tr></table></figure><ol><li>解决方案2: 设置你的input file value值为空,以jq操作dom为示例</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$(&apos;.inputImage&apos;).val(&apos;&apos;);</div></pre></td></tr></table></figure><ul><li>date: <a href=""><strong>2017年07月05日10:42:58</strong></a></li></ul><h2 id="疑惑五-import路径"><a href="#疑惑五-import路径" class="headerlink" title="疑惑五 import路径"></a>疑惑五 import路径</h2><p>不知道大家第一次搭脚手架后看index.js这个文件有没有这个疑问,为什么import路径是<a href=""><strong>@/components/Hello</strong></a>就可以找到hello.vue</p><p>打开webpack.base.conf.js文件解惑</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">   extensions: [&apos;.js&apos;, &apos;.vue&apos;, &apos;.json&apos;],</div><div class="line">   alias: &#123;</div><div class="line">      &apos;@&apos;: resolve(&apos;src&apos;),</div><div class="line">   &#125;</div><div class="line"> &#125;,</div></pre></td></tr></table></figure><p>@的意思是run的时候会通过@找到src根目录下的文件, resolve是一个执行函数</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function resolve (dir) &#123;</div><div class="line">  return path.join(__dirname, &apos;..&apos;, dir)</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>动手实践,把<a href=""><strong>@</strong></a>改为任意字符,之后再index.js的import语句对应修改,其实最终的地址是<a href=""><strong>src/components/Hello</strong></a></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import Vue from &apos;vue&apos;</div><div class="line">import Router from &apos;vue-router&apos;</div><div class="line">import Hello from &apos;任意字符/components/Hello&apos;</div></pre></td></tr></table></figure><ul><li>date <a href=""><strong>2017年07月30日23:14:49</strong></a></li></ul><h2 id="疑惑六-八进制在strict-mode-报错"><a href="#疑惑六-八进制在strict-mode-报错" class="headerlink" title="疑惑六  八进制在strict mode 报错"></a>疑惑六  八进制在strict mode 报错</h2><p>这个问题不局限于vue,它是js的问题,因为在做项目碰到这个坑, 遂记此</p><p>今天下午大概三点吧,控制台抛出下面的错误</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">SyntaxError: Octal literals are not allowed <span class="keyword">in</span> strict mode.</div><div class="line">    at exports.runInThisContext (vm.js:69:16)</div><div class="line">    at Module._compile (module.js:432:25)</div><div class="line">    at Object.Module._extensions..js (module.js:467:10)</div><div class="line">    at Module.load (module.js:349:32)</div><div class="line">    at Function.Module._load (module.js:305:12)</div><div class="line">    at Module.require (module.js:357:17)</div><div class="line">    at require (module.js:373:17)</div></pre></td></tr></table></figure><p>因为业务涉及使用到了<a href=""><strong>公式引擎</strong></a>,所以有一阵子我一直埋头在代码和源码中试图找出破绽(尽管引擎确实有不足之处),知道下班还是没能解决</p><p>现在是晚上10点左右,问题得到了解决,是八进制转换问题,因为我的变量有一个值是<a href=""><strong>05</strong></a>,之后我去掉首部0之后错误就消失,至于为什么strict模式下不支持八进制,知道的朋友麻烦下方留言告知哈~</p><ul><li>date: <a href=""><strong>2017年08月08日22:46:21</strong></a></li></ul><hr><p>持续更新中,敬请期待…</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;这篇文章将会记录一些我在日常开发中遇到的各种奇葩问题,在此记录,供大家借鉴减少不必要的时间浪费,此文将会持续commit,敬请关注&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
-    
-      <category term="webpack" scheme="http://yoursite.com/tags/webpack/"/>
     
   </entry>
   
